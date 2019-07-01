@@ -6,9 +6,11 @@ namespace LRRoguelike
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            Console.WriteLine(3 + 2);
-            // Program starts
+            // Instantiate classes
+            Render rndr = new Render();
+
+            rndr.StartMenu();
+
         }
     }
 }
