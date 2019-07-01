@@ -8,7 +8,7 @@ namespace LRRoguelike
     public class Render
     {
         /// <summary>
-        /// Output Start Menu, options included
+        /// Output Initial/Main Menu, options included
         /// </summary>
         public void MainMenu()
         {
@@ -86,9 +86,13 @@ namespace LRRoguelike
 
             } while (!canConvert || choice > 3 || choice < 1);
 
+            // Return converted uInput
             return choice;
         }
 
+        /// <summary>
+        /// Method to print error message
+        /// </summary>
         private void ErrorMessage()
         {
             Console.WriteLine("Invalid option...");
