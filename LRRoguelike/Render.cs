@@ -24,7 +24,7 @@ namespace LRRoguelike
             {
                 // Start game
                 case 1:
-                    Console.Clear();
+                    //Console.Clear();
                     Console.WriteLine("Let's play");
                     // goes to game loop
                     break;
@@ -53,7 +53,7 @@ namespace LRRoguelike
         /// <param name="height"></param>
         public void PrintBoard(int length, int height)
         {
-            Console.Clear();
+            //Console.Clear();
             // For cicle to print map
             for (int k = 0; k < length * 4 + 1; k++)
                 Console.Write("-");
@@ -90,8 +90,8 @@ namespace LRRoguelike
 
             // Goes back to start menu if user enters any key
             Console.WriteLine("Press anything to go back to Start Menu...");
-            Console.ReadKey();
-            Console.Clear();
+            //Console.ReadKey();
+            //Console.Clear();
             MainMenu();
         }
 

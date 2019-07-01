@@ -11,6 +11,7 @@ namespace LRRoguelike
             GameSettings gm = new GameSettings(args);
             Random rndm = new Random();
             Render rndr = new Render();
+            GameLoop gl = new GameLoop();
 
             // Define output text encoding
             Console.OutputEncoding = Encoding.UTF8;
@@ -31,8 +32,7 @@ namespace LRRoguelike
              *******  !DEBUG   *******
              *************************/
 
-
-            rndr.MainMenu();
+            gl.StartGame(gm.Collums, gm.Rows);
 
         }
     }
