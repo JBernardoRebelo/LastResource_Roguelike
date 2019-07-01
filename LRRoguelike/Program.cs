@@ -6,11 +6,15 @@ namespace LRRoguelike
     {
         static void Main(string[] args)
         {
-            // Instantiate classes
-            Render rndr = new Render();
+            //int lenght = Convert.ToInt32(args [0]);
+            //int height = Convert.ToInt32(args[1]);
 
-            rndr.StartMenu();
+            int lenght = 10;
+            int height = 10;
 
+            GameLoop gl = new GameLoop();
+
+            gl.StartGame(lenght, height);
         }
     }
 }

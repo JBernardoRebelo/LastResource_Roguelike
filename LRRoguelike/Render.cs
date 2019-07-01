@@ -48,6 +48,38 @@ namespace LRRoguelike
                     break;
             }
         }
+       
+        /// <summary>
+        /// Prints board, accepts args converted from console
+        /// </summary>
+        /// <param name="length"></param>
+        /// <param name="height"></param>
+        public void PrintBoard(int length, int height)
+        {
+            Console.Clear();
+            // For cicle to print map
+            for (int k = 0; k < length * 4 + 1; k++)
+                Console.Write("-");
+
+            // New line
+            Console.WriteLine();
+
+            for (int i = 0; i < height; i++)
+            {
+                for (int j = 0; j < length; j++)
+                {
+                    Console.Write("|   ");
+                }
+
+                Console.WriteLine('|');
+
+                for (int k = 0; k < length * 4 + 1; k++)
+                {
+                    Console.Write("-");
+                }
+                Console.WriteLine();
+            }
+        }
 
         /// <summary>
         /// Output credits, goes back to Start Menu
