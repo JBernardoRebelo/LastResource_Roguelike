@@ -18,7 +18,7 @@ namespace LRRoguelike
         /// </summary>
         public void StartGame(int length, int height)
         {
-            rndr.StartMenu();
+            rndr.MainMenu();
             Loop(length, height);
         }
 
