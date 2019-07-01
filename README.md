@@ -3,6 +3,7 @@
 ### Autores:
 
 *[João Rebelo - a21805230](https://github.com/JBernardoRebelo)*
+*[Miguel Fernández - a21803644](https://github.com/MizuRyujin)*
 
 ### Repositório Git:
 
