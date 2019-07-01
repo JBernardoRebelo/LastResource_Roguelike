@@ -15,14 +15,21 @@ namespace LRRoguelike
             // Define output text encoding
             Console.OutputEncoding = Encoding.UTF8;
 
+
+            /*************************
+             *******   DEBUG   *******
+             *************************/
             for (int i = 0; i < args.Length; i++)
             {
                 Console.WriteLine(args[i]);
             }
-            
-            Console.WriteLine(gm.Rows);
-            Console.WriteLine(gm.Collums);
 
+            Console.WriteLine("Number of rows: " + gm.Rows);
+            Console.WriteLine("Number of collums: " + gm.Collums);
+
+            /*************************
+             *******  !DEBUG   *******
+             *************************/
 
 
             rndr.MainMenu();
