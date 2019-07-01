@@ -12,6 +12,7 @@ namespace LRRoguelike
         /// </summary>
         public void StartMenu()
         {
+            // Player choice to navigate menus
             int choice;
 
             // Output to user
