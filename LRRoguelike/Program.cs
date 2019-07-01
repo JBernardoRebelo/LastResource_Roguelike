@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text;
-using System.Collections.Generic;
 
 namespace LRRoguelike
 {
@@ -8,14 +7,25 @@ namespace LRRoguelike
     {
         static void Main(string[] args)
         {
-            // Define output text encoding
-            Console.OutputEncoding = Encoding.UTF8;
-
             // Instantiate classes
+            GameSettings gm = new GameSettings(args);
             Random rndm = new Random();
             Render rndr = new Render();
 
-            rndr.StartMenu();
+            // Define output text encoding
+            Console.OutputEncoding = Encoding.UTF8;
+
+            for (int i = 0; i < args.Length; i++)
+            {
+                Console.WriteLine(args[i]);
+            }
+            
+            Console.WriteLine(gm.Rows);
+            Console.WriteLine(gm.Collums);
+
+
+
+            rndr.MainMenu();
 
         }
     }

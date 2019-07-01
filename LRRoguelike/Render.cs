@@ -10,7 +10,7 @@ namespace LRRoguelike
         /// <summary>
         /// Output Start Menu, options included
         /// </summary>
-        public void StartMenu()
+        public void MainMenu()
         {
             // Player choice to navigate menus
             int choice;
@@ -64,7 +64,7 @@ namespace LRRoguelike
             Console.WriteLine("Press anything to go back to Start Menu...");
             Console.ReadKey();
             Console.Clear();
-            StartMenu();
+            MainMenu();
         }
     }
 }
