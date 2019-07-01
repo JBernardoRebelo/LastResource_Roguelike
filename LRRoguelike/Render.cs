@@ -8,25 +8,22 @@ namespace LRRoguelike
     public class Render
     {
         /// <summary>
-        /// Output Start Menu, options included
+        /// Output Initial/Main Menu, options included
         /// </summary>
-        public void StartMenu()
+        public void MainMenu()
         {
-            int choice;
 
             // Output to user
-            Console.WriteLine("1. New Game;");
-            Console.WriteLine("2. Credits;");
-            Console.WriteLine("3. Quit;");
-
-            // Convert input
-            choice = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("\nPress...");
+            Console.WriteLine("1 -> New Game");
+            Console.WriteLine("2 -> Credits");
+            Console.WriteLine("3 -> Quit");
 
             // Pick choice
-            switch (choice)
+            switch (GetUserInput())
             {
                 // Start game
-                case 1: 
+                case 1:
                     Console.Clear();
                     Console.WriteLine("Let's play");
                     // goes to game loop
@@ -44,7 +41,7 @@ namespace LRRoguelike
 
                 // Case invalid choice is entered
                 default:
-                    Console.WriteLine("Invalid choice, goodbye...");
+                    ErrorMessage();
                     break;
             }
         }
@@ -95,7 +92,42 @@ namespace LRRoguelike
             Console.WriteLine("Press anything to go back to Start Menu...");
             Console.ReadKey();
             Console.Clear();
-            StartMenu();
+            MainMenu();
+        }
+
+        /// <summary>
+        /// Method to get and verify user input in menus
+        /// </summary>
+        private int GetUserInput()
+        {
+            // Block variables
+            string uInput;
+            bool canConvert;
+            int choice;
+
+            // Does not continue program while input is invalid or
+            // cannot be converted
+            do
+            {
+                // Ask for input
+                Console.Write("\nSelect your option: ");
+                uInput = Console.ReadLine();
+
+                // Verify if can convert to int32
+                canConvert = int.TryParse(uInput, out choice);
+
+            } while (!canConvert || choice > 3 || choice < 1);
+
+            // Return converted uInput
+            return choice;
+        }
+
+        /// <summary>
+        /// Method to print error message
+        /// </summary>
+        private void ErrorMessage()
+        {
+            Console.WriteLine("Invalid option...");
         }
     }
 }
