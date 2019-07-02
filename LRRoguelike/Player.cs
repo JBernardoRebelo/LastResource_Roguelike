@@ -54,7 +54,7 @@ namespace LRRoguelike
                 // Up
                 case "8":
                     // Wall
-                    if(Ypos < height)
+                    if(Ypos <= 0)
                     {
                         Ypos = Ypos;
                     }
@@ -72,7 +72,7 @@ namespace LRRoguelike
                 // Left
                 case "4":
                     // Wall
-                    if (Xpos < length)
+                    if (Xpos <= 0)
                     {
                         Xpos = Xpos;
                     }
@@ -86,7 +86,7 @@ namespace LRRoguelike
                 // Right
                 case "6":
                     // Wall
-                    if (Xpos > length)
+                    if (Xpos >= length)
                     {
                         Xpos = Xpos;
                     }
@@ -104,7 +104,7 @@ namespace LRRoguelike
                 // Down
                 case "2":
                     // Wall
-                    if (Ypos > height)
+                    if (Ypos >= height)
                     {
                         Ypos = Ypos;
                     }
