@@ -15,7 +15,7 @@ namespace LRRoguelike
             GameSettings gm = new GameSettings(args);
             Render rndr = new Render();
             GameLoop gl = new GameLoop();
-            Player player = new Player(pg.RanBtw(gm.Rows));
+            Player player = new Player(pg.RanBtw(1, gm.Rows));
 
             // Define output text encoding
             Console.OutputEncoding = Encoding.UTF8;
@@ -43,15 +43,14 @@ namespace LRRoguelike
         }
 
         /// <summary>
-        /// Returns a random number between given value and 0
+        /// Random number generator between 0 and given max value.
         /// </summary>
-        /// <param name="min"></param>
-        /// <param name="max"></param>
-        /// <returns></returns>
-        public int RanBtw(int max)
+        /// <param name="min"> Min intager value given by user. </param>
+        /// <param name="max"> Max intager value given by user. </param>
+        /// <returns> Returns random number between given values. </returns>
+        public int RanBtw(int min, int max)
         {
-            // Sets hp to random between 0 and mx and returns
-            int ran = rnd.Next(0, max);
+            int ran = rnd.Next(min, max);
             return ran;
         }
     }
