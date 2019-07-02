@@ -6,10 +6,12 @@ namespace LRRoguelike
 {
     public class PlayerActions
     {
+        // Instantiate Render for error messages
+
         /// <summary>
         /// Accepts input from user and moves player
         /// </summary>
-        /// <param name="chMove"></param>
+        /// <param name="chMove"> User chosen direction. </param>
         public void Move
             (Player player, string chMove, int height, int length)
         {
@@ -21,16 +23,16 @@ namespace LRRoguelike
 
                 // Up
                 case "8":
+
+                    // Moves
+                    player.Ypos--;
+
                     // Wall
                     if (player.Ypos <= 0)
                     {
-                        player.Ypos = player.Ypos;
+                        player.Ypos = 1;
                     }
-                    // Moves
-                    else
-                    {
-                        player.Ypos--;
-                    }
+ 
                     break;
 
                 case "9":
@@ -39,29 +41,27 @@ namespace LRRoguelike
 
                 // Left
                 case "4":
+
+                    // Moves
+                    player.Xpos--;
+
                     // Wall
                     if (player.Xpos <= 0)
                     {
-                        player.Xpos = player.Xpos;
-                    }
-                    // Moves
-                    else
-                    {
-                        player.Xpos--;
+                        player.Xpos = 1;
                     }
                     break;
 
                 // Right
                 case "6":
+
+                    // Moves
+                    player.Xpos++;
+
                     // Wall
                     if (player.Xpos >= length)
                     {
-                        player.Xpos = player.Xpos;
-                    }
-                    // Moves
-                    else
-                    {
-                        player.Xpos++;
+                        player.Xpos = length;
                     }
                     break;
 
@@ -71,15 +71,14 @@ namespace LRRoguelike
 
                 // Down
                 case "2":
+
+                    // Moves
+                    player.Ypos++;
+
                     // Wall
                     if (player.Ypos >= height)
                     {
-                        player.Ypos = player.Ypos;
-                    }
-                    // Moves
-                    else
-                    {
-                        player.Ypos++;
+                        player.Ypos = height;
                     }
                     break;
 

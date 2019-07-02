@@ -56,7 +56,9 @@ namespace LRRoguelike
             // Show stats
             Console.WriteLine("______________ Stats ______________");
             Console.WriteLine("Current HP: " + player.HP);
-            Console.WriteLine("Player's spawn, Y:" + player.Ypos + "X:" + player.Xpos + "\n");
+            /*  DEBUG  */
+            Console.WriteLine("Player's X: {0} and Y: {1}", player.Xpos, player.Ypos);
+            /*  !DEBUG */
             Console.WriteLine();
 
             // Options menu
@@ -121,7 +123,11 @@ namespace LRRoguelike
             }
         }
 
-
+        /// <summary>
+        /// Method to print object character representation in correct position
+        /// </summary>
+        /// <param name="height"> GameSettings Rows value. </param>
+        /// <param name="player"> Program user. </param>
         public void PlacePart(int height, Player player)
         {
             // Vars
@@ -141,7 +147,7 @@ namespace LRRoguelike
         /// </summary>
         /// <param name="x"> Object's Xpos value. </param>
         /// <param name="y"> Object's Ypos value. </param>
-        /// <returns> Intager array that contains a normalized </returns>
+        /// <returns> Integer array that contains a normalized. </returns>
         private static int[] NormalizePosition(int x, int y) =>
             new int[2] { x * 4 - 2, y * 2 - 1 };
 
@@ -191,7 +197,7 @@ namespace LRRoguelike
         }
 
         /// <summary>
-        /// Leaves game with a goodby message
+        /// Leaves game with a goodbye message
         /// </summary>
         public void LeaveGame()
         {
@@ -207,6 +213,11 @@ namespace LRRoguelike
             Console.WriteLine("Invalid option...");
         }
 
+        /// <summary>
+        /// Method to position menus in the correct position 
+        /// relative to the board
+        /// </summary>
+        /// <param name="height"> GameSettings Rows value. </param>
         public void PlaceMenus(int height)
         {
             for (int i = 0; i < height * 2.25f ; i++)

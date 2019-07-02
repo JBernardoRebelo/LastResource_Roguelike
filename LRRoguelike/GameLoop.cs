@@ -23,6 +23,7 @@ namespace LRRoguelike
         {
             rndr.MainMenu();
             Loop(length, height, player);
+
         }
 
         /// <summary>
