@@ -20,7 +20,7 @@ namespace LRRoguelike
             Console.WriteLine("3 -> Quit");
 
             // Pick choice
-            switch (GetUserInput())
+            switch (UserMenuInput())
             {
                 // Start game
                 case 1:
@@ -36,8 +36,7 @@ namespace LRRoguelike
 
                 // Leaves program 
                 case 3:
-                    Console.WriteLine("Goodbye! See you soon...");
-                    Environment.Exit(0);
+                    LeaveGame();
                     break;
 
                 // Case invalid choice is entered
@@ -54,13 +53,42 @@ namespace LRRoguelike
         /// <param name="player"> Program user. </param>
         public void GameloopMenu(Player player)
         {
-            // Show 
+            // Show stats
+            Console.WriteLine("______________ Stats ______________");
             Console.WriteLine("Current HP: " + player.HP);
+            /*  DEBUG  */
+            Console.WriteLine("Player's X: {0} and Y: {1}", player.Xpos, player.Ypos);
+            /*  !DEBUG */
+            Console.WriteLine();
 
+            // Options menu
+            Console.WriteLine("______________ Options _____________");
             Console.WriteLine("Choose your options: ");
             Console.WriteLine("L -> Look around");
-            Console.WriteLine(" Move");
-            Console.WriteLine("Q -> Quit game");
+            Console.WriteLine("M -> Move");
+            Console.WriteLine("Q -> Quit game \n");
+
+            // Legend
+            Console.WriteLine("______________ Legend ______________");
+            Console.WriteLine("⨀ -> Player");
+            Console.WriteLine("✚ -> Exit \n");
+        }
+
+        /// <summary>
+        /// Shows move instructions
+        /// </summary>
+        public void MoveMenu()
+        {
+            Console.WriteLine("______________ Move Menu ____________");
+            Console.WriteLine("Keys to move: ");
+            Console.WriteLine("7 = ↖");
+            Console.WriteLine("8 = ↑");
+            Console.WriteLine("9 = ↗");
+            Console.WriteLine("4 = ←");
+            Console.WriteLine("6 = →");
+            Console.WriteLine("1 = ↙");
+            Console.WriteLine("2 = ↓");
+            Console.WriteLine("3 = ↘");
         }
 
         /// <summary>
@@ -95,7 +123,11 @@ namespace LRRoguelike
             }
         }
 
-
+        /// <summary>
+        /// Method to print object character representation in correct position
+        /// </summary>
+        /// <param name="height"> GameSettings Rows value. </param>
+        /// <param name="player"> Program user. </param>
         public void PlacePart(int height, Player player)
         {
             // Vars
@@ -106,13 +138,18 @@ namespace LRRoguelike
 
             Console.WriteLine(player.PrintPlayer());
 
+            Console.SetCursorPosition(0, 0);
+
         }
 
+        /// <summary>
+        /// Normalize object's position to be printed on console
+        /// </summary>
+        /// <param name="x"> Object's Xpos value. </param>
+        /// <param name="y"> Object's Ypos value. </param>
+        /// <returns> Integer array that contains a normalized. </returns>
         private static int[] NormalizePosition(int x, int y) =>
             new int[2] { x * 4 - 2, y * 2 - 1 };
-
-        //private static int[] NormalizePosition(int x, int y) =>
-        //        new int[2] { x + 4, y + 4 };
 
         /// <summary>
         /// Output credits, goes back to Start Menu
@@ -134,7 +171,7 @@ namespace LRRoguelike
         /// <summary>
         /// Method to get and verify user input in menus
         /// </summary>
-        private int GetUserInput()
+        private int UserMenuInput()
         {
             // Block variables
             string uInput;
@@ -159,16 +196,30 @@ namespace LRRoguelike
         }
 
         /// <summary>
+        /// Leaves game with a goodbye message
+        /// </summary>
+        public void LeaveGame()
+        {
+            Console.WriteLine("Goodbye! See you soon...");
+            Environment.Exit(0);
+        }
+
+        /// <summary>
         /// Method to print error message
         /// </summary>
-        private void ErrorMessage()
+        public void ErrorMessage()
         {
             Console.WriteLine("Invalid option...");
         }
 
+        /// <summary>
+        /// Method to position menus in the correct position 
+        /// relative to the board
+        /// </summary>
+        /// <param name="height"> GameSettings Rows value. </param>
         public void PlaceMenus(int height)
         {
-            for (int i = 0; i < height + 3; i++)
+            for (int i = 0; i < height * 2.25f ; i++)
             {
                 Console.WriteLine();
             }

@@ -32,7 +32,7 @@ namespace LRRoguelike
             //HP = 100;
 
             /*  DEBUG  */
-            HP = 5;
+            HP = 10;
             /*  !DEBUG */
 
             // Initializing pos to random in first column
@@ -41,15 +41,7 @@ namespace LRRoguelike
             // Assigning Y to random
             Ypos = y;
 
-        }
-
-        /// <summary>
-        /// Waits for movement input and moves
-        /// </summary>
-        public void Move()
-        {
-            Console.Read();
-        }
+        }       
 
         /// <summary>
         /// Prints player's token in position
