@@ -9,7 +9,6 @@ namespace LRRoguelike
     /// </summary>
     public class GameLoop
     {
-    { 
         // Variables
         Render rndr = new Render();
 
@@ -56,7 +55,7 @@ namespace LRRoguelike
                 // Player looses 1 hp
                 player.HP--;
 
-                Console.Read();
+                //Console.Read();
 
             }
         }

@@ -60,7 +60,7 @@ namespace LRRoguelike
                     // Wall
                     if(Ypos <= 0)
                     {
-                        Ypos = Ypos;
+                        Ypos = 1;
                     }
                     // Moves
                     else
