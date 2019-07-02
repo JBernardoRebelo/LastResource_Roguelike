@@ -15,7 +15,7 @@ namespace LRRoguelike
             GameSettings gm = new GameSettings(args);
             Render rndr = new Render();
             GameLoop gl = new GameLoop();
-            Player player = new Player(pg.RanBtw(100), pg.RanBtw(gm.Rows));
+            Player player = new Player(pg.RanBtw(gm.Rows));
 
             // Define output text encoding
             Console.OutputEncoding = Encoding.UTF8;

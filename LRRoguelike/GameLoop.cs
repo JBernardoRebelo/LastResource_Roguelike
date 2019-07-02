@@ -33,10 +33,14 @@ namespace LRRoguelike
             {
                 // Print board
                 rndr.PrintBoard(length, height);
+                //rndr.PlacePart(height, player);
 
                 // Options
+                rndr.GameloopMenu();
+                // Look around Move
 
-                    // Move
+                // Move
+                player.Move();
                     // Look Around
 
                 // End of turn

@@ -49,6 +49,15 @@ namespace LRRoguelike
         }
        
         /// <summary>
+        /// Outputs gameloop options to user
+        /// </summary>
+        public void GameloopMenu()
+        {
+            Console.WriteLine("Choose your options: ");
+            Console.WriteLine("(L) - Look around");
+        }
+
+        /// <summary>
         /// Prints board, accepts args converted from console
         /// </summary>
         /// <param name="length"></param>
@@ -79,6 +88,22 @@ namespace LRRoguelike
                 Console.WriteLine();
             }
         }
+
+        /// <summary>
+        /// Accepts List of parts, places parts in map
+        /// </summary>
+        public void PlacePart(int height, Player player)
+        {
+            // Vars
+            int[] normalizedPos = NormalizePosition(player.Xpos, player.Ypos);
+
+            // Cursor
+            Console.SetCursorPosition(normalizedPos[0], normalizedPos[1]);
+
+        }
+
+        private static int[] NormalizePosition(int x, int y) =>
+            new int[2] { x * 4 - 2, y * 2 - 1 };
 
         /// <summary>
         /// Output credits, goes back to Start Menu

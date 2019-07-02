@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 namespace LRRoguelike
 {
     /// <summary>
@@ -25,10 +26,10 @@ namespace LRRoguelike
         /// <summary>
         /// Player constructor, assigns HP and Y to given random value
         /// </summary>
-        public Player (int hp, int y)
+        public Player (int y)
         {
             // Assigning HP to random
-            HP = hp;
+            HP = 100;
 
             // Initializing pos to random in first column
             Xpos = 0;
@@ -36,6 +37,14 @@ namespace LRRoguelike
             // Assigning Y to random
             Ypos = y; 
 
+        }
+
+        /// <summary>
+        /// Waits for movement input and moves
+        /// </summary>
+        public void Move()
+        {
+            Console.Read();
         }
 
         /// <summary>
