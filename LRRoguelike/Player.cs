@@ -32,7 +32,7 @@ namespace LRRoguelike
             //HP = 100;
 
             /*  DEBUG  */
-            HP = 5;
+            HP = 10;
             /*  !DEBUG */
 
             // Initializing pos to random in first column

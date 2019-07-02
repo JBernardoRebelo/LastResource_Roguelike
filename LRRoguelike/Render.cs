@@ -20,7 +20,7 @@ namespace LRRoguelike
             Console.WriteLine("3 -> Quit");
 
             // Pick choice
-            switch (GetUserInput())
+            switch (UserMenuInput())
             {
                 // Start game
                 case 1:
@@ -151,7 +151,6 @@ namespace LRRoguelike
         private static int[] NormalizePosition(int x, int y) =>
             new int[2] { x * 4 - 2, y * 2 - 1 };
 
-
         /// <summary>
         /// Output credits, goes back to Start Menu
         /// </summary>
@@ -172,7 +171,7 @@ namespace LRRoguelike
         /// <summary>
         /// Method to get and verify user input in menus
         /// </summary>
-        private int GetUserInput()
+        private int UserMenuInput()
         {
             // Block variables
             string uInput;
