@@ -55,6 +55,6 @@ namespace LRRoguelike
         /// Prints player's token in position
         /// </summary>
         /// <returns></returns>
-        public char PrintPlayer() => '⨀';
+        public char PrintPlayer() => 'p';
     }
 }

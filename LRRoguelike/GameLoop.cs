@@ -45,12 +45,14 @@ namespace LRRoguelike
                 // Look around Move
 
                 // Move
-                player.Move();
+                //player.Move();
                 // Look Around
 
                 // End of turn
                 // Player looses 1 hp
                 player.HP--;
+
+                Console.Read();
 
             }
         }

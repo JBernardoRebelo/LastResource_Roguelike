@@ -106,13 +106,19 @@ namespace LRRoguelike
 
             Console.WriteLine(player.PrintPlayer());
 
+            Console.SetCursorPosition(0, 0);
+
         }
 
+        /// <summary>
+        /// Normalize object's position to be printed on console
+        /// </summary>
+        /// <param name="x"> Object's Xpos value. </param>
+        /// <param name="y"> Object's Ypos value. </param>
+        /// <returns> Intager array that contains a normalized </returns>
         private static int[] NormalizePosition(int x, int y) =>
             new int[2] { x * 4 - 2, y * 2 - 1 };
 
-        //private static int[] NormalizePosition(int x, int y) =>
-        //        new int[2] { x + 4, y + 4 };
 
         /// <summary>
         /// Output credits, goes back to Start Menu
@@ -168,7 +174,7 @@ namespace LRRoguelike
 
         public void PlaceMenus(int height)
         {
-            for (int i = 0; i < height + 3; i++)
+            for (int i = 0; i < height * 2.25f ; i++)
             {
                 Console.WriteLine();
             }
