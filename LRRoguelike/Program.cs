@@ -15,7 +15,7 @@ namespace LRRoguelike
             GameSettings gm = new GameSettings(args);
             Render rndr = new Render();
             GameLoop gl = new GameLoop();
-            Player player = new Player(pg.RanHp(100), pg.RanY(gm.Rows));
+            Player player = new Player(pg.RanBtw(100), pg.RanBtw(gm.Rows));
 
             // Define output text encoding
             Console.OutputEncoding = Encoding.UTF8;
@@ -43,29 +43,16 @@ namespace LRRoguelike
         }
 
         /// <summary>
-        /// Returns player's HP, accepts max HP
+        /// Returns a random number between given value and 0
         /// </summary>
         /// <param name="min"></param>
         /// <param name="max"></param>
         /// <returns></returns>
-        public int RanHp(int max)
+        public int RanBtw(int max)
         {
             // Sets hp to random between 0 and mx and returns
-            int hp = rnd.Next(0, max);
-            return hp;
-        }
-
-        /// <summary>
-        /// Returns player's spawning point,
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
-        private int RanY(int y)
-        {
-            // Sets ypos to random between 0 and nº of rows and returns
-            int ypos = rnd.Next(0, y);
-            return ypos;
+            int ran = rnd.Next(0, max);
+            return ran;
         }
     }
 }
