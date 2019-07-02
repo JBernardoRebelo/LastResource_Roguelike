@@ -43,7 +43,7 @@ namespace LRRoguelike
         /// Accepts input from user and moves
         /// </summary>
         /// <param name="chMove"></param>
-        public void Move(string chMove)
+        public void Move(string chMove, int height, int length)
         {
             switch (chMove)
             {
@@ -51,29 +51,68 @@ namespace LRRoguelike
                     // Up left
                     break;
 
+                // Up
                 case "8":
-                    // Up
-                    Xpos++;
+                    // Wall
+                    if(Ypos < height)
+                    {
+                        Ypos = Ypos;
+                    }
+                    // Moves
+                    else
+                    {
+                        Ypos--;
+                    }
                     break;
 
                 case "9":
                     // Up right
                     break;
 
+                // Left
                 case "4":
-                    // Left
+                    // Wall
+                    if (Xpos < length)
+                    {
+                        Xpos = Xpos;
+                    }
+                    // Moves
+                    else
+                    {
+                        Xpos--;
+                    }
                     break;
 
+                // Right
                 case "6":
-                    // Right
+                    // Wall
+                    if (Xpos > length)
+                    {
+                        Xpos = Xpos;
+                    }
+                    // Moves
+                    else
+                    {
+                        Xpos++;
+                    }
                     break;
 
                 case "1":
                     // Down left
                     break;
 
+                // Down
                 case "2":
-                    // Down
+                    // Wall
+                    if (Ypos > height)
+                    {
+                        Ypos = Ypos;
+                    }
+                    // Moves
+                    else
+                    {
+                        Ypos++;
+                    }
                     break;
 
                 case "3":

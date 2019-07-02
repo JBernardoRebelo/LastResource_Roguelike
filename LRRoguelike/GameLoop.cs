@@ -40,7 +40,7 @@ namespace LRRoguelike
                 rndr.GameloopMenu(player);
 
                 option = Console.ReadLine();
-                MenuChecker(option, player);
+                MenuChecker(option, player, length, height);
 
 
 
@@ -54,7 +54,8 @@ namespace LRRoguelike
         /// Accepts a string and calls adequate methods
         /// </summary>
         /// <param name="option"></param>
-        public void MenuChecker(string option, Player player)
+        public void MenuChecker
+            (string option, Player player, int height, int length)
         {
             string chMove;
 
@@ -71,7 +72,7 @@ namespace LRRoguelike
 
                     // Assign's user's choice
                     chMove = Console.ReadLine();
-                    player.Move(chMove);
+                    player.Move(chMove, height, length);
 
                     break;
                 case "q":
