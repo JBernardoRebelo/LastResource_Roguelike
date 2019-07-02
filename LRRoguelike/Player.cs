@@ -32,7 +32,7 @@ namespace LRRoguelike
             HP = 100;
 
             // Initializing pos to random in first column
-            Xpos = 0;
+            Xpos = 2;
 
             // Assigning Y to random
             Ypos = y; 
@@ -40,9 +40,53 @@ namespace LRRoguelike
         }
 
         /// <summary>
-        /// Waits for movement input and moves
+        /// Accepts input from user and moves
         /// </summary>
-        public void Move()
+        /// <param name="chMove"></param>
+        public void Move(string chMove)
+        {
+            switch (chMove)
+            {
+                case "7":
+                    // Up left
+                    break;
+
+                case "8":
+                    // Up
+                    Xpos++;
+                    break;
+
+                case "9":
+                    // Up right
+                    break;
+
+                case "4":
+                    // Left
+                    break;
+
+                case "6":
+                    // Right
+                    break;
+
+                case "1":
+                    // Down left
+                    break;
+
+                case "2":
+                    // Down
+                    break;
+
+                case "3":
+                    // Down Right
+                    break;
+
+                default:
+                    
+                    break;
+            }
+        }
+
+        public void LookAround()
         {
             Console.Read();
         }
