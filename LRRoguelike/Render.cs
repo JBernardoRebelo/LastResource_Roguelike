@@ -37,11 +37,13 @@ namespace LRRoguelike
                 // Leaves program 
                 case 3:
                     Console.WriteLine("Goodbye! See you soon...");
+                    Environment.Exit(0);
                     break;
 
                 // Case invalid choice is entered
                 default:
                     ErrorMessage();
+                    Environment.Exit(0);
                     break;
             }
         }
@@ -89,8 +91,8 @@ namespace LRRoguelike
             Console.WriteLine("[Insert person 2 here];");
 
             // Goes back to start menu if user enters any key
-            Console.WriteLine("Press anything to go back to Start Menu...");
-            //Console.ReadKey();
+            Console.WriteLine("Type to go back to Start Menu...");
+            Console.Read();
             //Console.Clear();
             MainMenu();
         }

@@ -16,10 +16,10 @@ namespace LRRoguelike
         /// <summary>
         /// Shows start menu, redirects to Loop
         /// </summary>
-        public void StartGame(int length, int height)
+        public void StartGame(int length, int height, Player player)
         {
             rndr.MainMenu();
-            Loop(length, height);
+            Loop(length, height, player);
         }
 
         /// <summary>
@@ -27,10 +27,22 @@ namespace LRRoguelike
         /// </summary>
         /// <param name="length"></param>
         /// <param name="height"></param>
-        public void Loop(int length, int height)
+        public void Loop(int length, int height, Player player)
         {
-            // Print board
-            rndr.PrintBoard(length, height);
+            while(player.HP > 0)
+            {
+                // Print board
+                rndr.PrintBoard(length, height);
+
+                // Options
+
+                    // Move
+                    // Look Around
+
+                // End of turn
+                // Player looses 1 hp
+                player.HP--;
+            }
         }
 
     }
