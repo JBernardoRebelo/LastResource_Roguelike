@@ -44,9 +44,92 @@ namespace LRRoguelike
         }
 
         /// <summary>
-        /// Waits for movement input and moves
+        /// Accepts input from user and moves
         /// </summary>
-        public void Move()
+        /// <param name="chMove"></param>
+        public void Move(string chMove, int height, int length)
+        {
+            switch (chMove)
+            {
+                case "7":
+                    // Up left
+                    break;
+
+                // Up
+                case "8":
+                    // Wall
+                    if(Ypos <= 0)
+                    {
+                        Ypos = Ypos;
+                    }
+                    // Moves
+                    else
+                    {
+                        Ypos--;
+                    }
+                    break;
+
+                case "9":
+                    // Up right
+                    break;
+
+                // Left
+                case "4":
+                    // Wall
+                    if (Xpos <= 0)
+                    {
+                        Xpos = Xpos;
+                    }
+                    // Moves
+                    else
+                    {
+                        Xpos--;
+                    }
+                    break;
+
+                // Right
+                case "6":
+                    // Wall
+                    if (Xpos >= length)
+                    {
+                        Xpos = Xpos;
+                    }
+                    // Moves
+                    else
+                    {
+                        Xpos++;
+                    }
+                    break;
+
+                case "1":
+                    // Down left
+                    break;
+
+                // Down
+                case "2":
+                    // Wall
+                    if (Ypos >= height)
+                    {
+                        Ypos = Ypos;
+                    }
+                    // Moves
+                    else
+                    {
+                        Ypos++;
+                    }
+                    break;
+
+                case "3":
+                    // Down Right
+                    break;
+
+                default:
+                    
+                    break;
+            }
+        }
+
+        public void LookAround()
         {
             Console.Read();
         }

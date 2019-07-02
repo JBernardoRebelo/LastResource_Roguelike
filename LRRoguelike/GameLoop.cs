@@ -9,6 +9,7 @@ namespace LRRoguelike
     /// </summary>
     public class GameLoop
     {
+    { 
         // Variables
         Render rndr = new Render();
 
@@ -31,7 +32,9 @@ namespace LRRoguelike
         /// <param name="height"></param>
         public void Loop(int length, int height, Player player)
         {
-            while (player.HP > 0)
+            string option;
+
+            while(player.HP > 0)
             {
                 Console.Clear();
 
@@ -44,9 +47,10 @@ namespace LRRoguelike
                 rndr.GameloopMenu(player);
                 // Look around Move
 
-                // Move
-                //player.Move();
-                // Look Around
+                option = Console.ReadLine();
+                MenuChecker(option, player, length, height);
+
+
 
                 // End of turn
                 // Player looses 1 hp
@@ -57,5 +61,39 @@ namespace LRRoguelike
             }
         }
 
+        /// <summary>
+        /// Accepts a string and calls adequate methods
+        /// </summary>
+        /// <param name="option"></param>
+        public void MenuChecker
+            (string option, Player player, int height, int length)
+        {
+            string chMove;
+
+            switch (option)
+            {
+                case "l":
+                    // Looks around
+
+                    break;
+
+                case "m":
+                    // Move
+                    rndr.MoveMenu();
+
+                    // Assign's user's choice
+                    chMove = Console.ReadLine();
+                    player.Move(chMove, height, length);
+
+                    break;
+                case "q":
+                    rndr.LeaveGame();
+                    break;
+
+                default:
+                    rndr.ErrorMessage();
+                    break;
+            }
+        }
     }
 }
