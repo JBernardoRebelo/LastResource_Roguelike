@@ -21,5 +21,27 @@ namespace LRRoguelike
         /// Player's Y position in map
         /// </summary>
         public int Ypos { get; set; }
+
+        /// <summary>
+        /// Player constructor, assigns HP and Y to given random value
+        /// </summary>
+        public Player (int hp, int y)
+        {
+            // Assigning HP to random
+            HP = hp;
+
+            // Initializing pos to random in first column
+            Xpos = 0;
+
+            // Assigning Y to random
+            Ypos = y; 
+
+        }
+
+        /// <summary>
+        /// Prints player's token in position
+        /// </summary>
+        /// <returns></returns>
+        public char PrintPlayer() => '⨀';
     }
 }
