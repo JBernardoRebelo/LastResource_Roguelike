@@ -36,8 +36,7 @@ namespace LRRoguelike
 
                 // Leaves program 
                 case 3:
-                    Console.WriteLine("Goodbye! See you soon...");
-                    Environment.Exit(0);
+                    LeaveGame();
                     break;
 
                 // Case invalid choice is entered
@@ -53,13 +52,40 @@ namespace LRRoguelike
         /// </summary>
         public void GameloopMenu(Player player)
         {
-            // Show 
+            // Show stats
+            Console.WriteLine("______________ Stats ______________");
             Console.WriteLine("Current HP: " + player.HP);
+            Console.WriteLine("Player's spawn, Y:" + player.Ypos + "X:" + player.Xpos + "\n");
+            Console.WriteLine();
 
+            // Options menu
+            Console.WriteLine("______________ Options _____________");
             Console.WriteLine("Choose your options: ");
             Console.WriteLine("L -> Look around");
-            Console.WriteLine(" Move");
-            Console.WriteLine("Q -> Quit game");
+            Console.WriteLine("M -> Move");
+            Console.WriteLine("Q -> Quit game \n");
+
+            // Legend
+            Console.WriteLine("______________ Legend ______________");
+            Console.WriteLine("⨀ -> Player");
+            Console.WriteLine("✚ -> Exit \n");
+        }
+
+        /// <summary>
+        /// Shows move instructions
+        /// </summary>
+        public void MoveMenu()
+        {
+            Console.WriteLine("______________ Move Menu ____________");
+            Console.WriteLine("Keys to move: ");
+            Console.WriteLine("7 = ↖");
+            Console.WriteLine("8 = ↑");
+            Console.WriteLine("9 = ↗");
+            Console.WriteLine("4 = ←");
+            Console.WriteLine("6 = →");
+            Console.WriteLine("1 = ↙");
+            Console.WriteLine("2 = ↓");
+            Console.WriteLine("3 = ↘");
         }
 
         /// <summary>
@@ -155,9 +181,18 @@ namespace LRRoguelike
         }
 
         /// <summary>
+        /// Leaves game with a goodby message
+        /// </summary>
+        public void LeaveGame()
+        {
+            Console.WriteLine("Goodbye! See you soon...");
+            Environment.Exit(0);
+        }
+
+        /// <summary>
         /// Method to print error message
         /// </summary>
-        private void ErrorMessage()
+        public void ErrorMessage()
         {
             Console.WriteLine("Invalid option...");
         }
