@@ -47,10 +47,11 @@ namespace LRRoguelike
                     break;
             }
         }
-       
+
         /// <summary>
-        /// Outputs gameloop options to user
+        /// Shows in-game player menu.
         /// </summary>
+        /// <param name="player"> Program user. </param>
         public void GameloopMenu(Player player)
         {
             // Show 
@@ -65,8 +66,8 @@ namespace LRRoguelike
         /// <summary>
         /// Prints board, accepts args converted from console
         /// </summary>
-        /// <param name="length"></param>
-        /// <param name="height"></param>
+        /// <param name="length"> GameSettings Collums value. </param>
+        /// <param name="height"> GameSettings Row value. </param>
         public void PrintBoard(int length, int height)
         {
             //Console.Clear();
@@ -94,9 +95,7 @@ namespace LRRoguelike
             }
         }
 
-        /// <summary>
-        /// Accepts List of parts, places parts in map
-        /// </summary>
+
         public void PlacePart(int height, Player player)
         {
             // Vars
@@ -105,10 +104,15 @@ namespace LRRoguelike
             // Cursor
             Console.SetCursorPosition(normalizedPos[0], normalizedPos[1]);
 
+            Console.WriteLine(player.PrintPlayer());
+
         }
 
         private static int[] NormalizePosition(int x, int y) =>
             new int[2] { x * 4 - 2, y * 2 - 1 };
+
+        //private static int[] NormalizePosition(int x, int y) =>
+        //        new int[2] { x + 4, y + 4 };
 
         /// <summary>
         /// Output credits, goes back to Start Menu
@@ -160,6 +164,14 @@ namespace LRRoguelike
         private void ErrorMessage()
         {
             Console.WriteLine("Invalid option...");
+        }
+
+        public void PlaceMenus(int height)
+        {
+            for (int i = 0; i < height + 3; i++)
+            {
+                Console.WriteLine();
+            }
         }
     }
 }
