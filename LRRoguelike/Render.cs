@@ -51,10 +51,15 @@ namespace LRRoguelike
         /// <summary>
         /// Outputs gameloop options to user
         /// </summary>
-        public void GameloopMenu()
+        public void GameloopMenu(Player player)
         {
+            // Show 
+            Console.WriteLine("Current HP: " + player.HP);
+
             Console.WriteLine("Choose your options: ");
-            Console.WriteLine("(L) - Look around");
+            Console.WriteLine("L -> Look around");
+            Console.WriteLine(" Move");
+            Console.WriteLine("Q -> Quit game");
         }
 
         /// <summary>
