@@ -9,8 +9,9 @@ namespace LRRoguelike
     /// </summary>
     public class GameLoop
     { 
-        // Variables
+        // Instantiate Classes
         Render rndr = new Render();
+        PlayerActions pA = new PlayerActions();
 
         /// <summary>
         /// Shows start menu, redirects to Loop
@@ -42,8 +43,6 @@ namespace LRRoguelike
                 option = Console.ReadLine();
                 MenuChecker(option, player, length, height);
 
-
-
                 // End of turn
                 // Player looses 1 hp
                 player.HP--;
@@ -63,7 +62,7 @@ namespace LRRoguelike
             {
                 case "l":
                     // Looks around
-
+                    pA.LookAround();
                     break;
 
                 case "m":
@@ -72,7 +71,7 @@ namespace LRRoguelike
 
                     // Assign's user's choice
                     chMove = Console.ReadLine();
-                    player.Move(chMove, height, length);
+                    pA.Move(player, chMove, height, length);
 
                     break;
                 case "q":
