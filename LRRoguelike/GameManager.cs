@@ -64,11 +64,9 @@ namespace LRRoguelike
                 rndr.PrintBoard(col, rows);
                 
                 // Place player
-                rndr.PlacePart(rows, player);
-                
+                rndr.PlacePart(rows, player);            
                 // Place exit
                 rndr.PlacePart(rows, exit);
-
 
                 // Options
                 rndr.PlaceMenus(rows);
@@ -124,7 +122,8 @@ namespace LRRoguelike
             {
                 // Looks around
                 case "l":
-                    pA.LookAround(mp);
+                    pA.LookAround(mp, player);
+                    // DONT USE TURN LA           
                     break;
 
                 // Move
@@ -201,7 +200,7 @@ namespace LRRoguelike
 
             // Reset position
             player.SpawnPlayer(RanBtw(1, col));
-            exit.SpawnExit(RanBtw(1, col), rows);
+            exit.SpawnExit(RanBtw(1, rows), col);
         }
 
         /// <summary>
