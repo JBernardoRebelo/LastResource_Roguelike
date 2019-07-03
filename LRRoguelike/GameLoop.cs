@@ -10,29 +10,45 @@ namespace LRRoguelike
     public class GameLoop
     { 
         // Instantiate Classes
+        Random rnd = new Random();
         Render rndr = new Render();
         PlayerActions pA = new PlayerActions();
 
         /// <summary>
         /// Shows start menu, redirects to Loop
         /// </summary>
-        /// <param name="length"> GameSettings Collums value. </param>
-        /// <param name="height"> GameSettings Rows value. </param>
+        /// <param name="col"> GameSettings Collums value. </param>
+        /// <param name="rows"> GameSettings Rows value. </param>
         /// <param name="player"> Program user. </param>
         /// /// <param name="exit"> Program user. </param>
-        public void StartGame(int length, int height, Player player, Exit exit)
+        public void StartGame(int col, int rows)
         {
-            rndr.MainMenu();
-            Loop(length, height, player, exit);
+            // Instantiate objects in world with "random" positions
+            Player player = new Player(RanBtw(1, rows));
+            Exit exit = new Exit(RanBtw(1, rows), col);
 
+            //####################################################################################
+            Console.WriteLine("Number of rows: " + rows);
+            Console.WriteLine("Number of collums: " + col);
+            Console.WriteLine("Player's hp: " + player.HP);
+            Console.WriteLine("Player's spawn, Y:" + player.Ypos + "X: " + player.Xpos);
+            Console.WriteLine("Exit's position, Y:" + exit.Ypos + "X: " + exit.Xpos);
+            // DEBUG
+            //####################################################################################
+
+            // Render Main Menu
+            rndr.MainMenu();
+
+            // Start gameloop
+            Loop(col, rows, player, exit);
         }
 
         /// <summary>
         /// Game loop, accepts map dimensions
         /// </summary>
-        /// <param name="length"></param>
-        /// <param name="height"></param>
-        public void Loop(int length, int height, Player player, Exit exit)
+        /// <param name="col"></param>
+        /// <param name="rows"></param>
+        public void Loop(int col, int rows, Player player, Exit exit)
         {
             // Method variables
             string option;
@@ -45,17 +61,17 @@ namespace LRRoguelike
                 Console.Clear();
 
                 // Print board
-                rndr.PrintBoard(length, height);
+                rndr.PrintBoard(col, rows);
                 
                 // Place player
-                rndr.PlacePart(height, player);
+                rndr.PlacePart(rows, player);
                 
                 // Place exit
-                rndr.PlacePart(height, exit);
+                rndr.PlacePart(rows, exit);
 
 
                 // Options
-                rndr.PlaceMenus(height);
+                rndr.PlaceMenus(rows);
                 rndr.GameloopMenu(player);
                 // Look around Move
 
@@ -75,7 +91,7 @@ namespace LRRoguelike
                 } while (!valInput);
 
 
-                MenuChecker(option, player, length, height);
+                MenuChecker(option, player, col, rows);
 
                 // End of turn
                 // Player looses 1 hp reset valInput value
@@ -89,10 +105,10 @@ namespace LRRoguelike
         /// </summary>
         /// <param name="option"> User input. </param>
         /// <param name="player"> Program user. </param>
-        /// <param name="height"> GameSettings Rows value. </param>
-        /// <param name="length"> GameSettings Collums value. </param>
+        /// <param name="rows"> GameSettings Rows value. </param>
+        /// <param name="col"> GameSettings Collums value. </param>
         public void MenuChecker
-            (string option, Player player, int height, int length)
+            (string option, Player player, int rows, int col)
         {
             string uChoice;
             int chMove;
@@ -132,7 +148,7 @@ namespace LRRoguelike
                     } while (chMove <= 0 || chMove > 9 || chMove == 5);
 
                     // Actual movement
-                    pA.Move(player, chMove, height, length);
+                    pA.Move(player, chMove, rows, col);
 
                     break;
 
@@ -145,6 +161,29 @@ namespace LRRoguelike
                     rndr.ErrorMessage();
                     break;
             }
+        }
+
+        public void PositionChecker()
+        {
+
+        }
+
+        public void NewLevel(Player player, Exit exit, int col, int rows)
+        {
+            player.SpawnPlayer(RanBtw(1, col));
+            exit.SpawnExit(col, rows);
+        }
+
+        /// <summary>
+        /// Random number generator between 0 and given max value.
+        /// </summary>
+        /// <param name="min"> Min intager value given by user. </param>
+        /// <param name="max"> Max intager value given by user. </param>
+        /// <returns> Returns random number between given values. </returns>
+        public int RanBtw(int min, int max)
+        {
+            int ran = rnd.Next(min, max);
+            return ran;
         }
     }
 }
