@@ -90,8 +90,9 @@ namespace LRRoguelike
                     }
                 } while (!valInput);
 
+
                 // Checks player's choice and does stuff
-                MenuChecker(option, player, rows, col);
+                MenuChecker(option, player, exit, rows, col);
 
                 // Check if player and exit have == position and restart level
                 ExitChecker(player, exit, col, rows);
@@ -114,7 +115,7 @@ namespace LRRoguelike
         /// <param name="rows"> GameSettings Rows value. </param>
         /// <param name="col"> GameSettings Collums value. </param>
         public void MenuChecker
-            (string option, Player player, int rows, int col)
+            (string option, Player player, MapComponents mp, int rows, int col)
         {
             string uChoice;
             int chMove;
@@ -123,7 +124,7 @@ namespace LRRoguelike
             {
                 // Looks around
                 case "l":
-                    pA.LookAround();
+                    pA.LookAround(mp);
                     break;
 
                 // Move

@@ -215,6 +215,12 @@ namespace LRRoguelike
             return choice;
         }
 
+
+        public void ItemDescription(MapComponents mp)
+        {
+            Console.WriteLine(mp);
+        }
+
         /// <summary>
         /// Leaves game with a goodbye message
         /// </summary>
@@ -256,7 +262,7 @@ namespace LRRoguelike
         /// <param name="rows"> GameSettings Rows value. </param>
         public void PlaceMenus(int rows)
         {
-            for (int i = 0; i < rows * 2.25f ; i++)
+            for (int i = 0; i < rows * 2.25f; i++)
             {
                 Console.WriteLine();
             }
