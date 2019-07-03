@@ -37,7 +37,7 @@ namespace LRRoguelike
                         rndr.AgainstWall();
                         player.Ypos = 1;
                     }
-                    else if(player.Xpos <= 0)
+                    else if (player.Xpos <= 0)
                     {
                         rndr.AgainstWall();
                         player.Xpos = 1;
@@ -54,7 +54,7 @@ namespace LRRoguelike
                     {
                         rndr.AgainstWall();
                         player.Ypos = 1;
-                    } 
+                    }
                     break;
 
                 case 9:
@@ -177,9 +177,9 @@ namespace LRRoguelike
         /// Shows adjacent object's info
         /// </summary>
         /// <param name="mp"></param>
-        public void LookAround(MapComponents mp)
+        public void LookAround(MapComponents mp, Player player)
         {
-            rndr.ItemDescription(mp);
+            
         }
     }
 }

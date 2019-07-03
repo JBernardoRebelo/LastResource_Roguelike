@@ -215,10 +215,14 @@ namespace LRRoguelike
             return choice;
         }
 
-
+        /// <summary>
+        /// Accepts a map component and show's it's description
+        /// </summary>
+        /// <param name="mp"></param>
         public void ItemDescription(MapComponents mp)
         {
             Console.WriteLine(mp);
+            Console.Read();
         }
 
         /// <summary>
