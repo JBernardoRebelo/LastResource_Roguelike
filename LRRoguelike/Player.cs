@@ -28,20 +28,23 @@ namespace LRRoguelike
         /// </summary>
         public Player(int y)
         {
-            // Assigning HP to random
-            //HP = 100;
-
             /*  DEBUG  */
             HP = 10;
             /*  !DEBUG */
 
-            // Initializing pos to random in first column
+            SpawnPlayer(y);
+        }
+
+        /// <summary>
+        /// Accepts map dimensions, assingn's player's initial position
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="col"></param>
+        public void SpawnPlayer(int row)
+        {
+            Ypos = row;
             Xpos = 1;
-
-            // Assigning Y to random
-            Ypos = y;
-
-        }       
+        }
 
         /// <summary>
         /// Prints player's token in position

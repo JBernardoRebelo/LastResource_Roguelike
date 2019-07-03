@@ -19,10 +19,11 @@ namespace LRRoguelike
         /// <param name="length"> GameSettings Collums value. </param>
         /// <param name="height"> GameSettings Rows value. </param>
         /// <param name="player"> Program user. </param>
-        public void StartGame(int length, int height, Player player)
+        /// /// <param name="exit"> Program user. </param>
+        public void StartGame(int length, int height, Player player, Exit exit)
         {
             rndr.MainMenu();
-            Loop(length, height, player);
+            Loop(length, height, player, exit);
 
         }
 
@@ -31,7 +32,7 @@ namespace LRRoguelike
         /// </summary>
         /// <param name="length"></param>
         /// <param name="height"></param>
-        public void Loop(int length, int height, Player player)
+        public void Loop(int length, int height, Player player, Exit exit)
         {
             // Method variables
             string option;
@@ -45,13 +46,20 @@ namespace LRRoguelike
 
                 // Print board
                 rndr.PrintBoard(length, height);
+                
+                // Place player
                 rndr.PlacePart(height, player);
+                
+                // Place exit
+                rndr.PlacePart(height, exit);
+
 
                 // Options
                 rndr.PlaceMenus(height);
                 rndr.GameloopMenu(player);
                 // Look around Move
 
+                // Comment here ----- 
                 do
                 {
                     option = Console.ReadLine();
@@ -61,8 +69,9 @@ namespace LRRoguelike
                         valInput = true;
                     }
                     else
+                    {
                         rndr.ErrorMessage();
-
+                    }
                 } while (!valInput);
 
 
