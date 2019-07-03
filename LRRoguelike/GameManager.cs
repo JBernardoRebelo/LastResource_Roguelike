@@ -101,6 +101,9 @@ namespace LRRoguelike
                 player.HP--;
                 valInput = false;
             }
+
+            // End of game with death message
+            rndr.PlayerDeath(player);
         }
 
         /// <summary>
@@ -192,6 +195,10 @@ namespace LRRoguelike
         /// <param name="rows"></param>
         public void NewLevel(Player player, Exit exit, int col, int rows)
         {
+            // Level up
+            player.Lvl++;
+
+            // Reset position
             player.SpawnPlayer(RanBtw(1, col));
             exit.SpawnExit(RanBtw(1, col), rows);
         }

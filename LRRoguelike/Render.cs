@@ -56,10 +56,11 @@ namespace LRRoguelike
             // Show stats
             Console.WriteLine("______________ Stats ______________");
             Console.WriteLine("Current HP: " + player.HP);
+            Console.WriteLine("Level: " + player.Lvl + "\n");
+
             /*  DEBUG  */
             Console.WriteLine("Player's X: {0} and Y: {1}", player.Xpos, player.Ypos);
-            /*  !DEBUG */
-            Console.WriteLine();
+            /*  !DEBUG #################################################################### */
 
             // Options menu
             Console.WriteLine("______________ Options _____________");
@@ -72,6 +73,7 @@ namespace LRRoguelike
             Console.WriteLine("______________ Legend ______________");
             Console.WriteLine("⨀ -> Player");
             Console.WriteLine("✚ -> Exit \n");
+            Console.Write("Your option: ");
         }
 
         /// <summary>
@@ -88,7 +90,8 @@ namespace LRRoguelike
             Console.WriteLine("6 = →");
             Console.WriteLine("1 = ↙");
             Console.WriteLine("2 = ↓");
-            Console.WriteLine("3 = ↘");
+            Console.WriteLine("3 = ↘\n");
+            Console.Write("Your move: ");
         }
 
         /// <summary>
@@ -175,8 +178,8 @@ namespace LRRoguelike
         {
             // Shows credits
             Console.WriteLine("This project was made by: ");
-            Console.WriteLine("[Insert person 1 here];");
-            Console.WriteLine("[Insert person 2 here];");
+            Console.WriteLine("João Rebelo;");
+            Console.WriteLine("Miguel Fernández;");
 
             // Goes back to start menu if user enters any key
             Console.WriteLine("Type to go back to Start Menu...");
@@ -222,11 +225,28 @@ namespace LRRoguelike
         }
 
         /// <summary>
+        /// Outputs message of death and shows level of death
+        /// </summary>
+        public void PlayerDeath(Player player)
+        {
+            Console.WriteLine("You died on level: " + player.Lvl);
+            Console.WriteLine("Goodbye...");
+        }
+
+        /// <summary>
         /// Method to print error message
         /// </summary>
         public void ErrorMessage()
         {
             Console.WriteLine("Invalid option...");
+        }
+
+        /// <summary>
+        /// Warns player he moved against a wall
+        /// </summary>
+        public void AgainstWall()
+        {
+            Console.WriteLine("You moved against a wall");
         }
 
         /// <summary>
