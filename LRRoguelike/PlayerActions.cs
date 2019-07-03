@@ -36,10 +36,12 @@ namespace LRRoguelike
                     {
                         rndr.AgainstWall();
                         player.Ypos = 1;
+                        player.Xpos++;
                     }
                     else if (player.Xpos <= 0)
                     {
                         rndr.AgainstWall();
+                        player.Ypos++;
                         player.Xpos = 1;
                     }
                     break;
@@ -72,11 +74,13 @@ namespace LRRoguelike
                     {
                         rndr.AgainstWall();
                         player.Ypos = 1;
+                        player.Xpos--;
                     }
                     else if (player.Xpos >= col)
                     {
                         rndr.AgainstWall();
                         player.Xpos = col;
+                        player.Ypos++;
                     }
                     break;
 
@@ -88,7 +92,7 @@ namespace LRRoguelike
                     // Wall
                     if (player.Xpos <= 0)
                     {
-                        rndr.ErrorMessage();
+                        rndr.AgainstWall();
                         player.Xpos = 1;
                     }
                     break;
@@ -102,7 +106,7 @@ namespace LRRoguelike
                     // Wall
                     if (player.Xpos >= col)
                     {
-                        rndr.ErrorMessage();
+                        rndr.AgainstWall();
                         player.Xpos = col;
                     }
                     break;
@@ -122,11 +126,13 @@ namespace LRRoguelike
                     {
                         rndr.AgainstWall();
                         player.Ypos = rows;
+                        player.Xpos++;
                     }
                     else if (player.Xpos <= 0)
                     {
                         rndr.AgainstWall();
                         player.Xpos = 1;
+                        player.Ypos--;
                     }
                     break;
 
@@ -139,7 +145,7 @@ namespace LRRoguelike
                     // Wall
                     if (player.Ypos >= rows)
                     {
-                        rndr.ErrorMessage();
+                        rndr.AgainstWall();
                         player.Ypos = rows;
                     }
                     break;
@@ -159,11 +165,13 @@ namespace LRRoguelike
                     {
                         rndr.AgainstWall();
                         player.Ypos = rows;
+                        player.Xpos--;
                     }
                     else if (player.Xpos >= col)
                     {
                         rndr.AgainstWall();
                         player.Xpos = col;
+                        player.Ypos--;
                     }
                     break;
 

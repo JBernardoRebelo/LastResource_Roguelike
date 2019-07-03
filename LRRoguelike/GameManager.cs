@@ -71,8 +71,7 @@ namespace LRRoguelike
                 // Options
                 rndr.PlaceMenus(rows);
                 rndr.GameloopMenu(player);
-                // Look around Move
-
+               
                 // Comment here ----- 
                 do
                 {
