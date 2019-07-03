@@ -139,7 +139,24 @@ namespace LRRoguelike
             Console.WriteLine(player.PrintPlayer());
 
             Console.SetCursorPosition(0, 0);
+        }
 
+        /// <summary>
+        /// Overload, print object representation in correct position
+        /// </summary>
+        /// <param name="height"> GameSettings Rows value. </param>
+        /// <param name="exit"> Program user. </param>
+        public void PlacePart(int height, Exit exit)
+        {
+            // Vars
+            int[] normalizedPos = NormalizePosition(exit.Xpos, exit.Ypos);
+
+            // Cursor
+            Console.SetCursorPosition(normalizedPos[0], normalizedPos[1]);
+
+            Console.WriteLine(exit.PrintExit());
+
+            Console.SetCursorPosition(0, 0);
         }
 
         /// <summary>

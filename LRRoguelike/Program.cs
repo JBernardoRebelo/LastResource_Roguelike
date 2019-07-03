@@ -16,9 +16,10 @@ namespace LRRoguelike
             Render rndr = new Render();
             GameLoop gl = new GameLoop();
             Player player = new Player(pg.RanBtw(1, gm.Rows));
+            Exit exit = new Exit(pg.RanBtw(1, gm.Rows), gm.Collums);
 
             // Define output text encoding
-            Console.OutputEncoding = Encoding.UTF8;
+            Console.OutputEncoding = Encoding.Unicode;
 
 
             /*************************
@@ -32,13 +33,14 @@ namespace LRRoguelike
             Console.WriteLine("Number of rows: " + gm.Rows);
             Console.WriteLine("Number of collums: " + gm.Collums);
             Console.WriteLine("Player's hp: " + player.HP);
-            Console.WriteLine("Player's spawn, Y:" + player.Ypos + "X:" + player.Xpos);
+            Console.WriteLine("Player's spawn, Y:" + player.Ypos + "X: " + player.Xpos);
+            Console.WriteLine("Exit's position, Y:" + exit.Ypos + "X: " + exit.Xpos);
 
             /*************************
              *******  !DEBUG   *******
              *************************/
 
-            gl.StartGame(gm.Collums, gm.Rows, player);
+            gl.StartGame(gm.Collums, gm.Rows, player, exit);
 
         }
 
