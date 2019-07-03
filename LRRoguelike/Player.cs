@@ -24,14 +24,21 @@ namespace LRRoguelike
         public int Ypos { get; set; }
 
         /// <summary>
+        /// Registers player's level
+        /// </summary>
+        public int Lvl { get; set; }
+
+        /// <summary>
         /// Player constructor, assigns HP and Y to given random value
         /// </summary>
         public Player(int y)
         {
             /*  DEBUG  */
-            HP = 15;
+            HP = 10;
             /*  !DEBUG */
 
+            Lvl = 1;
+            // Set initial position
             SpawnPlayer(y);
         }
 
