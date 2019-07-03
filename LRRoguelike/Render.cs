@@ -230,6 +230,14 @@ namespace LRRoguelike
         }
 
         /// <summary>
+        /// Warns player he moved against a wall
+        /// </summary>
+        public void AgainstWall()
+        {
+            Console.WriteLine("You moved against a wall");
+        }
+
+        /// <summary>
         /// Method to position menus in the correct position 
         /// relative to the board
         /// </summary>
