@@ -94,28 +94,28 @@ namespace LRRoguelike
         /// <summary>
         /// Prints board, accepts args converted from console
         /// </summary>
-        /// <param name="length"> GameSettings Collums value. </param>
-        /// <param name="height"> GameSettings Row value. </param>
-        public void PrintBoard(int length, int height)
+        /// <param name="col"> GameSettings Collums value. </param>
+        /// <param name="rows"> GameSettings Row value. </param>
+        public void PrintBoard(int col, int rows)
         {
             //Console.Clear();
             // For cicle to print map
-            for (int k = 0; k < length * 4 + 1; k++)
+            for (int k = 0; k < col * 4 + 1; k++)
                 Console.Write("-");
 
             // New line
             Console.WriteLine();
 
-            for (int i = 0; i < height; i++)
+            for (int i = 0; i < rows; i++)
             {
-                for (int j = 0; j < length; j++)
+                for (int j = 0; j < col; j++)
                 {
                     Console.Write("|   ");
                 }
 
                 Console.WriteLine('|');
 
-                for (int k = 0; k < length * 4 + 1; k++)
+                for (int k = 0; k < col * 4 + 1; k++)
                 {
                     Console.Write("-");
                 }
@@ -126,9 +126,9 @@ namespace LRRoguelike
         /// <summary>
         /// Method to print object character representation in correct position
         /// </summary>
-        /// <param name="height"> GameSettings Rows value. </param>
+        /// <param name="rows"> GameSettings Rows value. </param>
         /// <param name="player"> Program user. </param>
-        public void PlacePart(int height, Player player)
+        public void PlacePart(int rows, Player player)
         {
             // Vars
             int[] normalizedPos = NormalizePosition(player.Xpos, player.Ypos);
@@ -144,9 +144,9 @@ namespace LRRoguelike
         /// <summary>
         /// Overload, print object representation in correct position
         /// </summary>
-        /// <param name="height"> GameSettings Rows value. </param>
+        /// <param name="rows"> GameSettings Rows value. </param>
         /// <param name="exit"> Program user. </param>
-        public void PlacePart(int height, Exit exit)
+        public void PlacePart(int rows, Exit exit)
         {
             // Vars
             int[] normalizedPos = NormalizePosition(exit.Xpos, exit.Ypos);
@@ -233,10 +233,10 @@ namespace LRRoguelike
         /// Method to position menus in the correct position 
         /// relative to the board
         /// </summary>
-        /// <param name="height"> GameSettings Rows value. </param>
-        public void PlaceMenus(int height)
+        /// <param name="rows"> GameSettings Rows value. </param>
+        public void PlaceMenus(int rows)
         {
-            for (int i = 0; i < height * 2.25f ; i++)
+            for (int i = 0; i < rows * 2.25f ; i++)
             {
                 Console.WriteLine();
             }

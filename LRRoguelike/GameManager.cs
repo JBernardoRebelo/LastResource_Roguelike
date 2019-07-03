@@ -7,7 +7,7 @@ namespace LRRoguelike
     /// <summary>
     /// Runs game, controls turns
     /// </summary>
-    public class GameLoop
+    public class GameManager
     { 
         // Instantiate Classes
         Random rnd = new Random();
@@ -90,8 +90,11 @@ namespace LRRoguelike
                     }
                 } while (!valInput);
 
+                // Checks player's choice and does stuff
+                MenuChecker(option, player, rows, col);
 
-                MenuChecker(option, player, col, rows);
+                // Check if player and exit have == position and restart level
+                ExitChecker(player, exit, col, rows);
 
                 // End of turn
                 // Player looses 1 hp reset valInput value
@@ -163,15 +166,34 @@ namespace LRRoguelike
             }
         }
 
-        public void PositionChecker()
+        /// <summary>
+        /// Accepts map dimensions and objects
+        /// Calls NewLevel if player's pos is equal to Exit
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="exit"></param>
+        /// <param name="col"></param>
+        /// <param name="rows"></param>
+        public void ExitChecker
+            (Player player, Exit exit, int col, int rows)
         {
-
+            if(player.Xpos == exit.Xpos && player.Ypos == exit.Ypos)
+            {
+                NewLevel(player, exit, col, rows);
+            }
         }
 
+        /// <summary>
+        /// Re-Spawns exit and player in new level
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="exit"></param>
+        /// <param name="col"></param>
+        /// <param name="rows"></param>
         public void NewLevel(Player player, Exit exit, int col, int rows)
         {
             player.SpawnPlayer(RanBtw(1, col));
-            exit.SpawnExit(col, rows);
+            exit.SpawnExit(RanBtw(1, col), rows);
         }
 
         /// <summary>

@@ -7,10 +7,9 @@ namespace LRRoguelike
     {  
         static void Main(string[] args)
         {
-            // Instantiate classes                   
-            Program pg = new Program();
+            // Instantiate classes
             GameSettings gm = new GameSettings(args);
-            GameLoop gl = new GameLoop();           
+            GameManager gl = new GameManager();           
 
             // Define output text encoding
             Console.OutputEncoding = Encoding.Unicode;

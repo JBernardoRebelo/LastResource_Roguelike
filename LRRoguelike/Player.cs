@@ -29,7 +29,7 @@ namespace LRRoguelike
         public Player(int y)
         {
             /*  DEBUG  */
-            HP = 10;
+            HP = 15;
             /*  !DEBUG */
 
             SpawnPlayer(y);
