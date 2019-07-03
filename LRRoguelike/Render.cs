@@ -221,6 +221,8 @@ namespace LRRoguelike
         /// <param name="mp"></param>
         public void ItemDescription(MapComponents mp)
         {
+            Console.WriteLine("___________________");
+            Console.WriteLine("Message:");
             Console.WriteLine(mp);
             Console.Read();
         }
@@ -230,6 +232,8 @@ namespace LRRoguelike
         /// </summary>
         public void LeaveGame()
         {
+            Console.WriteLine("___________________");
+            Console.WriteLine("Message:");
             Console.WriteLine("Goodbye! See you soon...");
             Environment.Exit(0);
         }
@@ -239,8 +243,11 @@ namespace LRRoguelike
         /// </summary>
         public void PlayerDeath(Player player)
         {
+            Console.WriteLine("___________________");
+            Console.WriteLine("Message:");
             Console.WriteLine("You died on level: " + player.Lvl);
             Console.WriteLine("Goodbye...");
+            Console.Read();
         }
 
         /// <summary>
@@ -248,6 +255,8 @@ namespace LRRoguelike
         /// </summary>
         public void ErrorMessage()
         {
+            Console.WriteLine("___________________");
+            Console.WriteLine("Message:");
             Console.WriteLine("Invalid option...");
         }
 
@@ -256,7 +265,10 @@ namespace LRRoguelike
         /// </summary>
         public void AgainstWall()
         {
+            Console.WriteLine("___________________");
+            Console.WriteLine("Message:");
             Console.WriteLine("You moved against a wall");
+            Console.Read();
         }
 
         /// <summary>
