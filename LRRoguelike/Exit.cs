@@ -33,5 +33,12 @@ namespace LRRoguelike
         /// </summary>
         /// <returns></returns>
         public char PrintExit() => 'E'; // ✚
+
+        /// <summary>
+        /// Show exit description
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString() => "Exit cell:\n"
+            + "Enter here to transit to the next level";
     }
 }

@@ -173,9 +173,13 @@ namespace LRRoguelike
             }
         }
 
-        public void LookAround()
+        /// <summary>
+        /// Shows adjacent object's info
+        /// </summary>
+        /// <param name="mp"></param>
+        public void LookAround(MapComponents mp)
         {
-            Console.Read();
+            rndr.ItemDescription(mp);
         }
     }
 }
