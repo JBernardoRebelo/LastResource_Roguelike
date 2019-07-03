@@ -2,7 +2,8 @@
 
 ### Autores:
 
-*[João Rebelo - a21805230](https://github.com/JBernardoRebelo)*
+*[João Rebelo - a21805230](https://github.com/JBernardoRebelo)*<br />
+*[Miguel Fernández - a21803644](https://github.com/MizuRyujin)*
 
 ### Repositório Git:
 

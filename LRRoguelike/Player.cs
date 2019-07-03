@@ -26,16 +26,20 @@ namespace LRRoguelike
         /// <summary>
         /// Player constructor, assigns HP and Y to given random value
         /// </summary>
-        public Player (int y)
+        public Player(int y)
         {
             // Assigning HP to random
-            HP = 100;
+            //HP = 100;
+
+            /*  DEBUG  */
+            HP = 10;
+            /*  !DEBUG */
 
             // Initializing pos to random in first column
-            Xpos = 2;
+            Xpos = 1;
 
             // Assigning Y to random
-            Ypos = y; 
+            Ypos = y;
 
         }       
 

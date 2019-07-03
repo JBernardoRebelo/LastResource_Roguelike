@@ -20,7 +20,7 @@ namespace LRRoguelike
             Console.WriteLine("3 -> Quit");
 
             // Pick choice
-            switch (GetUserInput())
+            switch (UserMenuInput())
             {
                 // Start game
                 case 1:
@@ -46,16 +46,19 @@ namespace LRRoguelike
                     break;
             }
         }
-       
+
         /// <summary>
-        /// Outputs gameloop options to user
+        /// Shows in-game player menu.
         /// </summary>
+        /// <param name="player"> Program user. </param>
         public void GameloopMenu(Player player)
         {
             // Show stats
             Console.WriteLine("______________ Stats ______________");
             Console.WriteLine("Current HP: " + player.HP);
-            Console.WriteLine("Player's spawn, Y:" + player.Ypos + "X:" + player.Xpos + "\n");
+            /*  DEBUG  */
+            Console.WriteLine("Player's X: {0} and Y: {1}", player.Xpos, player.Ypos);
+            /*  !DEBUG */
             Console.WriteLine();
 
             // Options menu
@@ -91,8 +94,8 @@ namespace LRRoguelike
         /// <summary>
         /// Prints board, accepts args converted from console
         /// </summary>
-        /// <param name="length"></param>
-        /// <param name="height"></param>
+        /// <param name="length"> GameSettings Collums value. </param>
+        /// <param name="height"> GameSettings Row value. </param>
         public void PrintBoard(int length, int height)
         {
             //Console.Clear();
@@ -121,8 +124,10 @@ namespace LRRoguelike
         }
 
         /// <summary>
-        /// Accepts List of parts, places parts in map
+        /// Method to print object character representation in correct position
         /// </summary>
+        /// <param name="height"> GameSettings Rows value. </param>
+        /// <param name="player"> Program user. </param>
         public void PlacePart(int height, Player player)
         {
             // Vars
@@ -131,8 +136,18 @@ namespace LRRoguelike
             // Cursor
             Console.SetCursorPosition(normalizedPos[0], normalizedPos[1]);
 
+            Console.WriteLine(player.PrintPlayer());
+
+            Console.SetCursorPosition(0, 0);
+
         }
 
+        /// <summary>
+        /// Normalize object's position to be printed on console
+        /// </summary>
+        /// <param name="x"> Object's Xpos value. </param>
+        /// <param name="y"> Object's Ypos value. </param>
+        /// <returns> Integer array that contains a normalized. </returns>
         private static int[] NormalizePosition(int x, int y) =>
             new int[2] { x * 4 - 2, y * 2 - 1 };
 
@@ -156,7 +171,7 @@ namespace LRRoguelike
         /// <summary>
         /// Method to get and verify user input in menus
         /// </summary>
-        private int GetUserInput()
+        private int UserMenuInput()
         {
             // Block variables
             string uInput;
@@ -181,7 +196,7 @@ namespace LRRoguelike
         }
 
         /// <summary>
-        /// Leaves game with a goodby message
+        /// Leaves game with a goodbye message
         /// </summary>
         public void LeaveGame()
         {
@@ -195,6 +210,19 @@ namespace LRRoguelike
         public void ErrorMessage()
         {
             Console.WriteLine("Invalid option...");
+        }
+
+        /// <summary>
+        /// Method to position menus in the correct position 
+        /// relative to the board
+        /// </summary>
+        /// <param name="height"> GameSettings Rows value. </param>
+        public void PlaceMenus(int height)
+        {
+            for (int i = 0; i < height * 2.25f ; i++)
+            {
+                Console.WriteLine();
+            }
         }
     }
 }

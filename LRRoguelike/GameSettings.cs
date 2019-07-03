@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LRRoguelike
 {
@@ -37,7 +35,7 @@ namespace LRRoguelike
                 {
                     if (!int.TryParse(args[i + 1], out int x))
                     {
-                        ErrorMessage();
+                        InputErrorMessage();
                     }
 
                     Rows = Convert.ToInt32(args[i + 1]);
@@ -48,7 +46,7 @@ namespace LRRoguelike
                 {
                     if (!int.TryParse(args[i + 1], out int x))
                     {
-                        ErrorMessage();
+                        InputErrorMessage();
                     }
 
                     Collums = Convert.ToInt32(args[i + 1]);
@@ -67,7 +65,7 @@ namespace LRRoguelike
         {
             if (args.Length < 4)
             {
-                ErrorMessage();
+                InputErrorMessage();
                 Environment.Exit(0);
             }
         }
@@ -82,7 +80,7 @@ namespace LRRoguelike
         {
             if (Rows == 0 || Rows == 1 || Collums == 0 || Collums == 1)
             {
-                ErrorMessage();
+                InputErrorMessage();
                 Environment.Exit(0);
             }
         }
@@ -91,7 +89,7 @@ namespace LRRoguelike
         /// Method to display an error message in case user inputs are invalid
         /// and explains how to use program correctly.
         /// </summary>
-        private void ErrorMessage()
+        private void InputErrorMessage()
         {
             Console.ForegroundColor = ConsoleColor.Red;
 
