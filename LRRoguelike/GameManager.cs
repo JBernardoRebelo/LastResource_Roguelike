@@ -8,7 +8,7 @@ namespace LRRoguelike
     /// Runs game, controls turns
     /// </summary>
     public class GameManager
-    { 
+    {
         // Instantiate Classes
         Random rnd = new Random();
         Render rndr = new Render();
@@ -30,6 +30,18 @@ namespace LRRoguelike
 
             // List of map components
             mpComp = new List<MapComponents>();
+
+            // Create map components and add to list
+            for (int i = 1; i < col; i++)
+            {
+                mpComp.Add(AddComponent(i, rows));
+
+                for (int j = 1; j < rows; j++)
+                {
+                    mpComp.Add(AddComponent(i, j));
+                }
+            }
+
             mpComp.Add(exit);
 
             //####################################################################################
@@ -45,15 +57,16 @@ namespace LRRoguelike
             rndr.MainMenu();
 
             // Start gameloop
-            Loop(col, rows, player, exit);
+            Loop(col, rows, player, exit, mpComp);
         }
 
         /// <summary>
-        /// Game loop, accepts map dimensions
+        /// Game loop, accepts map dimensions and map components
         /// </summary>
         /// <param name="col"></param>
         /// <param name="rows"></param>
-        public void Loop(int col, int rows, Player player, Exit exit)
+        private void Loop
+            (int col, int rows, Player player, Exit exit, List<MapComponents> mpComp)
         {
             // Method variables
             string option;
@@ -68,15 +81,23 @@ namespace LRRoguelike
                 // Print board
                 rndr.PrintBoard(col, rows);
 
+                // Print map components
+                foreach (MapComponents mc in mpComp)
+                {
+                    // Place map Components
+                    rndr.FillMap(rows, col, mpComp);
+                }
+
                 // Place player
-                rndr.PlacePart(rows, player);            
+                rndr.PlacePart(rows, player);
+
                 // Place exit
                 rndr.PlacePart(rows, exit);
 
                 // Options
                 rndr.PlaceMenus(rows);
                 rndr.GameloopMenu(player);
-               
+
                 // Comment here ----- 
                 do
                 {
@@ -184,7 +205,7 @@ namespace LRRoguelike
         public void ExitChecker
             (Player player, Exit exit, int col, int rows)
         {
-            if(player.Xpos == exit.Xpos && player.Ypos == exit.Ypos)
+            if (player.Xpos == exit.Xpos && player.Ypos == exit.Ypos)
             {
                 NewLevel(player, exit, col, rows);
             }
@@ -213,10 +234,22 @@ namespace LRRoguelike
         /// <param name="min"> Min intager value given by user. </param>
         /// <param name="max"> Max intager value given by user. </param>
         /// <returns> Returns random number between given values. </returns>
-        public int RanBtw(int min, int max)
+        private int RanBtw(int min, int max)
         {
             int ran = rnd.Next(min, max);
             return ran;
+        }
+
+        /// <summary>
+        /// Instantiate map component
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        private MapComponents AddComponent(int x, int y)
+        {
+            MapComponents mc = new MapComponents(x, y);
+            return mc;
         }
     }
 }

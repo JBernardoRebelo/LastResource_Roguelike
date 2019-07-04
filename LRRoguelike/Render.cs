@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace LRRoguelike
@@ -183,6 +184,27 @@ namespace LRRoguelike
             Console.WriteLine(exit.PrintExit());
 
             Console.SetCursorPosition(0, 0);
+        }
+
+        public void PlaceComponents(int rows, int col, List<MapComponents> mcs)
+        {
+            foreach(MapComponents mapComp in mcs)
+            {
+                // Vars
+                int[] normalizedPos = NormalizePosition(mapComp.Xpos, mapComp.Ypos);
+
+                // Cursor
+                Console.SetCursorPosition(normalizedPos[0], normalizedPos[1]);
+
+                Console.WriteLine(mapComp.PrintPart());
+
+                Console.SetCursorPosition(0, 0);
+            }
+        }
+
+        public void FillMap(int rows, int col, List<MapComponents> mcs)
+        {
+            PlaceComponents(rows, col, mcs);
         }
 
         /// <summary>
