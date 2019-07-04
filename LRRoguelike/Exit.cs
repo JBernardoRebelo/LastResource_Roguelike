@@ -32,7 +32,11 @@ namespace LRRoguelike
         /// Prints Exit's token in position
         /// </summary>
         /// <returns></returns>
-        public char PrintExit() => 'E'; // ✚
+        public char PrintExit()
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            return 'E';
+        }
 
         /// <summary>
         /// Show exit description
