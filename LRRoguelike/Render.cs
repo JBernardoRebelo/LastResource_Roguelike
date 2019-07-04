@@ -9,7 +9,7 @@ namespace LRRoguelike
     public class Render
     {
         // Store Message banner
-        private string message = "\n ___________ Message ___________";
+        private string message = "\n** Message:";
         
         /// <summary>
         /// Output Initial/Main Menu, options included
@@ -231,8 +231,8 @@ namespace LRRoguelike
         /// <param name="mp"></param>
         public void ItemDescription(MapComponents mp)
         {
-            Console.WriteLine(message);
-            Console.WriteLine(mp);
+            Console.Write(message);
+            Console.WriteLine("There's a" + mp + "\n");
             Console.Read();
         }
 
@@ -241,9 +241,8 @@ namespace LRRoguelike
         /// </summary>
         public void LeaveGame()
         {
-            Console.WriteLine(message);
-            Console.WriteLine("| Goodbye! See you soon...      |");
-            Console.WriteLine("|_______________________________|\n");
+            Console.Write(message);
+            Console.WriteLine(" Goodbye! See you soon...\n");
             Environment.Exit(0);
         }
 
@@ -252,11 +251,9 @@ namespace LRRoguelike
         /// </summary>
         public void PlayerDeath(Player player)
         {
-            Console.WriteLine(message);
-            Console.WriteLine
-                ("| You died on level: " + player.Lvl + "            |");
-            Console.WriteLine("| Goodbye...                    |");
-            Console.WriteLine("|_______________________________|\n");
+            Console.Write(message);
+            Console.WriteLine(" You died on level " + player.Lvl+".");
+            Console.WriteLine(" Goodbye...\n");
             Console.Read();
         }
 
@@ -265,9 +262,8 @@ namespace LRRoguelike
         /// </summary>
         public void ErrorMessage()
         {
-            Console.WriteLine(message);
-            Console.WriteLine("| Invalid option...");
-            Console.WriteLine("|_______________________________|\n");
+            Console.Write(message);
+            Console.WriteLine(" Invalid option...\n");
             Console.Write("Try again: ");
         }
 
@@ -276,9 +272,8 @@ namespace LRRoguelike
         /// </summary>
         public void AgainstWall()
         {
-            Console.WriteLine(message);
-            Console.WriteLine("| You wasted a turn moving against a wall...");
-            Console.WriteLine("|_______________________________|\n");
+            Console.Write(message);
+            Console.WriteLine(" You wasted a turn moving against a wall...\n");
             Thread.Sleep(3000);
         }
 
