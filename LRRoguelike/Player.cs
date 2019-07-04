@@ -34,9 +34,8 @@ namespace LRRoguelike
         public Player(int y)
         {
             /*  DEBUG  */
-            HP = 10;
+            HP = 100;
             /*  !DEBUG */
-
             Lvl = 1;
             // Set initial position
             SpawnPlayer(y);
@@ -57,6 +56,10 @@ namespace LRRoguelike
         /// Prints player's token in position
         /// </summary>
         /// <returns></returns>
-        public char PrintPlayer() => '⨀';
+        public char PrintPlayer()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            return 'P';
+        }
     }
 }

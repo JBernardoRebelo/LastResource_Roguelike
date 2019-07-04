@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace LRRoguelike
 {
@@ -7,24 +8,30 @@ namespace LRRoguelike
     /// </summary>
     public class Render
     {
+        // Store Message banner
+        private string message = "\n** Message:";
+        
         /// <summary>
         /// Output Initial/Main Menu, options included
         /// </summary>
         public void MainMenu()
         {
-
             // Output to user
             Console.WriteLine("\nPress...");
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("1 -> New Game");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("2 -> Credits");
+            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("3 -> Quit");
+            Console.ResetColor();
 
             // Pick choice
             switch (UserMenuInput())
             {
                 // Start game
                 case 1:
-                    //Console.Clear();
+                    Console.Clear();
                     Console.WriteLine("Let's play");
                     // goes to game loop
                     break;
@@ -53,26 +60,34 @@ namespace LRRoguelike
         /// <param name="player"> Program user. </param>
         public void GameloopMenu(Player player)
         {
+            // Change console color to green
+            Console.ForegroundColor = ConsoleColor.Green;
             // Show stats
-            Console.WriteLine("______________ Stats ______________");
-            Console.WriteLine("Current HP: " + player.HP);
-            Console.WriteLine("Level: " + player.Lvl + "\n");
+            Console.WriteLine(" »»»»»»»»»»»» Stats »»»»»»»»»»»»");
+            Console.WriteLine("         Current HP: " + player.HP);
+            Console.WriteLine("         Level: " + player.Lvl);
+            Console.WriteLine("         X position: {0}", player.Xpos);
+            Console.WriteLine("         Y position: {0}", player.Ypos+"\n");
 
-            /*  DEBUG  */
-            Console.WriteLine("Player's X: {0} and Y: {1}", player.Xpos, player.Ypos);
-            /*  !DEBUG #################################################################### */
-
+            // Change Console color to yellow
+            Console.ForegroundColor = ConsoleColor.Yellow;
             // Options menu
-            Console.WriteLine("______________ Options _____________");
-            Console.WriteLine("Choose your options: ");
-            Console.WriteLine("L -> Look around");
-            Console.WriteLine("M -> Move");
-            Console.WriteLine("Q -> Quit game \n");
+            Console.WriteLine(" ___________ Options ___________");
+            Console.WriteLine("| Choose your options:          |");
+            Console.WriteLine("| L -> Look around              |");
+            Console.WriteLine("| M -> Move                     |");
+            Console.WriteLine("| Q -> Quit game                |");
+            Console.WriteLine("|_______________________________|\n");
 
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             // Legend
-            Console.WriteLine("______________ Legend ______________");
-            Console.WriteLine("⨀ -> Player");
-            Console.WriteLine("✚ -> Exit \n");
+            Console.WriteLine(" ___________ Legend ____________");
+            Console.WriteLine("| ⨀ -> Player                   |");
+            Console.WriteLine("| ✚ -> Exit                     |");
+            Console.WriteLine("|_______________________________|\n");
+
+            // Sets console color to default
+            Console.ResetColor();
             Console.Write("Your option: ");
         }
 
@@ -81,16 +96,24 @@ namespace LRRoguelike
         /// </summary>
         public void MoveMenu()
         {
-            Console.WriteLine("______________ Move Menu ____________");
-            Console.WriteLine("Keys to move: ");
-            Console.WriteLine("7 = ↖");
-            Console.WriteLine("8 = ↑");
-            Console.WriteLine("9 = ↗");
-            Console.WriteLine("4 = ←");
-            Console.WriteLine("6 = →");
-            Console.WriteLine("1 = ↙");
-            Console.WriteLine("2 = ↓");
-            Console.WriteLine("3 = ↘\n");
+            // Change console color to magenta
+            Console.ForegroundColor = ConsoleColor.Magenta;
+
+            Console.WriteLine("\n _________ Move Menu ___________");
+            Console.WriteLine("| Keys to move:                 |");
+            Console.WriteLine("| 7 = ↖                         |");
+            Console.WriteLine("| 8 = ↑                         |");
+            Console.WriteLine("| 9 = ↗                         |");
+            Console.WriteLine("| 4 = ←                         |");
+            Console.WriteLine("| 6 = →                         |");
+            Console.WriteLine("| 1 = ↙                         |");
+            Console.WriteLine("| 2 = ↓                         |");
+            Console.WriteLine("| 3 = ↘                         |");
+            Console.WriteLine("|_______________________________|\n");
+
+            // Sets console color to default
+            Console.ResetColor();
+
             Console.Write("Your move: ");
         }
 
@@ -176,10 +199,12 @@ namespace LRRoguelike
         /// </summary>
         public void Credits()
         {
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             // Shows credits
-            Console.WriteLine("This project was made by: ");
-            Console.WriteLine("João Rebelo;");
-            Console.WriteLine("Miguel Fernández;");
+            Console.WriteLine("This project was made by: \n");
+            Console.WriteLine("  -> João Rebelo;");
+            Console.WriteLine("  -> Miguel Fernández;\n");
+            Console.ResetColor();
 
             // Goes back to start menu if user enters any key
             Console.WriteLine("Type to go back to Start Menu...");
@@ -221,9 +246,10 @@ namespace LRRoguelike
         /// <param name="mp"></param>
         public void ItemDescription(MapComponents mp)
         {
-            Console.WriteLine("___________________");
-            Console.WriteLine("Message:");
-            Console.WriteLine(mp);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(message);
+            Console.ResetColor();
+            Console.WriteLine("There's a" + mp + "\n");
             Console.Read();
         }
 
@@ -232,9 +258,10 @@ namespace LRRoguelike
         /// </summary>
         public void LeaveGame()
         {
-            Console.WriteLine("___________________");
-            Console.WriteLine("Message:");
-            Console.WriteLine("Goodbye! See you soon...");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(message);
+            Console.ResetColor();
+            Console.WriteLine(" Goodbye! See you soon...\n");
             Environment.Exit(0);
         }
 
@@ -243,10 +270,11 @@ namespace LRRoguelike
         /// </summary>
         public void PlayerDeath(Player player)
         {
-            Console.WriteLine("___________________");
-            Console.WriteLine("Message:");
-            Console.WriteLine("You died on level: " + player.Lvl);
-            Console.WriteLine("Goodbye...");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(message);
+            Console.ResetColor();
+            Console.WriteLine(" You died on level " + player.Lvl+".");
+            Console.WriteLine(" Goodbye...\n");
             Console.Read();
         }
 
@@ -255,9 +283,11 @@ namespace LRRoguelike
         /// </summary>
         public void ErrorMessage()
         {
-            Console.WriteLine("___________________");
-            Console.WriteLine("Message:");
-            Console.WriteLine("Invalid option...");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(message);
+            Console.ResetColor();
+            Console.WriteLine(" Invalid option...\n");
+            Console.Write("Try again: ");
         }
 
         /// <summary>
@@ -265,10 +295,11 @@ namespace LRRoguelike
         /// </summary>
         public void AgainstWall()
         {
-            Console.WriteLine("___________________");
-            Console.WriteLine("Message:");
-            Console.WriteLine("You moved against a wall");
-            Console.Read();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(message);
+            Console.ResetColor();
+            Console.WriteLine(" You wasted a turn moving against a wall...\n");
+            Thread.Sleep(3000);
         }
 
         /// <summary>
