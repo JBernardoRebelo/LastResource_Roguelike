@@ -13,6 +13,7 @@ namespace LRRoguelike
         Random rnd = new Random();
         Render rndr = new Render();
         PlayerActions pA = new PlayerActions();
+        List<MapComponents> mpComp;
 
         /// <summary>
         /// Shows start menu, redirects to Loop
@@ -26,6 +27,10 @@ namespace LRRoguelike
             // Instantiate objects in world with "random" positions
             Player player = new Player(RanBtw(1, rows));
             Exit exit = new Exit(RanBtw(1, rows), col);
+
+            // List of map components
+            mpComp = new List<MapComponents>();
+            mpComp.Add(exit);
 
             //####################################################################################
             Console.WriteLine("Number of rows: " + rows);
@@ -62,7 +67,7 @@ namespace LRRoguelike
 
                 // Print board
                 rndr.PrintBoard(col, rows);
-                
+
                 // Place player
                 rndr.PlacePart(rows, player);            
                 // Place exit
