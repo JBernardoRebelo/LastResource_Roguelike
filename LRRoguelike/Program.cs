@@ -15,6 +15,9 @@ namespace LRRoguelike
             Console.OutputEncoding = Encoding.Unicode;
 
 
+            // Clean console before game start
+            Console.Clear();                    // ***** mOVE THIS TO START MENU
+
             /*************************
              *******   DEBUG   *******
              *************************/
