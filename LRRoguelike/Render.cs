@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace LRRoguelike
 {
@@ -7,6 +8,9 @@ namespace LRRoguelike
     /// </summary>
     public class Render
     {
+        // Store Message banner
+        private string message = "\n______________ Message _____________\n";
+        
         /// <summary>
         /// Output Initial/Main Menu, options included
         /// </summary>
@@ -54,7 +58,7 @@ namespace LRRoguelike
         public void GameloopMenu(Player player)
         {
             // Show stats
-            Console.WriteLine("______________ Stats ______________");
+            Console.WriteLine("\n______________ Stats ______________\n");
             Console.WriteLine("Current HP: " + player.HP);
             Console.WriteLine("Level: " + player.Lvl + "\n");
 
@@ -63,14 +67,14 @@ namespace LRRoguelike
             /*  !DEBUG #################################################################### */
 
             // Options menu
-            Console.WriteLine("______________ Options _____________");
+            Console.WriteLine("______________ Options _____________\n");
             Console.WriteLine("Choose your options: ");
             Console.WriteLine("L -> Look around");
             Console.WriteLine("M -> Move");
             Console.WriteLine("Q -> Quit game \n");
 
             // Legend
-            Console.WriteLine("______________ Legend ______________");
+            Console.WriteLine("\n______________ Legend ______________\n");
             Console.WriteLine("⨀ -> Player");
             Console.WriteLine("✚ -> Exit \n");
             Console.Write("Your option: ");
@@ -81,7 +85,7 @@ namespace LRRoguelike
         /// </summary>
         public void MoveMenu()
         {
-            Console.WriteLine("______________ Move Menu ____________");
+            Console.WriteLine("\n______________ Move Menu ______________\n");
             Console.WriteLine("Keys to move: ");
             Console.WriteLine("7 = ↖");
             Console.WriteLine("8 = ↑");
@@ -221,8 +225,7 @@ namespace LRRoguelike
         /// <param name="mp"></param>
         public void ItemDescription(MapComponents mp)
         {
-            Console.WriteLine("___________________");
-            Console.WriteLine("Message:");
+            Console.WriteLine(message);
             Console.WriteLine(mp);
             Console.Read();
         }
@@ -232,8 +235,7 @@ namespace LRRoguelike
         /// </summary>
         public void LeaveGame()
         {
-            Console.WriteLine("___________________");
-            Console.WriteLine("Message:");
+            Console.WriteLine(message);
             Console.WriteLine("Goodbye! See you soon...");
             Environment.Exit(0);
         }
@@ -243,8 +245,7 @@ namespace LRRoguelike
         /// </summary>
         public void PlayerDeath(Player player)
         {
-            Console.WriteLine("___________________");
-            Console.WriteLine("Message:");
+            Console.WriteLine(message);
             Console.WriteLine("You died on level: " + player.Lvl);
             Console.WriteLine("Goodbye...");
             Console.Read();
@@ -255,9 +256,9 @@ namespace LRRoguelike
         /// </summary>
         public void ErrorMessage()
         {
-            Console.WriteLine("___________________");
-            Console.WriteLine("Message:");
+            Console.WriteLine(message);
             Console.WriteLine("Invalid option...");
+            Console.Write("Try again: ");
         }
 
         /// <summary>
@@ -265,10 +266,9 @@ namespace LRRoguelike
         /// </summary>
         public void AgainstWall()
         {
-            Console.WriteLine("___________________");
-            Console.WriteLine("Message:");
-            Console.WriteLine("You moved against a wall");
-            Console.Read();
+            Console.WriteLine(message);
+            Console.WriteLine("You wasted a turn moving against a wall...");
+            Thread.Sleep(3000);
         }
 
         /// <summary>
