@@ -198,7 +198,7 @@ namespace LRRoguelike
             player.Lvl++;
 
             // Reset position
-            player.SpawnPlayer(RanBtw(1, rows)); // ##########################################################
+            player.SpawnPlayer(RanBtw(1, rows));
             exit.SpawnExit(RanBtw(1, rows), col);
         }
 
