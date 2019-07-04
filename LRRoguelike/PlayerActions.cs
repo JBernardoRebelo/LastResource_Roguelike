@@ -23,8 +23,8 @@ namespace LRRoguelike
             {
                 case 7:
                     // Up left
-                    player.Ypos--;
                     player.Xpos--;
+                    player.Ypos--;
 
                     if (player.Ypos <= 0 && player.Xpos <= 0)
                     {
@@ -61,10 +61,10 @@ namespace LRRoguelike
 
                 case 9:
                     // Up right
-                    player.Ypos--;
                     player.Xpos++;
+                    player.Ypos--;                  
 
-                    if (player.Ypos <= 0 && player.Xpos >= col)
+                    if (player.Ypos <= 0 && player.Xpos > col)
                     {
                         rndr.AgainstWall();
                         player.Xpos = col;
@@ -76,7 +76,7 @@ namespace LRRoguelike
                         player.Ypos = 1;
                         player.Xpos--;
                     }
-                    else if (player.Xpos >= col)
+                    else if (player.Xpos > col)
                     {
                         rndr.AgainstWall();
                         player.Xpos = col;
@@ -99,12 +99,11 @@ namespace LRRoguelike
 
                 // Right
                 case 6:
-
                     // Moves
                     player.Xpos++;
 
                     // Wall
-                    if (player.Xpos >= col)
+                    if (player.Xpos > col)
                     {
                         rndr.AgainstWall();
                         player.Xpos = col;
@@ -113,16 +112,16 @@ namespace LRRoguelike
 
                 case 1:
                     // Down left
-                    player.Ypos++;
                     player.Xpos--;
+                    player.Ypos++;
 
-                    if (player.Ypos >= rows && player.Xpos <= 0)
+                    if (player.Ypos > rows && player.Xpos <= 0)
                     {
                         rndr.AgainstWall();
                         player.Xpos = 1;
                         player.Ypos = rows;
                     }
-                    else if (player.Ypos >= rows)
+                    else if (player.Ypos > rows)
                     {
                         rndr.AgainstWall();
                         player.Ypos = rows;
@@ -138,12 +137,11 @@ namespace LRRoguelike
 
                 // Down
                 case 2:
-
                     // Moves
                     player.Ypos++;
 
                     // Wall
-                    if (player.Ypos >= rows)
+                    if (player.Ypos > rows)
                     {
                         rndr.AgainstWall();
                         player.Ypos = rows;
@@ -152,22 +150,22 @@ namespace LRRoguelike
 
                 case 3:
                     // Down Right
-                    player.Ypos++;
                     player.Xpos++;
+                    player.Ypos++; 
 
-                    if (player.Ypos >= rows && player.Xpos >= col)
+                    if (player.Ypos > rows && player.Xpos > col)
                     {
                         rndr.AgainstWall();
                         player.Xpos = col;
                         player.Ypos = rows;
                     }
-                    else if (player.Ypos >= rows)
+                    else if (player.Ypos > rows)
                     {
                         rndr.AgainstWall();
                         player.Ypos = rows;
                         player.Xpos--;
                     }
-                    else if (player.Xpos >= col)
+                    else if (player.Xpos > col)
                     {
                         rndr.AgainstWall();
                         player.Xpos = col;
