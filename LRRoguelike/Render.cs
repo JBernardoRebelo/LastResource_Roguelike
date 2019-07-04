@@ -9,7 +9,7 @@ namespace LRRoguelike
     public class Render
     {
         // Store Message banner
-        private string message = "\n______________ Message _____________\n";
+        private string message = "\n ___________ Message ___________";
         
         /// <summary>
         /// Output Initial/Main Menu, options included
@@ -58,25 +58,30 @@ namespace LRRoguelike
         public void GameloopMenu(Player player)
         {
             // Show stats
-            Console.WriteLine("\n______________ Stats ______________\n");
-            Console.WriteLine("Current HP: " + player.HP);
-            Console.WriteLine("Level: " + player.Lvl + "\n");
-
-            /*  DEBUG  */
-            Console.WriteLine("Player's X: {0} and Y: {1}", player.Xpos, player.Ypos);
-            /*  !DEBUG #################################################################### */
+            Console.WriteLine(" ____________ Stats ____________");
+            Console.WriteLine
+                ("| Current HP: " + player.HP + "               |");
+            Console.WriteLine
+                ("| Level: " + player.Lvl + "                      |");
+            Console.WriteLine
+                ("| X position: {0}", player.Xpos + "                 |");
+            Console.WriteLine
+                ("| Y position: {0}", player.Ypos + "                 |");
+            Console.WriteLine("|_______________________________|\n");
 
             // Options menu
-            Console.WriteLine("______________ Options _____________\n");
-            Console.WriteLine("Choose your options: ");
-            Console.WriteLine("L -> Look around");
-            Console.WriteLine("M -> Move");
-            Console.WriteLine("Q -> Quit game \n");
+            Console.WriteLine(" ___________ Options ___________");
+            Console.WriteLine("| Choose your options:          |");
+            Console.WriteLine("| L -> Look around              |");
+            Console.WriteLine("| M -> Move                     |");
+            Console.WriteLine("| Q -> Quit game                |");
+            Console.WriteLine("|_______________________________|\n");
 
             // Legend
-            Console.WriteLine("\n______________ Legend ______________\n");
-            Console.WriteLine("⨀ -> Player");
-            Console.WriteLine("✚ -> Exit \n");
+            Console.WriteLine(" ___________ Legend ____________");
+            Console.WriteLine("| ⨀ -> Player                   |");
+            Console.WriteLine("| ✚ -> Exit                     |");
+            Console.WriteLine("|_______________________________|\n");
             Console.Write("Your option: ");
         }
 
@@ -85,16 +90,17 @@ namespace LRRoguelike
         /// </summary>
         public void MoveMenu()
         {
-            Console.WriteLine("\n______________ Move Menu ______________\n");
-            Console.WriteLine("Keys to move: ");
-            Console.WriteLine("7 = ↖");
-            Console.WriteLine("8 = ↑");
-            Console.WriteLine("9 = ↗");
-            Console.WriteLine("4 = ←");
-            Console.WriteLine("6 = →");
-            Console.WriteLine("1 = ↙");
-            Console.WriteLine("2 = ↓");
-            Console.WriteLine("3 = ↘\n");
+            Console.WriteLine("\n _________ Move Menu ___________");
+            Console.WriteLine("| Keys to move:                 |");
+            Console.WriteLine("| 7 = ↖                         |");
+            Console.WriteLine("| 8 = ↑                         |");
+            Console.WriteLine("| 9 = ↗                         |");
+            Console.WriteLine("| 4 = ←                         |");
+            Console.WriteLine("| 6 = →                         |");
+            Console.WriteLine("| 1 = ↙                         |");
+            Console.WriteLine("| 2 = ↓                         |");
+            Console.WriteLine("| 3 = ↘                         |");
+            Console.WriteLine("|_______________________________|\n");
             Console.Write("Your move: ");
         }
 
@@ -236,7 +242,8 @@ namespace LRRoguelike
         public void LeaveGame()
         {
             Console.WriteLine(message);
-            Console.WriteLine("Goodbye! See you soon...");
+            Console.WriteLine("| Goodbye! See you soon...      |");
+            Console.WriteLine("|_______________________________|\n");
             Environment.Exit(0);
         }
 
@@ -246,8 +253,10 @@ namespace LRRoguelike
         public void PlayerDeath(Player player)
         {
             Console.WriteLine(message);
-            Console.WriteLine("You died on level: " + player.Lvl);
-            Console.WriteLine("Goodbye...");
+            Console.WriteLine
+                ("| You died on level: " + player.Lvl + "            |");
+            Console.WriteLine("| Goodbye...                    |");
+            Console.WriteLine("|_______________________________|\n");
             Console.Read();
         }
 
@@ -257,7 +266,8 @@ namespace LRRoguelike
         public void ErrorMessage()
         {
             Console.WriteLine(message);
-            Console.WriteLine("Invalid option...");
+            Console.WriteLine("| Invalid option...");
+            Console.WriteLine("|_______________________________|\n");
             Console.Write("Try again: ");
         }
 
@@ -267,7 +277,8 @@ namespace LRRoguelike
         public void AgainstWall()
         {
             Console.WriteLine(message);
-            Console.WriteLine("You wasted a turn moving against a wall...");
+            Console.WriteLine("| You wasted a turn moving against a wall...");
+            Console.WriteLine("|_______________________________|\n");
             Thread.Sleep(3000);
         }
 
