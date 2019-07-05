@@ -119,7 +119,7 @@ namespace LRRoguelike
                 // Check if player and exit have == position and restart level
                 if (player.Xpos == exit.Xpos && player.Ypos == exit.Ypos)
                 {
-                    NewLevel(player, exit, col, rows);
+                    NewLevel(player, exit, mpComp, col, rows);
                     rndr.NextLevel();
                 }
 
@@ -140,10 +140,17 @@ namespace LRRoguelike
         /// <param name="exit"></param>
         /// <param name="col"></param>
         /// <param name="rows"></param>
-        public void NewLevel(Player player, Exit exit, int col, int rows)
+        public void NewLevel
+            (Player player, Exit exit, List<MapComponents> mapComps, int col, int rows)
         {
             // Level up
             player.Lvl++;
+
+            // Reset discover
+            foreach(MapComponents mc in mapComps)
+            {
+                mc.isDisc = false;
+            }
 
             // Reset position
             player.SpawnPlayer(RanBtw(1, rows));
