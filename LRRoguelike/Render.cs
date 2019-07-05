@@ -287,7 +287,7 @@ namespace LRRoguelike
         public void NextLevel()
         {
             Message();
-            Console.Write("You found the exit");
+            Console.Write(" You found the exit");
             Console.Write(" and passed to the next Level!");
             Thread.Sleep(3000);
         }
@@ -344,9 +344,9 @@ namespace LRRoguelike
         {
             Message();
             Console.Write
-                ($" You discovered the exit at position X:{x} Y:{y}!");
+                ($" You discovered the exit at position X:{x} Y:{y}! ");
             Console.WriteLine("Enter to proceed to the next Level!");
-            Thread.Sleep(3000);
+            Thread.Sleep(4000);
         }
 
         /// <summary>
