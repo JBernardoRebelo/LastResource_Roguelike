@@ -32,10 +32,9 @@ namespace LRRoguelike
             mpComp = new List<MapComponents>();
 
             // Create map components and add to list
-            for (int i = 1; i < col; i++)
+            for (int i = 1; i < col + 1 ; i++)
             {
                 mpComp.Add(AddComponent(i, rows));
-
                 for (int j = 1; j < rows; j++)
                 {
                     mpComp.Add(AddComponent(i, j));
