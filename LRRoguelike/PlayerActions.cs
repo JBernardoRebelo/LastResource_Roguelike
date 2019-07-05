@@ -270,5 +270,13 @@ namespace LRRoguelike
             // Player doesn't loose turn
             player.HP++;
         }
+
+        /// <summary>
+        /// After finding an item in map, pick it up
+        /// </summary>
+        public void PickUpItem()
+        {
+
+        }
     }
 }
