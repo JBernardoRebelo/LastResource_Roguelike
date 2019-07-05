@@ -114,7 +114,7 @@ namespace LRRoguelike
                 } while (!valInput);
 
                 // Checks player's choice and does stuff
-                checker.MenuChecker(option, player, exit, rows, col);
+                checker.MenuChecker(option, player, mpComp, rows, col);
 
                 // Check if player and exit have == position and restart level
                 if (player.Xpos == exit.Xpos && player.Ypos == exit.Ypos)

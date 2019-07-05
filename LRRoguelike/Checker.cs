@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace LRRoguelike
 {
@@ -16,7 +17,7 @@ namespace LRRoguelike
         /// <param name="rows"> GameSettings Rows value. </param>
         /// <param name="col"> GameSettings Collums value. </param>
         public void MenuChecker
-            (string option, Player player, MapComponents mp, int rows, int col)
+            (string option, Player player, List<MapComponents> mp, int rows, int col)
         {
             string uChoice;
             int chMove;

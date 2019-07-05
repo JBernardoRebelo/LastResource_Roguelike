@@ -183,9 +183,40 @@ namespace LRRoguelike
         /// Shows adjacent object's info
         /// </summary>
         /// <param name="mp"></param>
-        public void LookAround(MapComponents mp, Player player)
+        public void LookAround(List<MapComponents> mapComps, Player player)
         {
-            
+            foreach(MapComponents mc in mapComps)
+            {
+                // Player position
+                if(mc.Xpos == player.Xpos && mc.Ypos == player.Ypos)
+                {
+                    mc.isDisc = true;
+                }
+                // Left to player
+                else if(mc.Xpos == player.Xpos - 1 && mc.Ypos == player.Ypos)
+                {
+                    mc.isDisc = true;
+                }
+                // Right to player
+                else if (mc.Xpos == player.Xpos + 1 && mc.Ypos == player.Ypos)
+                {
+                    mc.isDisc = true;
+                }
+                // Down player
+                else if (mc.Xpos == player.Xpos && mc.Ypos == player.Ypos + 1)
+                {
+                    mc.isDisc = true;
+                }
+                // Up to player
+                else if (mc.Xpos == player.Xpos && mc.Ypos == player.Ypos - 1)
+                {
+                    mc.isDisc = true;
+                }
+            }
+
+            // This is a cheat and we know it
+            // Player doesn't loose turn
+            player.HP++;
         }
     }
 }

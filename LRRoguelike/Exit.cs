@@ -29,13 +29,21 @@ namespace LRRoguelike
         }
 
         /// <summary>
-        /// Prints Exit's token in position
+        /// Prints Exit's token in position according to discovered or not
         /// </summary>
         /// <returns></returns>
         public char PrintExit()
         {
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            return 'E';
+            if(isDisc)
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                return 'E';
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                return '#';
+            }
         }
 
         /// <summary>

@@ -47,7 +47,7 @@ namespace LRRoguelike
         {
             if(isDisc)
             {
-                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.ForegroundColor = ConsoleColor.Gray;
                 return '-';
             }           
             else
