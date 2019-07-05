@@ -56,5 +56,17 @@ namespace LRRoguelike
                 return '#';
             }
         }
+
+
+        /// <summary>
+        /// Accepts map dimensions and assigns position
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="col"></param>
+        public void SpawnPart(int row, int col)
+        {
+            Ypos = row;
+            Xpos = col;
+        }
     }
 }

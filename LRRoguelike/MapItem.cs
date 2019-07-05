@@ -4,29 +4,30 @@ using System.Text;
 
 namespace LRRoguelike
 {
-    public class Exit : MapComponents
+    public class MapItem : MapComponents
     {
+
         /// <summary>
-        /// Exit constructor
+        /// Map constructor, accepts map dimensions and assigns position
         /// </summary>
         /// <param name="row"></param>
         /// <param name="col"></param>
-        public Exit(int row, int col)
+        public MapItem(int row, int col)
         {
-            // Place exit
             SpawnPart(row, col);
         }
+
 
         /// <summary>
         /// Prints Exit's token in position according to discovered or not
         /// </summary>
         /// <returns></returns>
-        public char PrintExit()
+        public char PrintMapItem()
         {
-            if(isDisc)
+            if (isDisc)
             {
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                return 'E';
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                return 'M';
             }
             else
             {
@@ -34,12 +35,5 @@ namespace LRRoguelike
                 return '#';
             }
         }
-
-        /// <summary>
-        /// Show exit description
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString() => "Exit cell:\n"
-            + "Enter here to transit to the next level";
     }
 }

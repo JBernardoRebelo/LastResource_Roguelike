@@ -28,9 +28,18 @@ namespace LRRoguelike
             // Instantiate objects in world with "random" positions
             Player player = new Player(RanBtw(1, rows));
             Exit exit = new Exit(RanBtw(1, rows), col);
+            MapItem map = new MapItem(RanBtw(1, rows), RanBtw(1, col));
 
             // List of map components
             mpComp = new List<MapComponents>();
+
+            // Check positions - map and exit must be diferent
+            // Else new position is assigned
+            while (checker.ComponentPosChecker(map, exit))
+            {
+                map.Xpos = RanBtw(1, rows);
+                map.Ypos = RanBtw(1, col);
+            }
 
             // Create map components and add to list
             for (int i = 1; i < col + 1 ; i++)
@@ -43,13 +52,15 @@ namespace LRRoguelike
             }
 
             mpComp.Add(exit);
+            mpComp.Add(map);
 
             //####################################################################################
             Console.WriteLine("Number of rows: " + rows);
             Console.WriteLine("Number of collums: " + col);
             Console.WriteLine("Player's hp: " + player.HP);
-            Console.WriteLine("Player's spawn, Y:" + player.Ypos + "X: " + player.Xpos);
-            Console.WriteLine("Exit's position, Y:" + exit.Ypos + "X: " + exit.Xpos);
+            Console.WriteLine("Player's spawn, Y: " + player.Ypos + "X: " + player.Xpos);
+            Console.WriteLine("Exit's position, Y: " + exit.Ypos + "X: " + exit.Xpos);
+            Console.WriteLine("Map's position, Y: " + map.Ypos + "x: " + map.Xpos);
             // DEBUG
             //####################################################################################
 
@@ -57,7 +68,7 @@ namespace LRRoguelike
             rndr.MainMenu();
 
             // Start gameloop
-            Loop(col, rows, player, exit, mpComp);
+            Loop(col, rows, player, exit, map, mpComp);
         }
 
         /// <summary>
@@ -66,7 +77,8 @@ namespace LRRoguelike
         /// <param name="col"></param>
         /// <param name="rows"></param>
         private void Loop
-            (int col, int rows, Player player, Exit exit, List<MapComponents> mpComp)
+            (int col, int rows, Player player, Exit exit, MapItem map,
+            List<MapComponents> mpComp)
         {
             // Method variables
             string option;
@@ -88,14 +100,11 @@ namespace LRRoguelike
                 foreach (MapComponents mc in mpComp)
                 {
                     // Place map Components
-                    rndr.FillMap(rows, col, mpComp);
+                    rndr.FillMap(mc);
                 }
 
-                // Place player
-                rndr.PlacePart(rows, player);
-
-                // Place exit
-                rndr.PlacePart(rows, exit);
+                // Place player, exit and map
+                rndr.PlaceParts(player, exit, map); // *****************************
 
                 // Options
                 rndr.PlaceMenus(rows);
@@ -106,7 +115,7 @@ namespace LRRoguelike
                 {
                     option = Console.ReadLine();
 
-                    if (option == "l" || option == "m" || option == "q")
+                    if (option == "l" || option == "m" || option == "q" || option == "e")
                     {
                         valInput = true;
                     }
@@ -157,7 +166,7 @@ namespace LRRoguelike
 
             // Reset position
             player.SpawnPlayer(RanBtw(1, rows));
-            exit.SpawnExit(RanBtw(1, rows), col);
+            exit.SpawnPart(RanBtw(1, rows), col);
         }
 
         /// <summary>

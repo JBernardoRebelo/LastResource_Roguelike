@@ -60,7 +60,10 @@ namespace LRRoguelike
                     pA.Move(player, chMove, rows, col);
 
                     break;
+                case "e":
+                    // Pick up item
 
+                    break;
                 // Quit program
                 case "q":
                     rndr.LeaveGame();
@@ -69,6 +72,24 @@ namespace LRRoguelike
                 default:
                     rndr.ErrorMessage();
                     break;
+            }
+        }
+
+        /// <summary>
+        /// Accepts map and exit, checks map position
+        /// Returns false if map and exit have the same position
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="exit"></param>
+        public bool ComponentPosChecker(MapItem map, Exit exit)
+        {
+            if (map.Xpos == exit.Xpos && map.Ypos == exit.Xpos)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

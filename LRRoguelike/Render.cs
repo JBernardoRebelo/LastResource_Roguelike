@@ -159,61 +159,39 @@ namespace LRRoguelike
         }
 
         /// <summary>
-        /// Method to print object character representation in correct position
+        /// Draws objects on map, accepts all components so far
         /// </summary>
-        /// <param name="rows"> GameSettings Rows value. </param>
-        /// <param name="player"> Program user. </param>
-        public void PlacePart(int rows, Player player)
+        /// <param name="player"></param>
+        /// <param name="exit"></param>
+        /// <param name="map"></param>
+        public void PlaceParts(Player player, Exit exit, MapItem map)
         {
-            // Vars
-            int[] normalizedPos = NormalizePosition(player.Xpos, player.Ypos);
-
-            // Cursor
-            Console.SetCursorPosition(normalizedPos[0], normalizedPos[1]);
-
+            // Player
+            int[] normalizedPosP = NormalizePosition(player.Xpos, player.Ypos);
+            Console.SetCursorPosition(normalizedPosP[0], normalizedPosP[1]);
             Console.WriteLine(player.PrintPlayer());
 
-            Console.SetCursorPosition(0, 0);
+            // Exit
+            int[] normalizedPosE = NormalizePosition(exit.Xpos, exit.Ypos);
+            Console.SetCursorPosition(normalizedPosE[0], normalizedPosE[1]);
+            Console.WriteLine(exit.PrintExit());
+
+            // Map
+            int[] normalizedPosM = NormalizePosition(map.Xpos, map.Ypos);
+            Console.SetCursorPosition(normalizedPosM[0], normalizedPosM[1]);
+            Console.WriteLine(map.PrintMapItem());
         }
 
         /// <summary>
-        /// Overload, print object representation in correct position
+        /// Accepts and draws component in map
         /// </summary>
-        /// <param name="rows"> GameSettings Rows value. </param>
-        /// <param name="exit"> Program user. </param>
-        public void PlacePart(int rows, Exit exit)
+        /// <param name="mapComp"></param>
+        public void FillMap(MapComponents mapComp)
         {
             // Vars
-            int[] normalizedPos = NormalizePosition(exit.Xpos, exit.Ypos);
-
-            // Cursor
+            int[] normalizedPos = NormalizePosition(mapComp.Xpos, mapComp.Ypos);
             Console.SetCursorPosition(normalizedPos[0], normalizedPos[1]);
-
-            Console.WriteLine(exit.PrintExit());
-
-            Console.SetCursorPosition(0, 0);
-        }
-
-        public void PlaceComponents(int rows, int col, List<MapComponents> mcs)
-        {
-            foreach (MapComponents mapComp in mcs)
-            {
-                // Vars
-                int[] normalizedPos = NormalizePosition(mapComp.Xpos, mapComp.Ypos);
-
-                // Cursor
-                Console.SetCursorPosition(normalizedPos[0], normalizedPos[1]);
-
-                Console.WriteLine(mapComp.PrintPart());
-
-                //Console.SetCursorPosition(0, 0);
-            }
-        }
-
-
-        public void FillMap(int rows, int col, List<MapComponents> mcs)
-        {
-            PlaceComponents(rows, col, mcs);
+            Console.WriteLine(mapComp.PrintPart());
         }
 
         /// <summary>
