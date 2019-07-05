@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace LRRoguelike
@@ -8,9 +9,6 @@ namespace LRRoguelike
     /// </summary>
     public class Render
     {
-        // Store Message banner
-        private string message = "\n** Message:";
-        
         /// <summary>
         /// Output Initial/Main Menu, options included
         /// </summary>
@@ -61,13 +59,14 @@ namespace LRRoguelike
         public void GameloopMenu(Player player)
         {
             // Change console color to green
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Blue;
             // Show stats
             Console.WriteLine(" »»»»»»»»»»»» Stats »»»»»»»»»»»»");
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("         Current HP: " + player.HP);
             Console.WriteLine("         Level: " + player.Lvl);
             Console.WriteLine("         X position: {0}", player.Xpos);
-            Console.WriteLine("         Y position: {0}", player.Ypos+"\n");
+            Console.WriteLine("         Y position: {0}", player.Ypos + "\n");
 
             // Change Console color to yellow
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -82,8 +81,18 @@ namespace LRRoguelike
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             // Legend
             Console.WriteLine(" ___________ Legend ____________");
-            Console.WriteLine("| ⨀ -> Player                   |");
-            Console.WriteLine("| ✚ -> Exit                     |");
+            Console.Write("| ");
+            LegendSet('p');
+            Console.WriteLine("                   |");
+            Console.Write("| ");
+            LegendSet('e');
+            Console.WriteLine("                     |");
+            Console.Write("| ");
+            LegendSet('d');
+            Console.WriteLine("                |");
+            Console.Write("| ");
+            LegendSet('u');
+            Console.WriteLine("             |");
             Console.WriteLine("|_______________________________|\n");
 
             // Sets console color to default
@@ -97,7 +106,7 @@ namespace LRRoguelike
         public void MoveMenu()
         {
             // Change console color to magenta
-            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
 
             Console.WriteLine("\n _________ Move Menu ___________");
             Console.WriteLine("| Keys to move:                 |");
@@ -185,6 +194,28 @@ namespace LRRoguelike
             Console.SetCursorPosition(0, 0);
         }
 
+        public void PlaceComponents(int rows, int col, List<MapComponents> mcs)
+        {
+            foreach (MapComponents mapComp in mcs)
+            {
+                // Vars
+                int[] normalizedPos = NormalizePosition(mapComp.Xpos, mapComp.Ypos);
+
+                // Cursor
+                Console.SetCursorPosition(normalizedPos[0], normalizedPos[1]);
+
+                Console.WriteLine(mapComp.PrintPart());
+
+                //Console.SetCursorPosition(0, 0);
+            }
+        }
+
+
+        public void FillMap(int rows, int col, List<MapComponents> mcs)
+        {
+            PlaceComponents(rows, col, mcs);
+        }
+
         /// <summary>
         /// Normalize object's position to be printed on console
         /// </summary>
@@ -246,9 +277,7 @@ namespace LRRoguelike
         /// <param name="mp"></param>
         public void ItemDescription(MapComponents mp)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write(message);
-            Console.ResetColor();
+            Message();
             Console.WriteLine("There's a" + mp + "\n");
             Console.Read();
         }
@@ -258,9 +287,7 @@ namespace LRRoguelike
         /// </summary>
         public void LeaveGame()
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write(message);
-            Console.ResetColor();
+            Message();
             Console.WriteLine(" Goodbye! See you soon...\n");
             Environment.Exit(0);
         }
@@ -270,12 +297,21 @@ namespace LRRoguelike
         /// </summary>
         public void PlayerDeath(Player player)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write(message);
-            Console.ResetColor();
-            Console.WriteLine(" You died on level " + player.Lvl+".");
+            Message();
+            Console.WriteLine(" You died on level " + player.Lvl + ".");
             Console.WriteLine(" Goodbye...\n");
             Console.Read();
+        }
+
+        /// <summary>
+        /// Outputs message of next level
+        /// </summary>
+        public void NextLevel()
+        {
+            Message();
+            Console.Write("You found the exit");
+            Console.Write(" and passed to the next Level!");
+            Thread.Sleep(3000);
         }
 
         /// <summary>
@@ -283,9 +319,7 @@ namespace LRRoguelike
         /// </summary>
         public void ErrorMessage()
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write(message);
-            Console.ResetColor();
+            Message();
             Console.WriteLine(" Invalid option...\n");
             Console.Write("Try again: ");
         }
@@ -295,9 +329,7 @@ namespace LRRoguelike
         /// </summary>
         public void AgainstWall()
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write(message);
-            Console.ResetColor();
+            Message();
             Console.WriteLine(" You wasted a turn moving against a wall...\n");
             Thread.Sleep(3000);
         }
@@ -310,6 +342,66 @@ namespace LRRoguelike
         public void PlaceMenus(int rows)
         {
             for (int i = 0; i < rows * 2.25f; i++)
+            {
+                Console.WriteLine();
+            }
+        }
+
+        /// <summary>
+        /// Prints message in red
+        /// </summary>
+        private void Message()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("\n** Message:");
+            Console.ResetColor();
+        }
+
+        /// <summary>
+        /// Accepts a position and describes exit in it's position
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void FoundExit(int x, int y)
+        {
+            Message();
+            Console.Write
+                ($" You discovered the exit at position X:{x} Y:{y}!");
+            Console.WriteLine("Enter to proceed to the next Level!");
+            Thread.Sleep(3000);
+        }
+
+        /// <summary>
+        /// Decides character to be output in legend
+        /// </summary>
+        /// <param name="c"></param>
+        public void LegendSet(char c)
+        {
+            if(c == 'p')
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("P -> Player");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+            }
+            else if(c == 'e')
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write("E -> Exit");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+            }
+            else if(c == 'd')
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("- -> Dicovered");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+            }
+            else if(c == 'u')
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write("# -> Undiscovered");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+            }
+            else
             {
                 Console.WriteLine();
             }

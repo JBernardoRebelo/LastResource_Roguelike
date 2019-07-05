@@ -17,11 +17,44 @@ namespace LRRoguelike
         public int Ypos { get; set; }
 
         /// <summary>
-        /// Empty constructor
+        /// Check if discovered or not
+        /// </summary>
+        public bool isDisc { get; set; }
+
+        /// <summary>
+        /// Initializes isDisc to false, assigns position
+        /// </summary>
+        public MapComponents(int x, int y)
+        {
+            Xpos = x;
+            Ypos = y;
+            isDisc = false;
+        }
+
+        /// <summary>
+        /// Empty constructor, initializes isDisc to false
         /// </summary>
         public MapComponents()
         {
+            isDisc = false;
+        }
 
+        /// <summary>
+        /// Returns map component's char based on discovered or not
+        /// </summary>
+        /// <returns></returns>
+        public char PrintPart()
+        {
+            if(isDisc)
+            {
+                Console.ForegroundColor = ConsoleColor.Gray;
+                return '-';
+            }           
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                return '#';
+            }
         }
     }
 }

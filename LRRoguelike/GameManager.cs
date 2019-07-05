@@ -8,11 +8,13 @@ namespace LRRoguelike
     /// Runs game, controls turns
     /// </summary>
     public class GameManager
-    { 
+    {
         // Instantiate Classes
         Random rnd = new Random();
         Render rndr = new Render();
         PlayerActions pA = new PlayerActions();
+        Checker checker = new Checker();
+        List<MapComponents> mpComp;
 
         /// <summary>
         /// Shows start menu, redirects to Loop
@@ -27,6 +29,21 @@ namespace LRRoguelike
             Player player = new Player(RanBtw(1, rows));
             Exit exit = new Exit(RanBtw(1, rows), col);
 
+            // List of map components
+            mpComp = new List<MapComponents>();
+
+            // Create map components and add to list
+            for (int i = 1; i < col + 1 ; i++)
+            {
+                mpComp.Add(AddComponent(i, rows));
+                for (int j = 1; j < rows; j++)
+                {
+                    mpComp.Add(AddComponent(i, j));
+                }
+            }
+
+            mpComp.Add(exit);
+
             //####################################################################################
             Console.WriteLine("Number of rows: " + rows);
             Console.WriteLine("Number of collums: " + col);
@@ -40,15 +57,16 @@ namespace LRRoguelike
             rndr.MainMenu();
 
             // Start gameloop
-            Loop(col, rows, player, exit);
+            Loop(col, rows, player, exit, mpComp);
         }
 
         /// <summary>
-        /// Game loop, accepts map dimensions
+        /// Game loop, accepts map dimensions and map components
         /// </summary>
         /// <param name="col"></param>
         /// <param name="rows"></param>
-        public void Loop(int col, int rows, Player player, Exit exit)
+        private void Loop
+            (int col, int rows, Player player, Exit exit, List<MapComponents> mpComp)
         {
             // Method variables
             string option;
@@ -62,16 +80,27 @@ namespace LRRoguelike
 
                 // Print board
                 rndr.PrintBoard(col, rows);
-                
+
+                // Display fog of war
+                pA.FogOfWar(mpComp, player);
+
+                // Print map components
+                foreach (MapComponents mc in mpComp)
+                {
+                    // Place map Components
+                    rndr.FillMap(rows, col, mpComp);
+                }
+
                 // Place player
-                rndr.PlacePart(rows, player);            
+                rndr.PlacePart(rows, player);
+
                 // Place exit
                 rndr.PlacePart(rows, exit);
 
                 // Options
                 rndr.PlaceMenus(rows);
                 rndr.GameloopMenu(player);
-               
+
                 // Comment here ----- 
                 do
                 {
@@ -87,12 +116,15 @@ namespace LRRoguelike
                     }
                 } while (!valInput);
 
-
                 // Checks player's choice and does stuff
-                MenuChecker(option, player, exit, rows, col);
+                checker.MenuChecker(option, player, mpComp, rows, col);
 
                 // Check if player and exit have == position and restart level
-                ExitChecker(player, exit, col, rows);
+                if (player.Xpos == exit.Xpos && player.Ypos == exit.Ypos)
+                {
+                    NewLevel(player, exit, mpComp, col, rows);
+                    rndr.NextLevel();
+                }
 
                 // End of turn
                 // Player looses 1 hp reset valInput value
@@ -105,100 +137,26 @@ namespace LRRoguelike
         }
 
         /// <summary>
-        /// Accepts a string and calls adequate methods
-        /// </summary>
-        /// <param name="option"> User input. </param>
-        /// <param name="player"> Program user. </param>
-        /// <param name="rows"> GameSettings Rows value. </param>
-        /// <param name="col"> GameSettings Collums value. </param>
-        public void MenuChecker
-            (string option, Player player, MapComponents mp, int rows, int col)
-        {
-            string uChoice;
-            int chMove;
-
-            switch (option)
-            {
-                // Looks around
-                case "l":
-                    pA.LookAround(mp, player);
-                    // DONT USE TURN LA           
-                    break;
-
-                // Move
-                case "m":
-                    rndr.MoveMenu();
-
-                    // Assign's user's choice
-                    do
-                    {
-                        do
-                        {
-                            uChoice = Console.ReadLine();
-
-                            if (!int.TryParse(uChoice, out int a))
-                            {
-                                rndr.ErrorMessage();
-                            }
-
-                        } while (!int.TryParse(uChoice, out int b));
-
-                        chMove = Convert.ToInt32(uChoice);
-
-                        if (chMove <= 0 || chMove > 9 || chMove == 5)
-                        {
-                            rndr.ErrorMessage();
-                        }
-
-                    } while (chMove <= 0 || chMove > 9 || chMove == 5);
-
-                    // Actual movement
-                    pA.Move(player, chMove, rows, col);
-
-                    break;
-
-                // Quit program
-                case "q":
-                    rndr.LeaveGame();
-                    break;
-
-                default:
-                    rndr.ErrorMessage();
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// Accepts map dimensions and objects
-        /// Calls NewLevel if player's pos is equal to Exit
-        /// </summary>
-        /// <param name="player"></param>
-        /// <param name="exit"></param>
-        /// <param name="col"></param>
-        /// <param name="rows"></param>
-        public void ExitChecker
-            (Player player, Exit exit, int col, int rows)
-        {
-            if(player.Xpos == exit.Xpos && player.Ypos == exit.Ypos)
-            {
-                NewLevel(player, exit, col, rows);
-            }
-        }
-
-        /// <summary>
         /// Re-Spawns exit and player in new level
         /// </summary>
         /// <param name="player"></param>
         /// <param name="exit"></param>
         /// <param name="col"></param>
         /// <param name="rows"></param>
-        public void NewLevel(Player player, Exit exit, int col, int rows)
+        public void NewLevel
+            (Player player, Exit exit, List<MapComponents> mapComps, int col, int rows)
         {
             // Level up
             player.Lvl++;
 
+            // Reset discover
+            foreach(MapComponents mc in mapComps)
+            {
+                mc.isDisc = false;
+            }
+
             // Reset position
-            player.SpawnPlayer(RanBtw(1, rows)); // ##########################################################
+            player.SpawnPlayer(RanBtw(1, rows));
             exit.SpawnExit(RanBtw(1, rows), col);
         }
 
@@ -208,10 +166,22 @@ namespace LRRoguelike
         /// <param name="min"> Min intager value given by user. </param>
         /// <param name="max"> Max intager value given by user. </param>
         /// <returns> Returns random number between given values. </returns>
-        public int RanBtw(int min, int max)
+        private int RanBtw(int min, int max)
         {
             int ran = rnd.Next(min, max);
             return ran;
+        }
+
+        /// <summary>
+        /// Instantiate map component
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        private MapComponents AddComponent(int x, int y)
+        {
+            MapComponents mc = new MapComponents(x, y);
+            return mc;
         }
     }
 }

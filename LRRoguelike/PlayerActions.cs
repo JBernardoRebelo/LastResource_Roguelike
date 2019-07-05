@@ -62,7 +62,7 @@ namespace LRRoguelike
                 case 9:
                     // Up right
                     player.Xpos++;
-                    player.Ypos--;                  
+                    player.Ypos--;
 
                     if (player.Ypos <= 0 && player.Xpos > col)
                     {
@@ -151,7 +151,7 @@ namespace LRRoguelike
                 case 3:
                     // Down Right
                     player.Xpos++;
-                    player.Ypos++; 
+                    player.Ypos++;
 
                     if (player.Ypos > rows && player.Xpos > col)
                     {
@@ -180,12 +180,95 @@ namespace LRRoguelike
         }
 
         /// <summary>
-        /// Shows adjacent object's info
+        /// Show adjacent tiles
         /// </summary>
         /// <param name="mp"></param>
-        public void LookAround(MapComponents mp, Player player)
+        public void FogOfWar(List<MapComponents> mapComps, Player player)
         {
-            
+            foreach (MapComponents mc in mapComps)
+            {
+                // Player position
+                if (mc.Xpos == player.Xpos && mc.Ypos == player.Ypos)
+                {
+                    mc.isDisc = true;
+                }
+                // Left to player
+                else if (mc.Xpos == player.Xpos - 1 && mc.Ypos == player.Ypos)
+                {
+                    mc.isDisc = true;
+                }
+                // Right to player
+                else if (mc.Xpos == player.Xpos + 1 && mc.Ypos == player.Ypos)
+                {
+                    mc.isDisc = true;
+                }
+                // Down player
+                else if (mc.Xpos == player.Xpos && mc.Ypos == player.Ypos + 1)
+                {
+                    mc.isDisc = true;
+                }
+                // Up to player
+                else if (mc.Xpos == player.Xpos && mc.Ypos == player.Ypos - 1)
+                {
+                    mc.isDisc = true;
+                }
+                // Up Left
+                else if (mc.Xpos == player.Xpos - 1 && mc.Ypos == player.Ypos - 1)
+                {
+                    mc.isDisc = true;
+                }
+                // Up Right
+                else if (mc.Xpos == player.Xpos + 1 && mc.Ypos == player.Ypos - 1)
+                {
+                    mc.isDisc = true;
+                }
+                // Down Left
+                else if (mc.Xpos == player.Xpos - 1 && mc.Ypos == player.Ypos + 1)
+                {
+                    mc.isDisc = true;
+                }
+                // Down Right
+                else if (mc.Xpos == player.Xpos + 1 && mc.Ypos == player.Ypos + 1)
+                {
+                    mc.isDisc = true;
+                }
+
+                //// Output message saying description and position
+                //if (mc is Exit && !mc.isDisc)
+                //{
+                //    rndr.FoundExit(mc.Xpos, mc.Ypos);
+                //}
+            }
+        }
+
+        /// <summary>
+        /// Accepts list of MapComponents, show info case one of them is Exit
+        /// </summary>
+        /// <param name="mapComps"></param>
+        public void LookAround(List<MapComponents> mapComps, Player player)
+        {
+            int distanceX;
+            int distanceY;
+
+            foreach (MapComponents mc in mapComps)
+            {
+                // Moore formulas?
+                distanceX = player.Xpos - mc.Xpos;
+                distanceY = player.Ypos - mc.Ypos;
+
+                if (mc.isDisc && distanceX <= 1 && distanceY <= 1)
+                {
+                    // Show Exit info
+                    if (mc is Exit)
+                    {
+                        rndr.FoundExit(mc.Xpos, mc.Ypos);
+                    }
+                }
+            }
+
+            // This is a cheat and we know it
+            // Player doesn't loose turn
+            player.HP++;
         }
     }
 }
