@@ -62,7 +62,7 @@ namespace LRRoguelike
                 case 9:
                     // Up right
                     player.Xpos++;
-                    player.Ypos--;                  
+                    player.Ypos--;
 
                     if (player.Ypos <= 0 && player.Xpos > col)
                     {
@@ -151,7 +151,7 @@ namespace LRRoguelike
                 case 3:
                     // Down Right
                     player.Xpos++;
-                    player.Ypos++; 
+                    player.Ypos++;
 
                     if (player.Ypos > rows && player.Xpos > col)
                     {
@@ -185,15 +185,15 @@ namespace LRRoguelike
         /// <param name="mp"></param>
         public void FogOfWar(List<MapComponents> mapComps, Player player)
         {
-            foreach(MapComponents mc in mapComps)
+            foreach (MapComponents mc in mapComps)
             {
                 // Player position
-                if(mc.Xpos == player.Xpos && mc.Ypos == player.Ypos)
+                if (mc.Xpos == player.Xpos && mc.Ypos == player.Ypos)
                 {
-                    mc.isDisc = true;                   
+                    mc.isDisc = true;
                 }
                 // Left to player
-                else if(mc.Xpos == player.Xpos - 1 && mc.Ypos == player.Ypos)
+                else if (mc.Xpos == player.Xpos - 1 && mc.Ypos == player.Ypos)
                 {
                     mc.isDisc = true;
                 }
@@ -247,11 +247,22 @@ namespace LRRoguelike
         /// <param name="mapComps"></param>
         public void LookAround(List<MapComponents> mapComps, Player player)
         {
-            foreach(MapComponents mc in mapComps)
+            int distanceX;
+            int distanceY;
+
+            foreach (MapComponents mc in mapComps)
             {
-                if(mc.isDisc && mc is Exit)
+                // Moore formulas?
+                distanceX = player.Xpos - mc.Xpos;
+                distanceY = player.Ypos - mc.Ypos;
+
+                if (mc.isDisc && distanceX <= 1 && distanceY <= 1)
                 {
-                    rndr.FoundExit(mc.Xpos, mc.Ypos);
+                    // Show Exit info
+                    if (mc is Exit)
+                    {
+                        rndr.FoundExit(mc.Xpos, mc.Ypos);
+                    }
                 }
             }
 
