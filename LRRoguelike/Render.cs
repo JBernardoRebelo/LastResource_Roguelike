@@ -350,11 +350,25 @@ namespace LRRoguelike
         /// <summary>
         /// Prints message in red
         /// </summary>
-        public void Message()
+        private void Message()
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("\n** Message:");
             Console.ResetColor();
+        }
+
+        /// <summary>
+        /// Accepts a position and describes exit in it's position
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void FoundExit(int x, int y)
+        {
+            Message();
+            Console.Write
+                ($"You discovered the exit at position X:{x} Y:{y}!");
+            Console.WriteLine("Enter to proceed to the next Level!");
+            Thread.Sleep(3000);
         }
 
         /// <summary>

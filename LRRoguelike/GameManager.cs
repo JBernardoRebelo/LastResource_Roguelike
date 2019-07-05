@@ -81,6 +81,9 @@ namespace LRRoguelike
                 // Print board
                 rndr.PrintBoard(col, rows);
 
+                // Display fog of war
+                pA.FogOfWar(mpComp, player);
+
                 // Print map components
                 foreach (MapComponents mc in mpComp)
                 {

@@ -180,17 +180,17 @@ namespace LRRoguelike
         }
 
         /// <summary>
-        /// Shows adjacent object's info
+        /// Show adjacent tiles
         /// </summary>
         /// <param name="mp"></param>
-        public void LookAround(List<MapComponents> mapComps, Player player)
+        public void FogOfWar(List<MapComponents> mapComps, Player player)
         {
             foreach(MapComponents mc in mapComps)
             {
                 // Player position
                 if(mc.Xpos == player.Xpos && mc.Ypos == player.Ypos)
                 {
-                    mc.isDisc = true;
+                    mc.isDisc = true;                   
                 }
                 // Left to player
                 else if(mc.Xpos == player.Xpos - 1 && mc.Ypos == player.Ypos)
@@ -232,6 +232,12 @@ namespace LRRoguelike
                 {
                     mc.isDisc = true;
                 }
+
+                //// Output message saying description and position
+                //if (mc is Exit && !mc.isDisc)
+                //{
+                //    rndr.FoundExit(mc.Xpos, mc.Ypos);
+                //}
             }
 
             // This is a cheat and we know it
