@@ -212,6 +212,26 @@ namespace LRRoguelike
                 {
                     mc.isDisc = true;
                 }
+                // Up Left
+                else if (mc.Xpos == player.Xpos - 1 && mc.Ypos == player.Ypos - 1)
+                {
+                    mc.isDisc = true;
+                }
+                // Up Right
+                else if (mc.Xpos == player.Xpos + 1 && mc.Ypos == player.Ypos - 1)
+                {
+                    mc.isDisc = true;
+                }
+                // Down Left
+                else if (mc.Xpos == player.Xpos - 1 && mc.Ypos == player.Ypos + 1)
+                {
+                    mc.isDisc = true;
+                }
+                // Down Right
+                else if (mc.Xpos == player.Xpos + 1 && mc.Ypos == player.Ypos + 1)
+                {
+                    mc.isDisc = true;
+                }
             }
 
             // This is a cheat and we know it
