@@ -239,6 +239,21 @@ namespace LRRoguelike
                 //    rndr.FoundExit(mc.Xpos, mc.Ypos);
                 //}
             }
+        }
+
+        /// <summary>
+        /// Accepts list of MapComponents, show info case one of them is Exit
+        /// </summary>
+        /// <param name="mapComps"></param>
+        public void LookAround(List<MapComponents> mapComps, Player player)
+        {
+            foreach(MapComponents mc in mapComps)
+            {
+                if(mc.isDisc && mc is Exit)
+                {
+                    rndr.FoundExit(mc.Xpos, mc.Ypos);
+                }
+            }
 
             // This is a cheat and we know it
             // Player doesn't loose turn

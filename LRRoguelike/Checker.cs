@@ -26,7 +26,7 @@ namespace LRRoguelike
             {
                 // Looks around
                 case "l":
-                    //pA.LookAround();
+                    pA.LookAround(mp, player);
                     break;
 
                 // Move
