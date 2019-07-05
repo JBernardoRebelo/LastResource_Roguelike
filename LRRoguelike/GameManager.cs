@@ -208,6 +208,7 @@ namespace LRRoguelike
             if (player.Xpos == exit.Xpos && player.Ypos == exit.Ypos)
             {
                 NewLevel(player, exit, col, rows);
+                rndr.NextLevel();
             }
         }
 
