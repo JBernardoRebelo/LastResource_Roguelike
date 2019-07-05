@@ -13,6 +13,7 @@ namespace LRRoguelike
         Random rnd = new Random();
         Render rndr = new Render();
         PlayerActions pA = new PlayerActions();
+        Checker checker = new Checker();
         List<MapComponents> mpComp;
 
         /// <summary>
@@ -112,12 +113,15 @@ namespace LRRoguelike
                     }
                 } while (!valInput);
 
-
                 // Checks player's choice and does stuff
-                MenuChecker(option, player, exit, rows, col);
+                checker.MenuChecker(option, player, exit, rows, col);
 
                 // Check if player and exit have == position and restart level
-                ExitChecker(player, exit, col, rows);
+                if (player.Xpos == exit.Xpos && player.Ypos == exit.Ypos)
+                {
+                    NewLevel(player, exit, col, rows);
+                    rndr.NextLevel();
+                }
 
                 // End of turn
                 // Player looses 1 hp reset valInput value
@@ -127,88 +131,6 @@ namespace LRRoguelike
 
             // End of game with death message
             rndr.PlayerDeath(player);
-        }
-
-        /// <summary>
-        /// Accepts a string and calls adequate methods
-        /// </summary>
-        /// <param name="option"> User input. </param>
-        /// <param name="player"> Program user. </param>
-        /// <param name="rows"> GameSettings Rows value. </param>
-        /// <param name="col"> GameSettings Collums value. </param>
-        public void MenuChecker
-            (string option, Player player, MapComponents mp, int rows, int col)
-        {
-            string uChoice;
-            int chMove;
-
-            switch (option)
-            {
-                // Looks around
-                case "l":
-                    pA.LookAround(mp, player);
-                    // DONT USE TURN LA           
-                    break;
-
-                // Move
-                case "m":
-                    rndr.MoveMenu();
-
-                    // Assign's user's choice
-                    do
-                    {
-                        do
-                        {
-                            uChoice = Console.ReadLine();
-
-                            if (!int.TryParse(uChoice, out int a))
-                            {
-                                rndr.ErrorMessage();
-                            }
-
-                        } while (!int.TryParse(uChoice, out int b));
-
-                        chMove = Convert.ToInt32(uChoice);
-
-                        if (chMove <= 0 || chMove > 9 || chMove == 5)
-                        {
-                            rndr.ErrorMessage();
-                        }
-
-                    } while (chMove <= 0 || chMove > 9 || chMove == 5);
-
-                    // Actual movement
-                    pA.Move(player, chMove, rows, col);
-
-                    break;
-
-                // Quit program
-                case "q":
-                    rndr.LeaveGame();
-                    break;
-
-                default:
-                    rndr.ErrorMessage();
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// Accepts map dimensions and objects
-        /// Calls NewLevel if player's pos is equal to Exit
-        /// </summary>
-        /// <param name="player"></param>
-        /// <param name="exit"></param>
-        /// <param name="col"></param>
-        /// <param name="rows"></param>
-        public void ExitChecker
-            (Player player, Exit exit, int col, int rows)
-        {
-            if (player.Xpos == exit.Xpos && player.Ypos == exit.Ypos)
-            {
-                NewLevel(player, exit, col, rows);
-                rndr.NextLevel();
-            }
         }
 
         /// <summary>
