@@ -35,5 +35,19 @@ namespace LRRoguelike
                 return '#';
             }
         }
+
+
+        /// <summary>
+        /// Accepts a list of MapComponents and assigns isDisc(overed) to true
+        /// To all components
+        /// </summary>
+        /// <param name="mapComp"></param>
+        public void UncoverMap(List<MapComponents> mapComp)
+        {
+            foreach (MapComponents mc in mapComp)
+            {
+                mc.isDisc = true;
+            }
+        }
     }
 }

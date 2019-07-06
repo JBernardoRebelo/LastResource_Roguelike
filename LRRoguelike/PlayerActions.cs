@@ -266,7 +266,8 @@ namespace LRRoguelike
                     }
                     else if (mc is MapItem)
                     {
-                        // FoundMap Item
+                        // Show map info
+                        rndr.FoundMap(mc.Xpos, mc.Ypos);
                     }
                 }
             }
@@ -278,10 +279,15 @@ namespace LRRoguelike
 
         /// <summary>
         /// After finding an item in map, pick it up
+        /// Accepts player (positions), map (positions) and
+        /// MapComponents list to uncover map if needed
         /// </summary>
-        public void PickUpItem()
+        public void PickUpItem(Player player, MapItem map, List<MapComponents> mc)
         {
-
+            if(player.Xpos == map.Xpos || player.Ypos == map.Ypos)
+            {
+                map.UncoverMap(mc);
+            }
         }
     }
 }

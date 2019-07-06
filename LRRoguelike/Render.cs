@@ -73,9 +73,9 @@ namespace LRRoguelike
             // Options menu
             Console.WriteLine(" ___________ Options ___________");
             Console.WriteLine("| Choose your options:          |");
-            Console.WriteLine("| L -> Look around              |");
-            Console.WriteLine("| M -> Move                     |");
-            Console.WriteLine("| Q -> Quit game                |");
+            Console.WriteLine("| l -> Look around              |");
+            Console.WriteLine("| m -> Move                     |");
+            Console.WriteLine("| q -> Quit game                |");
             Console.WriteLine("|_______________________________|\n");
 
             Console.ForegroundColor = ConsoleColor.DarkCyan;
@@ -166,6 +166,11 @@ namespace LRRoguelike
         /// <param name="map"></param>
         public void PlaceParts(Player player, Exit exit, MapItem map)
         {
+            // Map
+            int[] normalizedPosM = NormalizePosition(map.Xpos, map.Ypos);
+            Console.SetCursorPosition(normalizedPosM[0], normalizedPosM[1]);
+            Console.WriteLine(map.PrintMapItem());
+
             // Player
             int[] normalizedPosP = NormalizePosition(player.Xpos, player.Ypos);
             Console.SetCursorPosition(normalizedPosP[0], normalizedPosP[1]);
@@ -175,11 +180,6 @@ namespace LRRoguelike
             int[] normalizedPosE = NormalizePosition(exit.Xpos, exit.Ypos);
             Console.SetCursorPosition(normalizedPosE[0], normalizedPosE[1]);
             Console.WriteLine(exit.PrintExit());
-
-            // Map
-            int[] normalizedPosM = NormalizePosition(map.Xpos, map.Ypos);
-            Console.SetCursorPosition(normalizedPosM[0], normalizedPosM[1]);
-            Console.WriteLine(map.PrintMapItem());
         }
 
         /// <summary>
@@ -344,8 +344,22 @@ namespace LRRoguelike
         {
             Message();
             Console.Write
-                ($" You discovered the exit at position X:{x} Y:{y}! ");
+                ($" You discovered the Exit at position X:{x} Y:{y}! ");
             Console.WriteLine("Enter to proceed to the next Level!");
+            Thread.Sleep(4000);
+        }
+
+        /// <summary>
+        /// Accepts a position and describes map in it's position
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void FoundMap(int x, int y)
+        {
+            Message();
+            Console.Write
+                ($" You discovered a Map at position X:{x} Y:{y}! ");
+            Console.WriteLine("Catch it to unveil the rest of the Level!");
             Thread.Sleep(4000);
         }
 

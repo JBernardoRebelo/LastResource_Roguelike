@@ -115,7 +115,8 @@ namespace LRRoguelike
                 {
                     option = Console.ReadLine();
 
-                    if (option == "l" || option == "m" || option == "q" || option == "e")
+                    if (option == "l" || option == "m" 
+                        || option == "q" || option == "e")
                     {
                         valInput = true;
                     }
@@ -126,7 +127,7 @@ namespace LRRoguelike
                 } while (!valInput);
 
                 // Checks player's choice and does stuff
-                checker.MenuChecker(option, player, mpComp, rows, col);
+                checker.MenuChecker(option, player, map, mpComp, rows, col);
 
                 // Check if player and exit have == position and restart level
                 if (player.Xpos == exit.Xpos && player.Ypos == exit.Ypos)
