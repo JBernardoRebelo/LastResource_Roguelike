@@ -252,16 +252,21 @@ namespace LRRoguelike
 
             foreach (MapComponents mc in mapComps)
             {
-                // Moore formulas?
+                // Calculate distances
                 distanceX = player.Xpos - mc.Xpos;
                 distanceY = player.Ypos - mc.Ypos;
 
-                if (mc.isDisc && distanceX <= 1 && distanceY <= 1)
+                if (mc.isDisc && distanceX <= 1 && distanceY <= 1 && 
+                    distanceX >= -1 && distanceY >= -1)
                 {
                     // Show Exit info
                     if (mc is Exit)
                     {
                         rndr.FoundExit(mc.Xpos, mc.Ypos);
+                    }
+                    else if (mc is MapItem)
+                    {
+                        // FoundMap Item
                     }
                 }
             }
