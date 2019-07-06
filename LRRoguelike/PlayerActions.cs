@@ -282,11 +282,24 @@ namespace LRRoguelike
         /// Accepts player (positions), map (positions) and
         /// MapComponents list to uncover map if needed
         /// </summary>
-        public void PickUpItem(Player player, MapItem map, List<MapComponents> mc)
+        public void PickUpItem
+            (Player player, MapItem map, List<MapComponents> mc)
         {
             if(player.Xpos == map.Xpos || player.Ypos == map.Ypos)
             {
-                map.UncoverMap(mc);
+                if(map.Used)
+                {
+                    Console.WriteLine("I was used so this won't do shit"); // ***********************************
+                }
+                else if(!map.Used)
+                {
+                    // Print message
+                    rndr.UseMap();
+                    // Set used map to true
+                    map.Used = true;
+                    // All mapcomponents turn discovered
+                    map.UncoverMap(mc);
+                }
             }
         }
     }

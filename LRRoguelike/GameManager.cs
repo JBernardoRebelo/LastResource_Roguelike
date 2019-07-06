@@ -104,7 +104,7 @@ namespace LRRoguelike
                 }
 
                 // Place player, exit and map
-                rndr.PlaceParts(player, exit, map); // *****************************
+                rndr.PlaceParts(player, exit, map);
 
                 // Options
                 rndr.PlaceMenus(rows);
@@ -132,7 +132,7 @@ namespace LRRoguelike
                 // Check if player and exit have == position and restart level
                 if (player.Xpos == exit.Xpos && player.Ypos == exit.Ypos)
                 {
-                    NewLevel(player, exit, mpComp, col, rows);
+                    NewLevel(player, exit, map, mpComp, col, rows);
                     rndr.NextLevel();
                 }
 
@@ -154,10 +154,14 @@ namespace LRRoguelike
         /// <param name="col"></param>
         /// <param name="rows"></param>
         public void NewLevel
-            (Player player, Exit exit, List<MapComponents> mapComps, int col, int rows)
+            (Player player, Exit exit, MapItem map,
+            List<MapComponents> mapComps, int col, int rows)
         {
             // Level up
             player.Lvl++;
+
+            // New map
+            map.Used = false;
 
             // Reset discover
             foreach(MapComponents mc in mapComps)

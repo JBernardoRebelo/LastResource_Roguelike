@@ -72,27 +72,36 @@ namespace LRRoguelike
             Console.ForegroundColor = ConsoleColor.Yellow;
             // Options menu
             Console.WriteLine(" ___________ Options ___________");
-            Console.WriteLine("| Choose your options:          |");
-            Console.WriteLine("| l -> Look around              |");
+            Console.WriteLine("|                               |");
             Console.WriteLine("| m -> Move                     |");
+            Console.WriteLine("| l -> Look around              |");
+            Console.WriteLine("| e -> Pick up item             |");
             Console.WriteLine("| q -> Quit game                |");
             Console.WriteLine("|_______________________________|\n");
 
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             // Legend
             Console.WriteLine(" ___________ Legend ____________");
+            // Player
             Console.Write("| ");
             LegendSet('p');
             Console.WriteLine("                   |");
+            // Exit
             Console.Write("| ");
             LegendSet('e');
             Console.WriteLine("                     |");
+            // Discovered
             Console.Write("| ");
             LegendSet('d');
             Console.WriteLine("                |");
+            // Uncovered
             Console.Write("| ");
             LegendSet('u');
             Console.WriteLine("             |");
+            // Map
+            Console.Write("| ");
+            LegendSet('m');
+            Console.WriteLine("                      |");
             Console.WriteLine("|_______________________________|\n");
 
             // Sets console color to default
@@ -166,10 +175,14 @@ namespace LRRoguelike
         /// <param name="map"></param>
         public void PlaceParts(Player player, Exit exit, MapItem map)
         {
-            // Map
-            int[] normalizedPosM = NormalizePosition(map.Xpos, map.Ypos);
-            Console.SetCursorPosition(normalizedPosM[0], normalizedPosM[1]);
-            Console.WriteLine(map.PrintMapItem());
+            // Doesn't place map if is Used
+            if(!map.Used)
+            {
+                // Map
+                int[] normalizedPosM = NormalizePosition(map.Xpos, map.Ypos);
+                Console.SetCursorPosition(normalizedPosM[0], normalizedPosM[1]);
+                Console.WriteLine(map.PrintMapItem());
+            }
 
             // Player
             int[] normalizedPosP = NormalizePosition(player.Xpos, player.Ypos);
@@ -393,10 +406,27 @@ namespace LRRoguelike
                 Console.Write("# -> Undiscovered");
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
+            else if(c == 'm')
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("M -> Map");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+            }
             else
             {
                 Console.WriteLine();
             }
+        }
+
+        /// <summary>
+        /// Output message of map usage
+        /// </summary>
+        public void UseMap()
+        {
+            Message();
+            Console.Write
+                ($" You just used map, the level will now uncover... ");
+            Thread.Sleep(4000);
         }
     }
 }
