@@ -171,7 +171,7 @@ namespace LRRoguelike
             // Reset position
             player.SpawnPlayer(RanBtw(1, rows));
             exit.SpawnPart(RanBtw(1, rows), col);
-            map.SpawnPart(RanBtw(1, rows), RanBtw(1, rows));
+            map.SpawnPart(RanBtw(1, rows), RanBtw(1, col));
         }
 
         /// <summary>
