@@ -17,7 +17,8 @@ namespace LRRoguelike
         /// <param name="rows"> GameSettings Rows value. </param>
         /// <param name="col"> GameSettings Collums value. </param>
         public void MenuChecker
-            (string option, Player player, List<MapComponents> mp, int rows, int col)
+            (string option, Player player, MapItem map,
+            List<MapComponents> mapComps, int rows, int col)
         {
             string uChoice;
             int chMove;
@@ -26,7 +27,7 @@ namespace LRRoguelike
             {
                 // Looks around
                 case "l":
-                    pA.LookAround(mp, player);
+                    pA.LookAround(mapComps, player);
                     break;
 
                 // Move
@@ -60,7 +61,11 @@ namespace LRRoguelike
                     pA.Move(player, chMove, rows, col);
 
                     break;
+                case "e":
+                    // Pick up item
+                    pA.PickUpItem(player, map, mapComps);
 
+                    break;
                 // Quit program
                 case "q":
                     rndr.LeaveGame();
@@ -69,6 +74,24 @@ namespace LRRoguelike
                 default:
                     rndr.ErrorMessage();
                     break;
+            }
+        }
+
+        /// <summary>
+        /// Accepts map and exit, checks map position
+        /// Returns false if map and exit have the same position
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="exit"></param>
+        public bool ComponentPosChecker(MapItem map, Exit exit)
+        {
+            if (map.Xpos == exit.Xpos && map.Ypos == exit.Xpos)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

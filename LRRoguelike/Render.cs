@@ -72,27 +72,36 @@ namespace LRRoguelike
             Console.ForegroundColor = ConsoleColor.Yellow;
             // Options menu
             Console.WriteLine(" ___________ Options ___________");
-            Console.WriteLine("| Choose your options:          |");
-            Console.WriteLine("| L -> Look around              |");
-            Console.WriteLine("| M -> Move                     |");
-            Console.WriteLine("| Q -> Quit game                |");
+            Console.WriteLine("|                               |");
+            Console.WriteLine("| m -> Move                     |");
+            Console.WriteLine("| l -> Look around              |");
+            Console.WriteLine("| e -> Pick up item             |");
+            Console.WriteLine("| q -> Quit game                |");
             Console.WriteLine("|_______________________________|\n");
 
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             // Legend
             Console.WriteLine(" ___________ Legend ____________");
+            // Player
             Console.Write("| ");
             LegendSet('p');
             Console.WriteLine("                   |");
+            // Exit
             Console.Write("| ");
             LegendSet('e');
             Console.WriteLine("                     |");
+            // Discovered
             Console.Write("| ");
             LegendSet('d');
             Console.WriteLine("                |");
+            // Uncovered
             Console.Write("| ");
             LegendSet('u');
             Console.WriteLine("             |");
+            // Map
+            Console.Write("| ");
+            LegendSet('m');
+            Console.WriteLine("                      |");
             Console.WriteLine("|_______________________________|\n");
 
             // Sets console color to default
@@ -106,18 +115,13 @@ namespace LRRoguelike
         public void MoveMenu()
         {
             // Change console color to magenta
-            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.ForegroundColor = ConsoleColor.Magenta;
 
             Console.WriteLine("\n _________ Move Menu ___________");
             Console.WriteLine("| Keys to move:                 |");
-            Console.WriteLine("| 7 = ↖                         |");
-            Console.WriteLine("| 8 = ↑                         |");
-            Console.WriteLine("| 9 = ↗                         |");
-            Console.WriteLine("| 4 = ←                         |");
-            Console.WriteLine("| 6 = →                         |");
-            Console.WriteLine("| 1 = ↙                         |");
-            Console.WriteLine("| 2 = ↓                         |");
-            Console.WriteLine("| 3 = ↘                         |");
+            Console.WriteLine("| 7 = ↖  |  8 = ↑  |  9 = ↗     |");
+            Console.WriteLine("| 4 = ←  |         |  6 = →     |");
+            Console.WriteLine("| 1 = ↙  |  2 = ↓  |  3 = ↘     |");
             Console.WriteLine("|_______________________________|\n");
 
             // Sets console color to default
@@ -159,61 +163,43 @@ namespace LRRoguelike
         }
 
         /// <summary>
-        /// Method to print object character representation in correct position
+        /// Draws objects on map, accepts all components so far
         /// </summary>
-        /// <param name="rows"> GameSettings Rows value. </param>
-        /// <param name="player"> Program user. </param>
-        public void PlacePart(int rows, Player player)
+        /// <param name="player"></param>
+        /// <param name="exit"></param>
+        /// <param name="map"></param>
+        public void PlaceParts(Player player, Exit exit, MapItem map)
         {
-            // Vars
-            int[] normalizedPos = NormalizePosition(player.Xpos, player.Ypos);
+            // Doesn't place map if is Used
+            if(!map.Used)
+            {
+                // Map
+                int[] normalizedPosM = NormalizePosition(map.Xpos, map.Ypos);
+                Console.SetCursorPosition(normalizedPosM[0], normalizedPosM[1]);
+                Console.WriteLine(map.PrintMapItem());
+            }
 
-            // Cursor
-            Console.SetCursorPosition(normalizedPos[0], normalizedPos[1]);
-
+            // Player
+            int[] normalizedPosP = NormalizePosition(player.Xpos, player.Ypos);
+            Console.SetCursorPosition(normalizedPosP[0], normalizedPosP[1]);
             Console.WriteLine(player.PrintPlayer());
 
-            Console.SetCursorPosition(0, 0);
+            // Exit
+            int[] normalizedPosE = NormalizePosition(exit.Xpos, exit.Ypos);
+            Console.SetCursorPosition(normalizedPosE[0], normalizedPosE[1]);
+            Console.WriteLine(exit.PrintExit());
         }
 
         /// <summary>
-        /// Overload, print object representation in correct position
+        /// Accepts and draws component in map
         /// </summary>
-        /// <param name="rows"> GameSettings Rows value. </param>
-        /// <param name="exit"> Program user. </param>
-        public void PlacePart(int rows, Exit exit)
+        /// <param name="mapComp"></param>
+        public void FillMap(MapComponents mapComp)
         {
             // Vars
-            int[] normalizedPos = NormalizePosition(exit.Xpos, exit.Ypos);
-
-            // Cursor
+            int[] normalizedPos = NormalizePosition(mapComp.Xpos, mapComp.Ypos);
             Console.SetCursorPosition(normalizedPos[0], normalizedPos[1]);
-
-            Console.WriteLine(exit.PrintExit());
-
-            Console.SetCursorPosition(0, 0);
-        }
-
-        public void PlaceComponents(int rows, int col, List<MapComponents> mcs)
-        {
-            foreach (MapComponents mapComp in mcs)
-            {
-                // Vars
-                int[] normalizedPos = NormalizePosition(mapComp.Xpos, mapComp.Ypos);
-
-                // Cursor
-                Console.SetCursorPosition(normalizedPos[0], normalizedPos[1]);
-
-                Console.WriteLine(mapComp.PrintPart());
-
-                //Console.SetCursorPosition(0, 0);
-            }
-        }
-
-
-        public void FillMap(int rows, int col, List<MapComponents> mcs)
-        {
-            PlaceComponents(rows, col, mcs);
+            Console.WriteLine(mapComp.PrintPart());
         }
 
         /// <summary>
@@ -366,8 +352,22 @@ namespace LRRoguelike
         {
             Message();
             Console.Write
-                ($" You discovered the exit at position X:{x} Y:{y}! ");
+                ($" You discovered the Exit at position X:{x} Y:{y}! ");
             Console.WriteLine("Enter to proceed to the next Level!");
+            Thread.Sleep(4000);
+        }
+
+        /// <summary>
+        /// Accepts a position and describes map in it's position
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void FoundMap(int x, int y)
+        {
+            Message();
+            Console.Write
+                ($" You discovered a Map at position X:{x} Y:{y}! ");
+            Console.WriteLine("Catch it to unveil the rest of the Level!");
             Thread.Sleep(4000);
         }
 
@@ -379,13 +379,13 @@ namespace LRRoguelike
         {
             if(c == 'p')
             {
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("P -> Player");
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             else if(c == 'e')
             {
-                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.Write("E -> Exit");
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
@@ -401,10 +401,27 @@ namespace LRRoguelike
                 Console.Write("# -> Undiscovered");
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
+            else if(c == 'm')
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("M -> Map");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+            }
             else
             {
                 Console.WriteLine();
             }
+        }
+
+        /// <summary>
+        /// Output message of map usage
+        /// </summary>
+        public void UseMap()
+        {
+            Message();
+            Console.Write
+                ($" You just used map, the level will now uncover... ");
+            Thread.Sleep(4000);
         }
     }
 }

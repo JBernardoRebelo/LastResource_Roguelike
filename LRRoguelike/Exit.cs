@@ -14,18 +14,7 @@ namespace LRRoguelike
         public Exit(int row, int col)
         {
             // Place exit
-            SpawnExit(row, col);
-        }
-
-        /// <summary>
-        /// Accepts map dimensions and assigns exit's position
-        /// </summary>
-        /// <param name="row"></param>
-        /// <param name="col"></param>
-        public void SpawnExit(int row, int col)
-        {
-            Ypos = row;
-            Xpos = col;
+            SpawnPart(row, col);
         }
 
         /// <summary>
@@ -36,7 +25,7 @@ namespace LRRoguelike
         {
             if(isDisc)
             {
-                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 return 'E';
             }
             else

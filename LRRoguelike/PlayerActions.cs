@@ -180,64 +180,26 @@ namespace LRRoguelike
         }
 
         /// <summary>
-        /// Show adjacent tiles
+        /// Show adjacent tiles in world
         /// </summary>
         /// <param name="mp"></param>
         public void FogOfWar(List<MapComponents> mapComps, Player player)
         {
+            int distanceX;
+            int distanceY;
+
             foreach (MapComponents mc in mapComps)
             {
-                // Player position
-                if (mc.Xpos == player.Xpos && mc.Ypos == player.Ypos)
-                {
-                    mc.isDisc = true;
-                }
-                // Left to player
-                else if (mc.Xpos == player.Xpos - 1 && mc.Ypos == player.Ypos)
-                {
-                    mc.isDisc = true;
-                }
-                // Right to player
-                else if (mc.Xpos == player.Xpos + 1 && mc.Ypos == player.Ypos)
-                {
-                    mc.isDisc = true;
-                }
-                // Down player
-                else if (mc.Xpos == player.Xpos && mc.Ypos == player.Ypos + 1)
-                {
-                    mc.isDisc = true;
-                }
-                // Up to player
-                else if (mc.Xpos == player.Xpos && mc.Ypos == player.Ypos - 1)
-                {
-                    mc.isDisc = true;
-                }
-                // Up Left
-                else if (mc.Xpos == player.Xpos - 1 && mc.Ypos == player.Ypos - 1)
-                {
-                    mc.isDisc = true;
-                }
-                // Up Right
-                else if (mc.Xpos == player.Xpos + 1 && mc.Ypos == player.Ypos - 1)
-                {
-                    mc.isDisc = true;
-                }
-                // Down Left
-                else if (mc.Xpos == player.Xpos - 1 && mc.Ypos == player.Ypos + 1)
-                {
-                    mc.isDisc = true;
-                }
-                // Down Right
-                else if (mc.Xpos == player.Xpos + 1 && mc.Ypos == player.Ypos + 1)
-                {
-                    mc.isDisc = true;
-                }
+                // Calculate distances
+                distanceX = player.Xpos - mc.Xpos;
+                distanceY = player.Ypos - mc.Ypos;
 
-                //// Output message saying description and position
-                //if (mc is Exit && !mc.isDisc)
-                //{
-                //    rndr.FoundExit(mc.Xpos, mc.Ypos);
-                //}
+                // Discover adjacent cells to player
+                if (distanceX <= 1 && distanceY <= 1 &&
+                    distanceX >= -1 && distanceY >= -1)
+                {
+                    mc.isDisc = true;
+                }
             }
         }
 
@@ -252,16 +214,22 @@ namespace LRRoguelike
 
             foreach (MapComponents mc in mapComps)
             {
-                // Moore formulas?
+                // Calculate distances
                 distanceX = player.Xpos - mc.Xpos;
                 distanceY = player.Ypos - mc.Ypos;
 
-                if (mc.isDisc && distanceX <= 1 && distanceY <= 1)
+                if (mc.isDisc && distanceX <= 1 && distanceY <= 1 &&
+                    distanceX >= -1 && distanceY >= -1)
                 {
                     // Show Exit info
                     if (mc is Exit)
                     {
                         rndr.FoundExit(mc.Xpos, mc.Ypos);
+                    }
+                    else if (mc is MapItem)
+                    {
+                        // Show map info
+                        rndr.FoundMap(mc.Xpos, mc.Ypos);
                     }
                 }
             }
@@ -273,10 +241,28 @@ namespace LRRoguelike
 
         /// <summary>
         /// After finding an item in map, pick it up
+        /// Accepts player (positions), map (positions) and
+        /// MapComponents list to uncover map if needed
         /// </summary>
-        public void PickUpItem()
+        public void PickUpItem
+            (Player player, MapItem map, List<MapComponents> mc)
         {
-
+            if (player.Xpos == map.Xpos || player.Ypos == map.Ypos)
+            {
+                if (map.Used)
+                {
+                    Console.WriteLine("I was used so this won't do shit"); // ***********************************
+                }
+                else if (!map.Used)
+                {
+                    // Print message
+                    rndr.UseMap();
+                    // Set used map to true
+                    map.Used = true;
+                    // All mapcomponents turn discovered
+                    map.UncoverMap(mc);
+                }
+            }
         }
     }
 }

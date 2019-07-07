@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LRRoguelike
 {
@@ -55,6 +53,17 @@ namespace LRRoguelike
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 return '#';
             }
+        }
+
+        /// <summary>
+        /// Accepts map dimensions and assigns position
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="col"></param>
+        public void SpawnPart(int row, int col)
+        {
+            Ypos = row;
+            Xpos = col;
         }
     }
 }
