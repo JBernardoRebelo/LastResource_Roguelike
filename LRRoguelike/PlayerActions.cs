@@ -62,7 +62,7 @@ namespace LRRoguelike
                 case 9:
                     // Up right
                     player.Xpos++;
-                    player.Ypos--;                  
+                    player.Ypos--;
 
                     if (player.Ypos <= 0 && player.Xpos > col)
                     {
@@ -151,7 +151,7 @@ namespace LRRoguelike
                 case 3:
                     // Down Right
                     player.Xpos++;
-                    player.Ypos++; 
+                    player.Ypos++;
 
                     if (player.Ypos > rows && player.Xpos > col)
                     {
@@ -180,12 +180,89 @@ namespace LRRoguelike
         }
 
         /// <summary>
-        /// Shows adjacent object's info
+        /// Show adjacent tiles in world
         /// </summary>
         /// <param name="mp"></param>
-        public void LookAround(MapComponents mp, Player player)
+        public void FogOfWar(List<MapComponents> mapComps, Player player)
         {
-            
+            int distanceX;
+            int distanceY;
+
+            foreach (MapComponents mc in mapComps)
+            {
+                // Calculate distances
+                distanceX = player.Xpos - mc.Xpos;
+                distanceY = player.Ypos - mc.Ypos;
+
+                // Discover adjacent cells to player
+                if (distanceX <= 1 && distanceY <= 1 &&
+                    distanceX >= -1 && distanceY >= -1)
+                {
+                    mc.isDisc = true;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Accepts list of MapComponents, show info case one of them is Exit
+        /// </summary>
+        /// <param name="mapComps"></param>
+        public void LookAround(List<MapComponents> mapComps, Player player)
+        {
+            int distanceX;
+            int distanceY;
+
+            foreach (MapComponents mc in mapComps)
+            {
+                // Calculate distances
+                distanceX = player.Xpos - mc.Xpos;
+                distanceY = player.Ypos - mc.Ypos;
+
+                if (mc.isDisc && distanceX <= 1 && distanceY <= 1 &&
+                    distanceX >= -1 && distanceY >= -1)
+                {
+                    // Show Exit info
+                    if (mc is Exit)
+                    {
+                        rndr.FoundExit(mc.Xpos, mc.Ypos);
+                    }
+                    else if (mc is MapItem)
+                    {
+                        // Show map info
+                        rndr.FoundMap(mc.Xpos, mc.Ypos);
+                    }
+                }
+            }
+
+            // This is a cheat and we know it
+            // Player doesn't loose turn
+            player.HP++;
+        }
+
+        /// <summary>
+        /// After finding an item in map, pick it up
+        /// Accepts player (positions), map (positions) and
+        /// MapComponents list to uncover map if needed
+        /// </summary>
+        public void PickUpItem
+            (Player player, MapItem map, List<MapComponents> mc)
+        {
+            if (player.Xpos == map.Xpos || player.Ypos == map.Ypos)
+            {
+                if (map.Used)
+                {
+                    Console.WriteLine("I was used so this won't do shit"); // ***********************************
+                }
+                else if (!map.Used)
+                {
+                    // Print message
+                    rndr.UseMap();
+                    // Set used map to true
+                    map.Used = true;
+                    // All mapcomponents turn discovered
+                    map.UncoverMap(mc);
+                }
+            }
         }
     }
 }
