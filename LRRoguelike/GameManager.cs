@@ -15,6 +15,7 @@ namespace LRRoguelike
         PlayerActions pA = new PlayerActions();
         Checker checker = new Checker();
         List<MapComponents> mpComp;
+        List<Trap> traps;
 
         /// <summary>
         /// Shows start menu, redirects to Loop
@@ -42,7 +43,7 @@ namespace LRRoguelike
             }
 
             // Create map components and add to list
-            for (int i = 1; i < col + 1 ; i++)
+            for (int i = 1; i < col + 1; i++)
             {
                 mpComp.Add(AddComponent(i, rows));
                 for (int j = 1; j < rows; j++)
@@ -51,6 +52,25 @@ namespace LRRoguelike
                 }
             }
 
+            // Create traps and add to list
+            for (int i = 1; i < col; i++)
+            {
+                TrapGen(i, col - 2,  mpComp);
+
+                // Increment again
+                i++;
+                for (int j = 1; j < rows; j++)
+                {
+                    TrapGen(j, rows - 2, mpComp);
+                    j++;
+                }
+            }
+
+            //foreach(Trap trap in traps)
+            //{
+            //    mpComp.Add(trap);
+            //}
+            
             mpComp.Add(exit);
             mpComp.Add(map);
 
@@ -61,6 +81,14 @@ namespace LRRoguelike
             Console.WriteLine("Player's spawn, Y: " + player.Ypos + "X: " + player.Xpos);
             Console.WriteLine("Exit's position, Y: " + exit.Ypos + "X: " + exit.Xpos);
             Console.WriteLine("Map's position, Y: " + map.Ypos + "x: " + map.Xpos);
+
+            foreach(MapComponents trap in mpComp)
+            {
+                if(trap is Trap)
+                {
+                    Console.WriteLine($"I'm a trap at position: X: {trap.Xpos} Y: {trap.Ypos}");
+                }
+            }
             // DEBUG
             //####################################################################################
 
@@ -68,7 +96,7 @@ namespace LRRoguelike
             rndr.MainMenu();
 
             // Start gameloop
-            Loop(col, rows, player, exit, map, mpComp);
+            Loop(col, rows, player, exit, map, traps, mpComp);
         }
 
         /// <summary>
@@ -78,7 +106,7 @@ namespace LRRoguelike
         /// <param name="rows"></param>
         private void Loop
             (int col, int rows, Player player, Exit exit, MapItem map,
-            List<MapComponents> mpComp)
+            List<Trap> traps, List<MapComponents> mpComp)
         {
             // Method variables
             string option;
@@ -115,7 +143,7 @@ namespace LRRoguelike
                 {
                     option = Console.ReadLine();
 
-                    if (option == "l" || option == "m" 
+                    if (option == "l" || option == "m"
                         || option == "q" || option == "e")
                     {
                         valInput = true;
@@ -164,7 +192,7 @@ namespace LRRoguelike
             map.Used = false;
 
             // Reset discover
-            foreach(MapComponents mc in mapComps)
+            foreach (MapComponents mc in mapComps)
             {
                 mc.isDisc = false;
             }
@@ -172,6 +200,23 @@ namespace LRRoguelike
             player.SpawnPlayer(RanBtw(1, rows));
             exit.SpawnPart(RanBtw(1, rows), col);
             map.SpawnPart(RanBtw(1, rows), RanBtw(1, col));
+        }
+
+        /// <summary>
+        /// Creates a list of diferent types of traps
+        /// Accepts map dimensions and a list of traps to generate
+        /// </summary>
+        /// <param name="col"></param>
+        /// <param name="rows"></param>
+        public void TrapGen(int seedX, int seedY, List<MapComponents> mcComp) // ********************************** incomplete
+        {
+            // Add traps to list
+            // Add diferent types of traps
+            Trap trap = new Trap
+                (RanBtw(1, seedX), RanBtw(1, seedY), RanBtw(1,100));
+
+            // Add trap to list
+            mcComp.Add(trap);
         }
 
         /// <summary>

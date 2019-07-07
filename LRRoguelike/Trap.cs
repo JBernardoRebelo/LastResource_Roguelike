@@ -29,5 +29,31 @@ namespace LRRoguelike
             Ypos = y;
             MaxDamage = mD;
         }
+
+        /// <summary>
+        /// Empty constructor
+        /// </summary>
+        public Trap()
+        {
+
+        }
+
+        /// <summary>
+        /// Prints Trap's token in position according to discovered or not
+        /// </summary>
+        /// <returns></returns>
+        public char PrintTrap()
+        {
+            if (isDisc)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                return 'T';
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                return '#';
+            }
+        }
     }
 }

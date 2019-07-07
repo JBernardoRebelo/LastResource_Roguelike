@@ -168,7 +168,8 @@ namespace LRRoguelike
         /// <param name="player"></param>
         /// <param name="exit"></param>
         /// <param name="map"></param>
-        public void PlaceParts(Player player, Exit exit, MapItem map)
+        public void PlaceParts(Player player, Exit exit,
+            MapItem map)
         {
             // Doesn't place map if is Used
             if(!map.Used)
@@ -178,6 +179,15 @@ namespace LRRoguelike
                 Console.SetCursorPosition(normalizedPosM[0], normalizedPosM[1]);
                 Console.WriteLine(map.PrintMapItem());
             }
+
+            //// Traps
+            //foreach (Trap trap in traps)
+            //{
+            //    // Map
+            //    int[] normalizedPosT = NormalizePosition(trap.Xpos, trap.Ypos);
+            //    Console.SetCursorPosition(normalizedPosT[0], normalizedPosT[1]);
+            //    Console.WriteLine(trap.PrintTrap());
+            //}
 
             // Player
             int[] normalizedPosP = NormalizePosition(player.Xpos, player.Ypos);
