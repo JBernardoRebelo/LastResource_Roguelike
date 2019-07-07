@@ -172,22 +172,13 @@ namespace LRRoguelike
             MapItem map)
         {
             // Doesn't place map if is Used
-            if(!map.Used)
+            if (!map.Used)
             {
                 // Map
                 int[] normalizedPosM = NormalizePosition(map.Xpos, map.Ypos);
                 Console.SetCursorPosition(normalizedPosM[0], normalizedPosM[1]);
                 Console.WriteLine(map.PrintMapItem());
             }
-
-            //// Traps
-            //foreach (Trap trap in traps)
-            //{
-            //    // Map
-            //    int[] normalizedPosT = NormalizePosition(trap.Xpos, trap.Ypos);
-            //    Console.SetCursorPosition(normalizedPosT[0], normalizedPosT[1]);
-            //    Console.WriteLine(trap.PrintTrap());
-            //}
 
             // Player
             int[] normalizedPosP = NormalizePosition(player.Xpos, player.Ypos);
@@ -206,10 +197,34 @@ namespace LRRoguelike
         /// <param name="mapComp"></param>
         public void FillMap(MapComponents mapComp)
         {
-            // Vars
-            int[] normalizedPos = NormalizePosition(mapComp.Xpos, mapComp.Ypos);
-            Console.SetCursorPosition(normalizedPos[0], normalizedPos[1]);
-            Console.WriteLine(mapComp.PrintPart());
+            if (mapComp is Trap)
+            {
+                Trap trap = mapComp as Trap;
+                Trap trap1 = new Trap();
+                {
+                    int[] normalizedPosT = NormalizePosition(trap.Xpos, trap.Ypos);
+                    Console.SetCursorPosition(normalizedPosT[0], normalizedPosT[1]);
+                    Console.WriteLine(trap1.PrintPart());
+                }
+            }
+            else if (mapComp is MapComponents)
+            {
+                int[] normalizedPos = NormalizePosition(mapComp.Xpos, mapComp.Ypos);
+                Console.SetCursorPosition(normalizedPos[0], normalizedPos[1]);
+                Console.WriteLine(mapComp.PrintPart());
+            }
+        }
+
+        /// <summary>
+        /// Accepts and draws component in map
+        /// </summary>
+        /// <param name="mapComp"></param>
+        public void FillMapTraps(Trap trap)
+        {
+            Trap trap1 = new Trap();
+            int[] normalizedPosT = NormalizePosition(trap.Xpos, trap.Ypos);
+            Console.SetCursorPosition(normalizedPosT[0], normalizedPosT[1]);
+            Console.WriteLine(trap1.PrintPart());
         }
 
         /// <summary>
@@ -265,17 +280,6 @@ namespace LRRoguelike
 
             // Return converted uInput
             return choice;
-        }
-
-        /// <summary>
-        /// Accepts a map component and show's it's description
-        /// </summary>
-        /// <param name="mp"></param>
-        public void ItemDescription(MapComponents mp)
-        {
-            Message();
-            Console.WriteLine("There's a" + mp + "\n");
-            Console.Read();
         }
 
         /// <summary>
@@ -382,36 +386,50 @@ namespace LRRoguelike
         }
 
         /// <summary>
+        /// Accepts a position and describes trap in it's position
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void FoundTrap(int x, int y)
+        {
+            Message();
+            Console.Write
+                ($" You discovered a Trap at position X:{x} Y:{y}! ");
+            Console.WriteLine("Don't fall in to it! It will hurt!");
+            Thread.Sleep(4000);
+        }
+
+        /// <summary>
         /// Decides character to be output in legend
         /// </summary>
         /// <param name="c"></param>
         public void LegendSet(char c)
         {
-            if(c == 'p')
+            if (c == 'p')
             {
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("P -> Player");
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
-            else if(c == 'e')
+            else if (c == 'e')
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.Write("E -> Exit");
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
-            else if(c == 'd')
+            else if (c == 'd')
             {
                 Console.ForegroundColor = ConsoleColor.DarkGray;
                 Console.Write("- -> Dicovered");
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
-            else if(c == 'u')
+            else if (c == 'u')
             {
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write("# -> Undiscovered");
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
-            else if(c == 'm')
+            else if (c == 'm')
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("M -> Map");

@@ -46,31 +46,33 @@ namespace LRRoguelike
             for (int i = 1; i < col + 1; i++)
             {
                 mpComp.Add(AddComponent(i, rows));
+
+                // Add traps
+                mpComp.Add(TrapGen(i, col));
+
                 for (int j = 1; j < rows; j++)
                 {
                     mpComp.Add(AddComponent(i, j));
                 }
             }
 
-            // Create traps and add to list
-            for (int i = 1; i < col; i++)
-            {
-                TrapGen(i, col - 2,  mpComp);
-
-                // Increment again
-                i++;
-                for (int j = 1; j < rows; j++)
-                {
-                    TrapGen(j, rows - 2, mpComp);
-                    j++;
-                }
-            }
-
-            //foreach(Trap trap in traps)
+            //// Create traps and add to list
+            //for (int i = 1; i < col; i++)
             //{
-            //    mpComp.Add(trap);
+            //    Trap trap = new Trap
+            //    (RanBtw(1, col), RanBtw(1, col), RanBtw(1, 100));
+
+            //    //traps.Add(trap);
+
+            //    // Increment again
+            //    i++;
+            //    for (int j = 1; j < rows; j++)
+            //    {
+            //        TrapGen(j, rows - 2);
+            //        j++;
+            //    }
             //}
-            
+
             mpComp.Add(exit);
             mpComp.Add(map);
 
@@ -82,11 +84,13 @@ namespace LRRoguelike
             Console.WriteLine("Exit's position, Y: " + exit.Ypos + "X: " + exit.Xpos);
             Console.WriteLine("Map's position, Y: " + map.Ypos + "x: " + map.Xpos);
 
-            foreach(MapComponents trap in mpComp)
+            foreach (MapComponents trap in mpComp)
             {
-                if(trap is Trap)
+                if (trap is Trap)
                 {
+                    Trap trap1 = trap as Trap;
                     Console.WriteLine($"I'm a trap at position: X: {trap.Xpos} Y: {trap.Ypos}");
+                    Console.WriteLine(trap1.PrintTrap());
                 }
             }
             // DEBUG
@@ -96,7 +100,7 @@ namespace LRRoguelike
             rndr.MainMenu();
 
             // Start gameloop
-            Loop(col, rows, player, exit, map, traps, mpComp);
+            Loop(col, rows, player, exit, map, mpComp);
         }
 
         /// <summary>
@@ -105,8 +109,8 @@ namespace LRRoguelike
         /// <param name="col"></param>
         /// <param name="rows"></param>
         private void Loop
-            (int col, int rows, Player player, Exit exit, MapItem map,
-            List<Trap> traps, List<MapComponents> mpComp)
+            (int col, int rows, Player player, Exit exit, MapItem map, 
+            List<MapComponents> mpComp)
         {
             // Method variables
             string option;
@@ -130,6 +134,21 @@ namespace LRRoguelike
                     // Place map Components
                     rndr.FillMap(mc);
                 }
+
+                // Overprint traps
+                foreach(MapComponents traps in mpComp)
+                {
+                    if (traps is Trap)
+                    {
+                        Trap trap = traps as Trap;
+                        rndr.FillMapTraps(trap);
+                    }
+                }
+
+                //foreach(Trap trap in traps)
+                //{
+                //    rndr.FillMap(trap);
+                //}
 
                 // Place player, exit and map
                 rndr.PlaceParts(player, exit, map);
@@ -208,15 +227,15 @@ namespace LRRoguelike
         /// </summary>
         /// <param name="col"></param>
         /// <param name="rows"></param>
-        public void TrapGen(int seedX, int seedY, List<MapComponents> mcComp) // ********************************** incomplete
+        public Trap TrapGen(int seedX, int seedY) // ********************************** incomplete
         {
-            // Add traps to list
-            // Add diferent types of traps
+            // Instantiate trap
             Trap trap = new Trap
-                (RanBtw(1, seedX), RanBtw(1, seedY), RanBtw(1,100));
+                (RanBtw(1, seedX), RanBtw(1, seedY), RanBtw(1, 100));
 
+            return trap;
             // Add trap to list
-            mcComp.Add(trap);
+            // mcComp.Add(trap);
         }
 
         /// <summary>

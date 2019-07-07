@@ -231,6 +231,11 @@ namespace LRRoguelike
                         // Show map info
                         rndr.FoundMap(mc.Xpos, mc.Ypos);
                     }
+                    else if(mc is Trap)
+                    {
+                        // Show trap info
+                        rndr.FoundTrap(mc.Xpos, mc.Xpos);
+                    }
                 }
             }
 
@@ -247,7 +252,7 @@ namespace LRRoguelike
         public void PickUpItem
             (Player player, MapItem map, List<MapComponents> mc)
         {
-            if (player.Xpos == map.Xpos || player.Ypos == map.Ypos)
+            if (player.Xpos == map.Xpos && player.Ypos == map.Ypos)
             {
                 if (map.Used)
                 {
