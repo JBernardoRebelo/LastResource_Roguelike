@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LRRoguelike
 {
@@ -56,7 +54,6 @@ namespace LRRoguelike
                 return '#';
             }
         }
-
 
         /// <summary>
         /// Accepts map dimensions and assigns position

@@ -58,7 +58,7 @@ namespace LRRoguelike
         /// <returns></returns>
         public char PrintPlayer()
         {
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Cyan;
             return 'P';
         }
     }
