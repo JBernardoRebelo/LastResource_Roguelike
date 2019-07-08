@@ -80,13 +80,16 @@ namespace LRRoguelike
             Console.WriteLine("Exit's position, Y: " + exit.Ypos + "X: " + exit.Xpos);
             Console.WriteLine("Map's position, Y: " + map.Ypos + "x: " + map.Xpos);
 
+            int numtraps = 0;
+
             foreach (MapComponents trap in mpComp)
             {
                 if (trap is Trap)
                 {
+                    numtraps++;
                     Trap trap1 = trap as Trap;
                     Console.WriteLine($"I'm a trap at position: X: {trap.Xpos} Y: {trap.Ypos}");
-                    Console.WriteLine(trap1.PrintTrap());
+                    Console.WriteLine(numtraps);
                 }
             }
             // DEBUG
