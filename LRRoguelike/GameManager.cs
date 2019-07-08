@@ -48,7 +48,7 @@ namespace LRRoguelike
                 mpComp.Add(AddComponent(i, rows));
 
                 // Add traps
-                mpComp.Add(TrapGen(i, col));
+                mpComp.Add(TrapGen(i, rows));
 
                 for (int j = 1; j < rows; j++)
                 {
@@ -131,18 +131,8 @@ namespace LRRoguelike
                 // Print map components
                 foreach (MapComponents mc in mpComp)
                 {
-                    // Place map Components
+                    // Place map Components and traps
                     rndr.FillMap(mc);
-                }
-
-                // Overprint traps
-                foreach(MapComponents traps in mpComp)
-                {
-                    if (traps is Trap)
-                    {
-                        Trap trap = traps as Trap;
-                        rndr.FillMapTraps(trap);
-                    }
                 }
 
                 //foreach(Trap trap in traps)
