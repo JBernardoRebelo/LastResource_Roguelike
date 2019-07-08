@@ -45,33 +45,29 @@ namespace LRRoguelike
             // Create map components and add to list
             for (int i = 1; i < col + 1; i++)
             {
+                int rand = RanBtw(1, col);
+
                 mpComp.Add(AddComponent(i, rows));
 
-                // Add traps
-                mpComp.Add(TrapGen(i, rows));
+                if(rand > col/2)
+                {
+                    // Add traps
+                    mpComp.Add(TrapGen(i, rows));
+                }
 
                 for (int j = 1; j < rows; j++)
                 {
+                    rand = RanBtw(1, rows);
+
                     mpComp.Add(AddComponent(i, j));
+
+                    if(rand > rows/2)
+                    {
+                        // Add traps
+                        mpComp.Add(TrapGen(i, rows));
+                    }
                 }
             }
-
-            //// Create traps and add to list
-            //for (int i = 1; i < col; i++)
-            //{
-            //    Trap trap = new Trap
-            //    (RanBtw(1, col), RanBtw(1, col), RanBtw(1, 100));
-
-            //    //traps.Add(trap);
-
-            //    // Increment again
-            //    i++;
-            //    for (int j = 1; j < rows; j++)
-            //    {
-            //        TrapGen(j, rows - 2);
-            //        j++;
-            //    }
-            //}
 
             mpComp.Add(exit);
             mpComp.Add(map);
@@ -134,11 +130,6 @@ namespace LRRoguelike
                     // Place map Components and traps
                     rndr.FillMap(mc);
                 }
-
-                //foreach(Trap trap in traps)
-                //{
-                //    rndr.FillMap(trap);
-                //}
 
                 // Place player, exit and map
                 rndr.PlaceParts(player, exit, map);
@@ -223,9 +214,9 @@ namespace LRRoguelike
             Trap trap = new Trap
                 (RanBtw(1, seedX), RanBtw(1, seedY), RanBtw(1, 100));
 
+            // Add trap types
+
             return trap;
-            // Add trap to list
-            // mcComp.Add(trap);
         }
 
         /// <summary>
