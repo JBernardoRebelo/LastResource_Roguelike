@@ -48,6 +48,7 @@ namespace LRRoguelike
                 // Random num
                 int rand = RanBtw(1, i);
 
+                // Add default Map component
                 mpComp.Add(AddComponent(i, rows));
 
                 // Add traps
@@ -71,6 +72,7 @@ namespace LRRoguelike
                 }
             }
 
+            // Add exit and map to list of components
             mpComp.Add(exit);
             mpComp.Add(map);
 
@@ -117,6 +119,7 @@ namespace LRRoguelike
             // Method variables
             string option;
             bool valInput = false;
+            int damageTaken;
 
             // Actual game loop
             while (player.HP > 0)
@@ -144,11 +147,33 @@ namespace LRRoguelike
                 rndr.PlaceMenus(rows);
                 rndr.GameloopMenu(player);
 
-                // Comment here ----- 
+                // Trap worker
+                foreach (MapComponents mp in mpComp)
+                {
+                    if (mp is Trap)
+                    {
+                        Trap trap = mp as Trap;
+                        // Check if player was hit by traps
+                        if (checker.TrapPlayer(trap, player))
+                        {
+                            damageTaken = RanBtw(1, trap.MaxDamage);
+
+                            // Take hp from player
+                            player.HP -= damageTaken;
+                            trap.FallenInto = true;
+                            // Print details 
+                            rndr.DamageTaken(trap, damageTaken);
+                        }
+                    }
+                }
+
+                // Option loop
                 do
                 {
+                    // Store input
                     option = Console.ReadLine();
 
+                    // Make sure option is valid
                     if (option == "l" || option == "m"
                         || option == "q" || option == "e")
                     {

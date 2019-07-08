@@ -78,6 +78,26 @@ namespace LRRoguelike
         }
 
         /// <summary>
+        /// Accepts list of map components and a player
+        /// Check if player was hit, return true if so
+        /// </summary>
+        /// <param name="mc"></param>
+        /// <param name="player"></param>
+        public bool TrapPlayer(Trap trap, Player player)
+        {
+            // Check if that map component has same pos as player
+            if (trap.Xpos == player.Xpos && trap.Ypos == player.Ypos
+                && trap.FallenInto == false)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Accepts map and exit, checks map position
         /// Returns false if map and exit have the same position
         /// </summary>

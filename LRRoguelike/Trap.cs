@@ -33,6 +33,7 @@ namespace LRRoguelike
             Xpos = x;
             Ypos = y;
             MaxDamage = mD;
+            FallenInto = false;
 
             // Define type based on damage
             if(mD <= 100 && mD >= 80)

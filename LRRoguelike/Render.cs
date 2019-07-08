@@ -404,6 +404,20 @@ namespace LRRoguelike
         }
 
         /// <summary>
+        /// Accepts a trap and a player
+        /// Show damage taken by trap
+        /// </summary>
+        /// <param name="trap"></param>
+        /// <param name="player"></param>
+        public void DamageTaken(Trap trap, int dmg)
+        {
+            Message();
+            Console.Write($"You have fallen into a {trap.Type} trap ");
+            Console.WriteLine($"and lost {dmg} HP");
+            Thread.Sleep(4000);
+        }
+
+        /// <summary>
         /// Decides character to be output in legend
         /// </summary>
         /// <param name="c"></param>
