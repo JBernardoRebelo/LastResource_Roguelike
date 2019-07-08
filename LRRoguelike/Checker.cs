@@ -86,8 +86,7 @@ namespace LRRoguelike
         public bool TrapPlayer(Trap trap, Player player)
         {
             // Check if that map component has same pos as player
-            if (trap.Xpos == player.Xpos && trap.Ypos == player.Ypos
-                && trap.FallenInto == false)
+            if (trap.Xpos == player.Xpos && trap.Ypos == player.Ypos)
             {
                 return true;
             }

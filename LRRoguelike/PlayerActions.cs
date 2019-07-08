@@ -261,7 +261,6 @@ namespace LRRoguelike
             {
                 if (map.Used)
                 {
-                    Console.WriteLine("I was used so this won't do shit"); // ***********************************
                 }
                 else if (!map.Used)
                 {

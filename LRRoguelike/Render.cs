@@ -371,7 +371,7 @@ namespace LRRoguelike
             Console.Write
                 ($" You discovered a Map at position X:{x} Y:{y}! ");
             Console.WriteLine("Catch it to unveil the rest of the Level!");
-            Thread.Sleep(4000);
+            Thread.Sleep(3000);
         }
 
         /// <summary>
@@ -415,6 +415,16 @@ namespace LRRoguelike
             Console.Write($"You have fallen into a {trap.Type} trap ");
             Console.WriteLine($"and lost {dmg} HP");
             Thread.Sleep(4000);
+        }
+
+        /// <summary>
+        /// Print a message if player has fallen into a trap
+        /// </summary>
+        public void FallenInto()
+        {
+            Message();
+            Console.WriteLine("Fortunately, This trap no longer works!");
+            Thread.Sleep(3000);
         }
 
         /// <summary>
