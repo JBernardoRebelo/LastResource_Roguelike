@@ -17,6 +17,11 @@ namespace LRRoguelike
         public bool FallenInto { get; set; }
 
         /// <summary>
+        /// Set trap type
+        /// </summary>
+        public TrapType Type{ get; set; }
+
+        /// <summary>
         /// Trap constructor, accepts map dimensions and seed for damage
         /// Assigns position and max Damage
         /// </summary>
@@ -28,6 +33,20 @@ namespace LRRoguelike
             Xpos = x;
             Ypos = y;
             MaxDamage = mD;
+
+            // Define type based on damage
+            if(mD <= 100 && mD >= 80)
+            {
+                Type = TrapType.Blades;
+            }
+            else if(mD < 80 && mD > 40)
+            {
+                Type = TrapType.Net;
+            }
+            else
+            {
+                Type = TrapType.Whole;
+            }
         }
 
         /// <summary>

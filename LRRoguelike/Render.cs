@@ -330,7 +330,7 @@ namespace LRRoguelike
         /// <param name="rows"> GameSettings Rows value. </param>
         public void PlaceMenus(int rows)
         {
-            for (int i = 0; i < rows * 2.25f; i++)
+            for (int i = 0; i < rows * 1.8f; i++)
             {
                 Console.WriteLine();
             }
@@ -379,12 +379,27 @@ namespace LRRoguelike
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void FoundTrap(int x, int y)
+        public void FoundTrap(int x, int y, Trap trap)
         {
             Message();
-            Console.Write
-                ($" You discovered a Trap at position X:{x} Y:{y}! ");
-            Console.WriteLine("Don't fall in to it! It will hurt!");
+            Console.Write($" You discovered a {trap.Type} ");
+            Console.Write($"trap at position X:{trap.Xpos} Y: {trap.Ypos}! ");
+            // Output info based of type
+            if (trap.Type == TrapType.Whole)
+            {
+                Console.WriteLine
+                    ("Don't fall in to it! It will hurt a little!");
+            }
+            else if (trap.Type == TrapType.Net)
+            {
+                Console.Write("Take care, don't be grabed by it or else ");
+                Console.WriteLine("you'll lose precious HP!");
+            }
+            else if (trap.Type == TrapType.Blades)
+            {
+                Console.Write("Try to dodge those blades, ");
+                Console.WriteLine("they'll chop you up and it will hurt a lot!");
+            }
             Thread.Sleep(4000);
         }
 

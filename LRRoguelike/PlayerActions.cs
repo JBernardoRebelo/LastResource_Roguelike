@@ -229,12 +229,17 @@ namespace LRRoguelike
                     else if (mc is MapItem)
                     {
                         // Show map info
-                        rndr.FoundMap(mc.Xpos, mc.Ypos);
+                        MapItem map = mc as MapItem;
+                        if(!map.Used)
+                        {
+                            rndr.FoundMap(mc.Xpos, mc.Ypos);
+                        }
                     }
                     else if(mc is Trap)
                     {
+                        Trap trap = mc as Trap;
                         // Show trap info
-                        rndr.FoundTrap(mc.Xpos, mc.Xpos);
+                        rndr.FoundTrap(trap.Xpos, trap.Xpos, trap);
                     }
                 }
             }

@@ -45,26 +45,28 @@ namespace LRRoguelike
             // Create map components and add to list
             for (int i = 1; i < col + 1; i++)
             {
-                int rand = RanBtw(1, col);
+                // Random num
+                int rand = RanBtw(1, i);
 
                 mpComp.Add(AddComponent(i, rows));
 
-                if(rand > col/2)
+                // Add traps
+                if (rand % 2 == 0)
                 {
-                    // Add traps
                     mpComp.Add(TrapGen(i, rows));
                 }
 
                 for (int j = 1; j < rows; j++)
                 {
-                    rand = RanBtw(1, rows);
+                    // Random num
+                    rand = RanBtw(1, j);
 
                     mpComp.Add(AddComponent(i, j));
 
-                    if(rand > rows/2)
+                    // Add traps 
+                    if (rand % 2 == 0)
                     {
-                        // Add traps
-                        mpComp.Add(TrapGen(i, rows));
+                        mpComp.Add(TrapGen(i, j));
                     }
                 }
             }
@@ -88,10 +90,11 @@ namespace LRRoguelike
                 {
                     numtraps++;
                     Trap trap1 = trap as Trap;
-                    Console.WriteLine($"I'm a trap at position: X: {trap.Xpos} Y: {trap.Ypos}");
-                    Console.WriteLine(numtraps);
+                    Console.Write($"I'm a trap at position: X: {trap1.Xpos} Y: {trap1.Ypos}");
+                    Console.WriteLine(trap1.Type);
                 }
             }
+            Console.WriteLine(numtraps);
             // DEBUG
             //####################################################################################
 
@@ -206,18 +209,15 @@ namespace LRRoguelike
         }
 
         /// <summary>
-        /// Creates a list of diferent types of traps
-        /// Accepts map dimensions and a list of traps to generate
+        /// Accepts seeds a seed to generate random trap in map
         /// </summary>
         /// <param name="col"></param>
         /// <param name="rows"></param>
-        public Trap TrapGen(int seedX, int seedY) // ********************************** incomplete
+        public Trap TrapGen(int seedX, int seedY)
         {
             // Instantiate trap
             Trap trap = new Trap
                 (RanBtw(1, seedX), RanBtw(1, seedY), RanBtw(1, 100));
-
-            // Add trap types
 
             return trap;
         }
