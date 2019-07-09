@@ -22,6 +22,8 @@ namespace LRRoguelike
         /// <summary>
         /// Initializes isDisc to false, assigns position
         /// </summary>
+        /// <param name="x"> GameSettings Collums value. </param>
+        /// <param name="y"> GameSettings Rows value. </param>
         public MapComponents(int x, int y)
         {
             Xpos = x;
@@ -40,7 +42,7 @@ namespace LRRoguelike
         /// <summary>
         /// Returns map component's char based on discovered or not
         /// </summary>
-        /// <returns></returns>
+        /// <returns> Designated map component character. </returns>
         public char PrintPart()
         {
             if(isDisc)
@@ -58,8 +60,8 @@ namespace LRRoguelike
         /// <summary>
         /// Accepts map dimensions and assigns position
         /// </summary>
-        /// <param name="row"></param>
-        /// <param name="col"></param>
+        /// <param name="col"> GameSettings Collums value. </param>
+        /// <param name="row"> GameSettings Rows value. </param>
         public void SpawnPart(int row, int col)
         {
             Ypos = row;
