@@ -70,6 +70,7 @@ namespace LRRoguelike
                 case "h":
                     // Help menu
                     rndr.Help();
+                    player.HP++;
                     break;
 
                 // Quit program

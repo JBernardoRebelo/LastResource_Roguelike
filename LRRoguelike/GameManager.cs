@@ -53,7 +53,7 @@ namespace LRRoguelike
                 // Add traps
                 if (rand % 2 == 0)
                 {
-                    mpComp.Add(TrapGen(i, rows));
+                    mpComp.Add(TrapGen(col, rows));
                 }
 
                 for (int j = 1; j < rows; j++)
@@ -66,7 +66,7 @@ namespace LRRoguelike
                     // Add traps 
                     if (rand % 2 == 0)
                     {
-                        mpComp.Add(TrapGen(i, j));
+                        mpComp.Add(TrapGen(col, rows));
                     }
                 }
             }
@@ -207,6 +207,15 @@ namespace LRRoguelike
             foreach (MapComponents mc in mapComps)
             {
                 mc.isDisc = false;
+                if(mc is Trap)
+                {
+                    Trap trap = mc as Trap;
+                    trap.FallenInto = false;
+
+                    // Assign new position
+                    trap.Xpos = RanBtw(1, col);
+                    trap.Ypos = RanBtw(1, rows);
+                }
             }
             // Reset position
             player.SpawnPlayer(RanBtw(1, rows));

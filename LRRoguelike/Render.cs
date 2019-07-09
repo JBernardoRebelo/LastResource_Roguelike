@@ -135,17 +135,20 @@ namespace LRRoguelike
             Console.Write("Your move: ");
         }
 
+        /// <summary>
+        /// Display help menu
+        /// </summary>
         public void Help()
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("\n _________ Help Menu ________________");
-            Console.WriteLine("| There are 3 kinds of traps:        |");
-            Console.WriteLine("| -> Whole traps: Deal up to 40 dmg  |");
-            Console.WriteLine("| -> Net traps: Deal up to 80 dmg    |");
-            Console.WriteLine("| -> Blades traps: Deal up to 40 dmg |");
-            Console.WriteLine("|____________________________________|\n");
+            Console.WriteLine("\n _____________ Help Menu _____________");
+            Console.WriteLine("| There are 3 kinds of traps:         |");
+            Console.WriteLine("| -> Whole traps: Deal up to 40 dmg   |");
+            Console.WriteLine("| -> Net traps: Deal up to 80 dmg     |");
+            Console.WriteLine("| -> Blades traps: Deal up to 100 dmg |");
+            Console.WriteLine("|_____________________________________|\n");
             Console.ResetColor();
-            Console.Read();
+            Thread.Sleep(5000);
         }
 
         /// <summary>
@@ -422,7 +425,8 @@ namespace LRRoguelike
         public void FallenInto()
         {
             Message();
-            Console.WriteLine("Fortunately, This trap no longer works!");
+            Console.WriteLine
+                (" Fortunately, the trap you're in no longer works!");
             Thread.Sleep(3000);
         }
 
@@ -481,7 +485,7 @@ namespace LRRoguelike
         {
             Message();
             Console.Write
-                ($" You just used map, the level will now uncover... ");
+                ($" You just used a map, the level will now uncover... ");
             Thread.Sleep(4000);
         }
 

@@ -19,7 +19,7 @@ namespace LRRoguelike
         /// <summary>
         /// Set trap type
         /// </summary>
-        public TrapType Type{ get; set; }
+        public TrapType Type { get; set; }
 
         /// <summary>
         /// Trap constructor, accepts map dimensions and seed for damage
@@ -36,11 +36,11 @@ namespace LRRoguelike
             FallenInto = false;
 
             // Define type based on damage
-            if(mD <= 100 && mD >= 80)
+            if (mD <= 100 && mD >= 80)
             {
                 Type = TrapType.Blades;
             }
-            else if(mD < 80 && mD > 40)
+            else if (mD < 80 && mD > 40)
             {
                 Type = TrapType.Net;
             }
