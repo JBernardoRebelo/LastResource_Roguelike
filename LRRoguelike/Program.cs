@@ -3,8 +3,16 @@ using System.Text;
 
 namespace LRRoguelike
 {
+    /// <summary>
+    /// Program class where main() is located and where GameSettings and
+    /// GameLoop are instanciated. Output text encoding defined aswell.
+    /// </summary>
     public class Program
     {  
+        /// <summary>
+        /// Main function.
+        /// </summary>
+        /// <param name="args"> Console arguments. </param>
         static void Main(string[] args)
         {
             // Instantiate classes
@@ -13,10 +21,6 @@ namespace LRRoguelike
 
             // Define output text encoding
             Console.OutputEncoding = Encoding.Unicode;
-
-
-            // Clean console before game start
-            Console.Clear();                    // ***** mOVE THIS TO START MENU
 
             /*************************
              *******   DEBUG   *******

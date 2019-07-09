@@ -14,6 +14,8 @@ namespace LRRoguelike
         /// </summary>
         public void MainMenu()
         {
+            Console.Clear();
+
             // Output to user
             Console.WriteLine("\nPress...");
             Console.ForegroundColor = ConsoleColor.Green;

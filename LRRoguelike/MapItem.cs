@@ -15,8 +15,8 @@ namespace LRRoguelike
         /// Map constructor, accepts map dimensions and assigns position
         /// Initializes used to false
         /// </summary>
-        /// <param name="row"></param>
-        /// <param name="col"></param>
+        /// <param name="row"> Given row value within map size. </param>
+        /// <param name="col"> Given collum value within map size. </param>
         public MapItem(int row, int col)
         {
             SpawnPart(row, col);
@@ -25,9 +25,9 @@ namespace LRRoguelike
 
 
         /// <summary>
-        /// Prints Exit's token in position according to discovered or not
+        /// Prints Map's token in position according to discovered or not
         /// </summary>
-        /// <returns></returns>
+        /// <returns> Designated MapItem charater. </returns>
         public char PrintMapItem()
         {
             if (isDisc)
@@ -47,8 +47,8 @@ namespace LRRoguelike
         /// Accepts a list of MapComponents and assigns isDisc(overed) to true
         /// To all components
         /// </summary>
-        /// <param name="mapComp"></param>
-        public void UncoverMap(List<MapComponents> mapComp)
+        /// <param name="mapComp"> List of map components. </param>
+        public void UncoverMap(IEnumerable<MapComponents> mapComp)
         {
             foreach (MapComponents mc in mapComp)
             {
