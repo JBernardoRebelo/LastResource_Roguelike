@@ -9,8 +9,8 @@ namespace LRRoguelike
         /// <summary>
         /// Exit constructor
         /// </summary>
-        /// <param name="row"></param>
-        /// <param name="col"></param>
+        /// <param name="row"> Random given value within map row number. </param>
+        /// <param name="col"> GameSettings Collums value. </param>
         public Exit(int row, int col)
         {
             // Place exit
@@ -20,7 +20,7 @@ namespace LRRoguelike
         /// <summary>
         /// Prints Exit's token in position according to discovered or not
         /// </summary>
-        /// <returns></returns>
+        /// <returns> Designated Exit character. </returns>
         public char PrintExit()
         {
             if(isDisc)
@@ -38,7 +38,7 @@ namespace LRRoguelike
         /// <summary>
         /// Show exit description
         /// </summary>
-        /// <returns></returns>
+        /// <returns> Exit detailed information. </returns>
         public override string ToString() => "Exit cell:\n"
             + "Enter here to transit to the next level";
     }
