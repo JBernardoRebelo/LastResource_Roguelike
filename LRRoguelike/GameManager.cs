@@ -15,7 +15,6 @@ namespace LRRoguelike
         PlayerActions pA = new PlayerActions();
         Checker checker = new Checker();
         List<MapComponents> mpComp;
-        List<Trap> traps;
 
         /// <summary>
         /// Shows start menu, redirects to Loop
@@ -119,7 +118,6 @@ namespace LRRoguelike
             // Method variables
             string option;
             bool valInput = false;
-            int damageTaken;
 
             // Actual game loop
             while (player.HP > 0)
@@ -155,7 +153,7 @@ namespace LRRoguelike
 
                     // Make sure option is valid
                     if (option == "l" || option == "m"
-                        || option == "q" || option == "e")
+                        || option == "q" || option == "e" || option == "h")
                     {
                         valInput = true;
                     }
@@ -168,34 +166,8 @@ namespace LRRoguelike
                 // Checks player's choice and does stuff
                 checker.MenuChecker(option, player, map, mpComp, rows, col);
 
-                // Trap worker
-                foreach (MapComponents mp in mpComp)
-                {
-                    if (mp is Trap)
-                    {
-                        Trap trap = mp as Trap;
-                        // Check if player was hit by traps
-                        if (checker.TrapPlayer(trap, player))
-                        {
-                            if (trap.FallenInto == false)
-                            {
-                                damageTaken = RanBtw(1, trap.MaxDamage);
-
-                                // Take hp from player
-                                player.HP -= damageTaken;
-                                trap.FallenInto = true;
-
-                                // Print details 
-                                rndr.DamageTaken(trap, damageTaken);
-                            }
-                            // Print a message if player has alreaydy fallen in trap
-                            else
-                            {
-                                rndr.FallenInto();
-                            }
-                        }
-                    }
-                }
+                // Traps damage player
+                TrapWorker(player);
 
                 // Check if player and exit have == position and restart level
                 if (player.Xpos == exit.Xpos && player.Ypos == exit.Ypos)
@@ -205,7 +177,7 @@ namespace LRRoguelike
                 }
 
                 // End of turn
-                // Player looses 1 hp reset valInput value
+                // Player loses 1 hp reset valInput value
                 player.HP--;
                 valInput = false;
             }
@@ -254,6 +226,43 @@ namespace LRRoguelike
                 (RanBtw(1, seedX), RanBtw(1, seedY), RanBtw(0, 100));
 
             return trap;
+        }
+
+        /// <summary>
+        /// Accepts a player, makes traps work
+        /// </summary>
+        /// <param name="player"></param>
+        private void TrapWorker(Player player)
+        {
+            int damageTaken;
+            // Trap worker
+            foreach (MapComponents mp in mpComp)
+            {
+                if (mp is Trap)
+                {
+                    Trap trap = mp as Trap;
+                    // Check if player was hit by traps
+                    if (checker.TrapPlayer(trap, player))
+                    {
+                        if (trap.FallenInto == false)
+                        {
+                            damageTaken = RanBtw(1, trap.MaxDamage);
+
+                            // Take hp from player
+                            player.HP -= damageTaken;
+                            trap.FallenInto = true;
+
+                            // Print details 
+                            rndr.DamageTaken(trap, damageTaken);
+                        }
+                        // Print a message if player has alreaydy fallen in trap
+                        else
+                        {
+                            rndr.FallenInto();
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>

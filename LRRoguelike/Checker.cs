@@ -66,6 +66,12 @@ namespace LRRoguelike
                     pA.PickUpItem(player, map, mapComps);
 
                     break;
+
+                case "h":
+                    // Help menu
+                    rndr.Help();
+                    break;
+
                 // Quit program
                 case "q":
                     rndr.LeaveGame();

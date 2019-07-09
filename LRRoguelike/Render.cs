@@ -73,10 +73,11 @@ namespace LRRoguelike
             // Options menu
             Console.WriteLine(" ___________ Options ___________");
             Console.WriteLine("|                               |");
-            Console.WriteLine("| m -> Move                     |");
-            Console.WriteLine("| l -> Look around              |");
-            Console.WriteLine("| e -> Pick up item             |");
-            Console.WriteLine("| q -> Quit game                |");
+            Console.WriteLine("| (m) -> Move                   |");
+            Console.WriteLine("| (l) -> Look around            |");
+            Console.WriteLine("| (e) -> Pick up item           |");
+            Console.WriteLine("| (h) -> Help                   |");
+            Console.WriteLine("| (q) -> Quit game              |");
             Console.WriteLine("|_______________________________|\n");
 
             Console.ForegroundColor = ConsoleColor.DarkCyan;
@@ -102,6 +103,10 @@ namespace LRRoguelike
             Console.Write("| ");
             LegendSet('m');
             Console.WriteLine("                      |");
+            // Map
+            Console.Write("| ");
+            LegendSet('t');
+            Console.WriteLine("                     |");
             Console.WriteLine("|_______________________________|\n");
 
             // Sets console color to default
@@ -128,6 +133,19 @@ namespace LRRoguelike
             Console.ResetColor();
 
             Console.Write("Your move: ");
+        }
+
+        public void Help()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("\n _________ Help Menu ________________");
+            Console.WriteLine("| There are 3 kinds of traps:        |");
+            Console.WriteLine("| -> Whole traps: Deal up to 40 dmg  |");
+            Console.WriteLine("| -> Net traps: Deal up to 80 dmg    |");
+            Console.WriteLine("| -> Blades traps: Deal up to 40 dmg |");
+            Console.WriteLine("|____________________________________|\n");
+            Console.ResetColor();
+            Console.Read();
         }
 
         /// <summary>
@@ -224,25 +242,6 @@ namespace LRRoguelike
         /// <returns> Integer array that contains a normalized. </returns>
         private static int[] NormalizePosition(int x, int y) =>
             new int[2] { x * 4 - 2, y * 2 - 1 };
-
-        /// <summary>
-        /// Output credits, goes back to Start Menu
-        /// </summary>
-        public void Credits()
-        {
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            // Shows credits
-            Console.WriteLine("This project was made by: \n");
-            Console.WriteLine("  -> João Rebelo;");
-            Console.WriteLine("  -> Miguel Fernández;\n");
-            Console.ResetColor();
-
-            // Goes back to start menu if user enters any key
-            Console.WriteLine("Type to go back to Start Menu...");
-            Console.Read();
-            //Console.Clear();
-            MainMenu();
-        }
 
         /// <summary>
         /// Method to get and verify user input in menus
@@ -463,6 +462,12 @@ namespace LRRoguelike
                 Console.Write("M -> Map");
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
+            else if (c == 't')
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("T -> Trap");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+            }
             else
             {
                 Console.WriteLine();
@@ -478,6 +483,25 @@ namespace LRRoguelike
             Console.Write
                 ($" You just used map, the level will now uncover... ");
             Thread.Sleep(4000);
+        }
+
+        /// <summary>
+        /// Output credits, goes back to Start Menu
+        /// </summary>
+        public void Credits()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            // Shows credits
+            Console.WriteLine("This project was made by: \n");
+            Console.WriteLine("  -> João Rebelo;");
+            Console.WriteLine("  -> Miguel Fernández;\n");
+            Console.ResetColor();
+
+            // Goes back to start menu if user enters any key
+            Console.WriteLine("Type to go back to Start Menu...");
+            Console.Read();
+            //Console.Clear();
+            MainMenu();
         }
     }
 }
