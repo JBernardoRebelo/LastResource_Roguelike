@@ -31,6 +31,7 @@ namespace LRRoguelike
         /// <summary>
         /// Player constructor, assigns HP and Y to given random value
         /// </summary>
+        /// <param name="y"> GameSettings Rows value. </param>
         public Player(int y)
         {
             /*  DEBUG  */
@@ -42,10 +43,9 @@ namespace LRRoguelike
         }
 
         /// <summary>
-        /// Accepts map dimensions, assingn's player's initial position
+        /// Accepts map dimensions, assign's player's initial position
         /// </summary>
-        /// <param name="row"></param>
-        /// <param name="col"></param>
+        /// <param name="row"> GameSettings Rows value. </param>
         public void SpawnPlayer(int row)
         {
             Ypos = row;
@@ -55,7 +55,9 @@ namespace LRRoguelike
         /// <summary>
         /// Prints player's token in position
         /// </summary>
-        /// <returns></returns>
+        /// <returns> 
+        /// Program user unique character for visualisation. 
+        /// </returns>
         public char PrintPlayer()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
