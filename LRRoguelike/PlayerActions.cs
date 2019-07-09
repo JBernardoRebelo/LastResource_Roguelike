@@ -182,8 +182,9 @@ namespace LRRoguelike
         /// <summary>
         /// Show adjacent tiles in world
         /// </summary>
-        /// <param name="mp"></param>
-        public void FogOfWar(List<MapComponents> mapComps, Player player)
+        /// <param name="mapComps"> List of map components. </param>
+        /// <param name="player"> Program user. </param>
+        public void FogOfWar(IEnumerable<MapComponents> mapComps, Player player)
         {
             int distanceX;
             int distanceY;
@@ -203,11 +204,13 @@ namespace LRRoguelike
             }
         }
 
+
         /// <summary>
         /// Accepts list of MapComponents, show info case one of them is Exit
         /// </summary>
-        /// <param name="mapComps"></param>
-        public void LookAround(List<MapComponents> mapComps, Player player)
+        /// <param name="mapComps"> List of map components. </param>
+        /// <param name="player"> Program user. </param>
+        public void LookAround(IEnumerable<MapComponents> mapComps, Player player)
         {
             int distanceX;
             int distanceY;
@@ -240,12 +243,13 @@ namespace LRRoguelike
         }
 
         /// <summary>
-        /// After finding an item in map, pick it up
-        /// Accepts player (positions), map (positions) and
-        /// MapComponents list to uncover map if needed
+        /// After finding an item in map, Player mey pick it up
         /// </summary>
+        /// <param name="player"> Program user. </param>
+        /// <param name="map"> MapItem instance. </param>
+        /// <param name="mc"> List of map components. </param>
         public void PickUpItem
-            (Player player, MapItem map, List<MapComponents> mc)
+            (Player player, MapItem map, IEnumerable<MapComponents> mc)
         {
             if (player.Xpos == map.Xpos || player.Ypos == map.Ypos)
             {
