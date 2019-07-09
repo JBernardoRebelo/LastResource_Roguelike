@@ -74,11 +74,15 @@ namespace LRRoguelike
         /// <summary>
         /// Game loop, accepts map dimensions and map components
         /// </summary>
-        /// <param name="col"></param>
-        /// <param name="rows"></param>
+        /// <param name="col"> GameSettings Collums value. </param>
+        /// <param name="rows"> GameSettings Rows value. </param>
+        /// <param name="player"> Program user. </param>
+        /// <param name="exit"> Level exit. </param>
+        /// <param name="map"> MapItem. </param>
+        /// <param name="mpComp"> List of map components. </param>
         private void Loop
             (int col, int rows, Player player, Exit exit, MapItem map,
-            List<MapComponents> mpComp)
+            IEnumerable<MapComponents> mpComp)
         {
             // Method variables
             string option;
@@ -146,16 +150,19 @@ namespace LRRoguelike
             rndr.PlayerDeath(player);
         }
 
+
         /// <summary>
         /// Re-Spawns exit and player in new level
         /// </summary>
-        /// <param name="player"></param>
-        /// <param name="exit"></param>
-        /// <param name="col"></param>
-        /// <param name="rows"></param>
+        /// <param name="player"> Program user. </param>
+        /// <param name="exit"> Level exit. </param>
+        /// <param name="map"> MapItem. </param>
+        /// <param name="mapComps"> List of map components. </param>
+        /// <param name="col"> GameSettings Collums value. </param>
+        /// <param name="rows"> GameSettings Rows value. </param>
         public void NewLevel
             (Player player, Exit exit, MapItem map,
-            List<MapComponents> mapComps, int col, int rows)
+            IEnumerable<MapComponents> mapComps, int col, int rows)
         {
             // Level up
             player.Lvl++;
@@ -189,9 +196,9 @@ namespace LRRoguelike
         /// <summary>
         /// Instantiate map component
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
+        /// <param name="x"> GameSettings Collums value. </param>
+        /// <param name="y"> GameSettings Rows value. </param>
+        /// <returns> Map component with given coordinates. </returns>
         private MapComponents AddComponent(int x, int y)
         {
             MapComponents mc = new MapComponents(x, y);
