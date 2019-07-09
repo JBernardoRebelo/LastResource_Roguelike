@@ -18,7 +18,7 @@ namespace LRRoguelike
         /// <param name="col"> GameSettings Collums value. </param>
         public void MenuChecker
             (string option, Player player, MapItem map,
-            List<MapComponents> mapComps, int rows, int col)
+            IEnumerable<MapComponents> mapComps, int rows, int col)
         {
             string uChoice;
             int chMove;
