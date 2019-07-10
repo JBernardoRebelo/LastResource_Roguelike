@@ -2,7 +2,7 @@
 
 namespace LRRoguelike
 {
-    public class MapComponents
+    public class MapComponents : IComparable<MapComponents>
     {
         /// <summary>
         /// Component's X position in map
@@ -65,6 +65,19 @@ namespace LRRoguelike
         {
             Ypos = row;
             Xpos = col;
+        }
+
+
+        public int CompareTo(MapComponents other)
+        {
+            if (other is Trap)
+            {
+                return -1;
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }

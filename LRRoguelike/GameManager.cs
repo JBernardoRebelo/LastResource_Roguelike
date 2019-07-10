@@ -51,7 +51,7 @@ namespace LRRoguelike
                 mpComp.Add(AddComponent(i, rows));
 
                 // Add traps
-                if (rand > rows/2)
+                if (rand > rows / 2)
                 {
                     mpComp.Add(TrapGen(col, rows));
                 }
@@ -213,7 +213,7 @@ namespace LRRoguelike
             foreach (MapComponents mc in mapComps)
             {
                 mc.isDisc = false;
-                if(mc is Trap)
+                if (mc is Trap)
                 {
                     Trap trap = mc as Trap;
                     trap.FallenInto = false;
