@@ -23,14 +23,14 @@ namespace LRRoguelike
             Console.OutputEncoding = Encoding.Unicode;
 
             /*************************
-             *******   DEBUG   *******
+             *******   debug   *******
              *************************/
             for (int i = 0; i < args.Length; i++)
             {
                 Console.WriteLine(args[i]);
             }
             /*************************
-             *******  !DEBUG   *******
+             *******  !debug   *******
              *************************/
 
             gl.StartGame(gm.Collums, gm.Rows);
