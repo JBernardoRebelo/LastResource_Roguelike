@@ -14,7 +14,7 @@ namespace LRRoguelike
         /// </summary>
         public void MainMenu()
         {
-            Console.Clear();
+            //Console.Clear();
 
             // Output to user
             Console.WriteLine("\nPress...");
@@ -231,7 +231,7 @@ namespace LRRoguelike
                 }
             }
             // Place map components
-            else if (mapComp is MapComponents)
+            else
             {
                 int[] normalizedPos = NormalizePosition(mapComp.Xpos, mapComp.Ypos);
                 Console.SetCursorPosition(normalizedPos[0], normalizedPos[1]);
@@ -453,7 +453,7 @@ namespace LRRoguelike
             else if (c == 'd')
             {
                 Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.Write("- -> Dicovered");
+                Console.Write("  -> Dicovered");
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             else if (c == 'u')

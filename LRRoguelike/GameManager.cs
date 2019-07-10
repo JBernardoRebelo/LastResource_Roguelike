@@ -45,13 +45,13 @@ namespace LRRoguelike
             for (int i = 1; i < col + 1; i++)
             {
                 // Random num
-                int rand = RanBtw(1, i);
+                int rand = RanBtw(1, rows);
 
                 // Add default Map component
                 mpComp.Add(AddComponent(i, rows));
 
                 // Add traps
-                if (rand % 2 == 0)
+                if (rand > rows/2)
                 {
                     mpComp.Add(TrapGen(col, rows));
                 }
@@ -63,8 +63,7 @@ namespace LRRoguelike
 
                     mpComp.Add(AddComponent(i, j));
 
-                    // Add traps 
-                    if (rand % 2 == 0)
+                    if (rand > col / 2)
                     {
                         mpComp.Add(TrapGen(col, rows));
                     }
