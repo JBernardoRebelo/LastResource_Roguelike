@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace LRRoguelike
 {
+    /// <summary>
+    /// Map class, item used to unveil board.
+    /// </summary>
     public class MapItem : MapComponents
     {
         /// <summary>
@@ -22,7 +24,6 @@ namespace LRRoguelike
             SpawnPart(row, col);
             Used = false;
         }
-
 
         /// <summary>
         /// Prints Map's token in position according to discovered or not

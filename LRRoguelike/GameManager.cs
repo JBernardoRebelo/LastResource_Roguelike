@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace LRRoguelike
 {
@@ -21,8 +20,6 @@ namespace LRRoguelike
         /// </summary>
         /// <param name="col"> GameSettings Collums value. </param>
         /// <param name="rows"> GameSettings Rows value. </param>
-        /// <param name="player"> Program user. </param>
-        /// /// <param name="exit"> Program user. </param>
         public void StartGame(int col, int rows)
         {
             // Instantiate objects in world with "random" positions
@@ -73,30 +70,6 @@ namespace LRRoguelike
             // Add exit and map to list of components
             mpComp.Add(exit);
             mpComp.Add(map);
-
-            //####################################################################################
-            Console.WriteLine("Number of rows: " + rows);
-            Console.WriteLine("Number of collums: " + col);
-            Console.WriteLine("Player's hp: " + player.HP);
-            Console.WriteLine("Player's spawn, Y: " + player.Ypos + "X: " + player.Xpos);
-            Console.WriteLine("Exit's position, Y: " + exit.Ypos + "X: " + exit.Xpos);
-            Console.WriteLine("Map's position, Y: " + map.Ypos + "x: " + map.Xpos);
-
-            int numtraps = 0;
-
-            foreach (MapComponents trap in mpComp)
-            {
-                if (trap is Trap)
-                {
-                    numtraps++;
-                    Trap trap1 = trap as Trap;
-                    Console.Write($"I'm a trap at position: X: {trap1.Xpos} Y: {trap1.Ypos}");
-                    Console.WriteLine(trap1.Type);
-                }
-            }
-            Console.WriteLine(numtraps);
-            // DEBUG
-            //####################################################################################
 
             // Render Main Menu
             rndr.MainMenu();
@@ -246,8 +219,10 @@ namespace LRRoguelike
         /// <summary>
         /// Accepts seeds a seed to generate random trap in map
         /// </summary>
-        /// <param name="col"></param>
-        /// <param name="rows"></param>
+        /// <param name="col"> Random x (Collums) position between
+        /// 1 and max board collums. </param>
+        /// <param name="rows">Random y (Rows) position between
+        /// 1 and max board rows. </param>
         private Trap TrapGen(int seedX, int seedY)
         {
             // Instantiate trap
@@ -258,9 +233,10 @@ namespace LRRoguelike
         }
 
         /// <summary>
-        /// Accepts a player, makes traps work
+        /// Method to activate the trap, deals damage to player between 1 and 
+        /// specific trap max damage. 
         /// </summary>
-        /// <param name="player"></param>
+        /// <param name="player"> Program user. </param>
         private void TrapWorker(Player player)
         {
             int damageTaken;
@@ -284,7 +260,8 @@ namespace LRRoguelike
                             // Print details 
                             rndr.DamageTaken(trap, damageTaken);
                         }
-                        // Print a message if player has alreaydy fallen in trap
+                        // Print a message if player has alreaydy fallen...
+                        // ... in trap
                         else
                         {
                             rndr.FallenInto();

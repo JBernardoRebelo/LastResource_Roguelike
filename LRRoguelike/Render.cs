@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 
 namespace LRRoguelike
@@ -188,9 +187,9 @@ namespace LRRoguelike
         /// <summary>
         /// Draws objects on map, accepts all components so far
         /// </summary>
-        /// <param name="player"></param>
-        /// <param name="exit"></param>
-        /// <param name="map"></param>
+        /// <param name="player"> Program user. </param>
+        /// <param name="exit"> Level exit. </param>
+        /// <param name="map"> Map item. </param>
         public void PlaceParts(Player player, Exit exit,
             MapItem map)
         {
@@ -215,9 +214,9 @@ namespace LRRoguelike
         }
 
         /// <summary>
-        /// Accepts and draws trap in map
+        /// Accepts and draws trap in map.
         /// </summary>
-        /// <param name="mapComp"></param>
+        /// <param name="trap"> Trap object instance. </param>
         public void FillMap(Trap trap)
         {
             int[] normalizedPosT = NormalizePosition(trap.Xpos, trap.Ypos);
@@ -228,7 +227,8 @@ namespace LRRoguelike
         /// <summary>
         /// Overload Accepts and draws component in map
         /// </summary>
-        /// <param name="mapComp"></param>
+        /// <param name="mapComp"> Specific map component to be printed
+        /// on board. </param>
         public void FillMap(MapComponents mapComp)
         {
             int[] normalizedPos = NormalizePosition(mapComp.Xpos, mapComp.Ypos);
@@ -244,6 +244,25 @@ namespace LRRoguelike
         /// <returns> Integer array that contains a normalized. </returns>
         private static int[] NormalizePosition(int x, int y) =>
             new int[2] { x * 4 - 2, y * 2 - 1 };
+
+        /// <summary>
+        /// Output credits, goes back to Start Menu
+        /// </summary>
+        public void Credits()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            // Shows credits
+            Console.WriteLine("This project was made by: \n");
+            Console.WriteLine("  -> João Rebelo;");
+            Console.WriteLine("  -> Miguel Fernández;\n");
+            Console.ResetColor();
+
+            // Goes back to start menu if user enters any key
+            Console.WriteLine("Type to go back to Start Menu...");
+            Console.Read();
+            //Console.Clear();
+            MainMenu();
+        }
 
         /// <summary>
         /// Method to get and verify user input in menus
@@ -273,6 +292,18 @@ namespace LRRoguelike
         }
 
         /// <summary>
+        /// Accepts a map component and show's it's description
+        /// </summary>
+        /// <param name="mp"> Specific map component for info to be
+        /// printed. </param>
+        public void ItemDescription(MapComponents mp)
+        {
+            Message();
+            Console.WriteLine("There's a" + mp + "\n");
+            Console.Read();
+        }
+
+        /// <summary>
         /// Leaves game with a goodbye message
         /// </summary>
         public void LeaveGame()
@@ -285,6 +316,7 @@ namespace LRRoguelike
         /// <summary>
         /// Outputs message of death and shows level of death
         /// </summary>
+        /// <param name="player"> Program user. </param>
         public void PlayerDeath(Player player)
         {
             Message();
@@ -350,8 +382,8 @@ namespace LRRoguelike
         /// <summary>
         /// Accepts a position and describes exit in it's position
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="x"> Exits's x (Collums) position. </param>
+        /// <param name="y"> Exits's y (Rows) position. </param>
         public void FoundExit(int x, int y)
         {
             Message();
@@ -364,8 +396,8 @@ namespace LRRoguelike
         /// <summary>
         /// Accepts a position and describes map in it's position
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="x"> Map's x (Collums) position. </param>
+        /// <param name="y"> Map's y (Rows) position. </param>
         public void FoundMap(int x, int y)
         {
             Message();
@@ -378,8 +410,9 @@ namespace LRRoguelike
         /// <summary>
         /// Accepts a position and describes trap in it's position
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="x"> Trap's x (Collums) position. </param>
+        /// <param name="y"> Trap's y (Rows) position. </param>
+        /// <param name="trap"> Trap object instance. </param>
         public void FoundTrap(int x, int y, Trap trap)
         {
             Message();
@@ -408,8 +441,8 @@ namespace LRRoguelike
         /// Accepts a trap and a player
         /// Show damage taken by trap
         /// </summary>
-        /// <param name="trap"></param>
-        /// <param name="player"></param>
+        /// <param name="trap"> Trap component (object instance). </param>
+        /// <param name="dmg"> Trap's damage. </param>
         public void DamageTaken(Trap trap, int dmg)
         {
             Message();
@@ -432,7 +465,8 @@ namespace LRRoguelike
         /// <summary>
         /// Decides character to be output in legend
         /// </summary>
-        /// <param name="c"></param>
+        /// <param name="c"> Character whose color will be change to be 
+        /// distiguished from chart. </param>
         private void LegendSet(char c)
         {
             if (c == 'p')
@@ -489,22 +523,23 @@ namespace LRRoguelike
         }
 
         /// <summary>
-        /// Output credits, goes back to Start Menu
+        /// Method to display an error message in case user inputs are invalid
+        /// and explains how to use program correctly.
         /// </summary>
-        private void Credits()
+        public void InputErrorMessage()
         {
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            // Shows credits
-            Console.WriteLine("This project was made by: \n");
-            Console.WriteLine("  -> João Rebelo;");
-            Console.WriteLine("  -> Miguel Fernández;\n");
-            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Red;
 
-            // Goes back to start menu if user enters any key
-            Console.WriteLine("Type to go back to Start Menu...");
-            Console.Read();
-            //Console.Clear();
-            MainMenu();
+            Console.WriteLine("\nInvalid console arguments..." +
+                              "\nFor correct usage, input: " +
+                              "\" dotnet run -- " +
+                              "-r <Desired number of rows> " +
+                              "-c <Desired number of collums>\".\n" +
+                              "Map size must be bigger than 1.");
+
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+            Environment.Exit(0);
         }
     }
 }

@@ -3,19 +3,24 @@ using System.Collections.Generic;
 
 namespace LRRoguelike
 {
-    class Checker
+    /// <summary>
+    /// Class used to check actions and menu interactions
+    /// </summary>
+    public class Checker
     {
         // Instantiate needed classes
         Render rndr = new Render();
         PlayerActions pA = new PlayerActions();
 
         /// <summary>
-        /// Accepts a string and calls adequate methods
+        /// Accepts a string and calls adequate methods.
         /// </summary>
         /// <param name="option"> User input. </param>
         /// <param name="player"> Program user. </param>
         /// <param name="rows"> GameSettings Rows value. </param>
         /// <param name="col"> GameSettings Collums value. </param>
+        /// <param name="map"> Map item. </param>
+        /// <param name="mapComps"> List of map components. </param>
         public void MenuChecker
             (string option, Player player, MapItem map,
             IEnumerable<MapComponents> mapComps, int rows, int col)
@@ -85,11 +90,12 @@ namespace LRRoguelike
         }
 
         /// <summary>
-        /// Accepts list of map components and a player
-        /// Check if player was hit, return true if so
+        /// Method to confirm if player position is the same as the trap.
         /// </summary>
-        /// <param name="mc"></param>
-        /// <param name="player"></param>
+        /// <param name="trap"> Specific Trap object instance. </param>
+        /// <param name="player"> Program user. </param>
+        /// <returns> True if position is the same, false if different.
+        /// </returns>
         public bool TrapPlayer(Trap trap, Player player)
         {
             // Check if that map component has same pos as player
@@ -107,8 +113,8 @@ namespace LRRoguelike
         /// Accepts map and exit, checks map position
         /// Returns false if map and exit have the same position
         /// </summary>
-        /// <param name="map"></param>
-        /// <param name="exit"></param>
+        /// <param name="map"> Map object instance. </param>
+        /// <param name="exit"> Exit object instance. </param>
         public bool ComponentPosChecker(MapItem map, Exit exit)
         {
             if (map.Xpos == exit.Xpos && map.Ypos == exit.Xpos)
