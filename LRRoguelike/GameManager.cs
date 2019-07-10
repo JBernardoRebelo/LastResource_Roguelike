@@ -59,7 +59,7 @@ namespace LRRoguelike
                 for (int j = 1; j < rows; j++)
                 {
                     // Random num
-                    rand = RanBtw(1, j);
+                    rand = RanBtw(1, col);
 
                     mpComp.Add(AddComponent(i, j));
 
