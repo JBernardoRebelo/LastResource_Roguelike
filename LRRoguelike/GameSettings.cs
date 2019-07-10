@@ -7,6 +7,9 @@ namespace LRRoguelike
     /// </summary>
     public class GameSettings
     {
+        // Instance variables
+        Render rndr = new Render();
+
         /// <summary>
         /// Map total rows
         /// </summary>
@@ -35,7 +38,7 @@ namespace LRRoguelike
                 {
                     if (!int.TryParse(args[i + 1], out int x))
                     {
-                        InputErrorMessage();
+                        rndr.InputErrorMessage();
                     }
 
                     Rows = Convert.ToInt32(args[i + 1]);
@@ -46,7 +49,7 @@ namespace LRRoguelike
                 {
                     if (!int.TryParse(args[i + 1], out int x))
                     {
-                        InputErrorMessage();
+                        rndr.InputErrorMessage();
                     }
 
                     Collums = Convert.ToInt32(args[i + 1]);
@@ -65,7 +68,7 @@ namespace LRRoguelike
         {
             if (args.Length < 4)
             {
-                InputErrorMessage();
+                rndr.InputErrorMessage();
                 Environment.Exit(0);
             }
         }
@@ -80,29 +83,10 @@ namespace LRRoguelike
         {
             if (Rows == 0 || Rows == 1 || Collums == 0 || Collums == 1)
             {
-                InputErrorMessage();
+                rndr.InputErrorMessage();
                 Environment.Exit(0);
             }
         }
 
-        /// <summary>
-        /// Method to display an error message in case user inputs are invalid
-        /// and explains how to use program correctly.
-        /// </summary>
-        private void InputErrorMessage()
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-
-            Console.WriteLine("\nInvalid console arguments..." +
-                              "\nFor correct usage, input: " +
-                              "\" dotnet run -- " +
-                              "-r <Desired number of rows> " +
-                              "-c <Desired number of collums>\".\n" +
-                              "Map size must be bigger than 1.");
-
-            Console.ForegroundColor = ConsoleColor.Gray;
-
-            Environment.Exit(0);
-        }
     }
 }

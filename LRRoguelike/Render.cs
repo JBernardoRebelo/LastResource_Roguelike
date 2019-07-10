@@ -161,7 +161,7 @@ namespace LRRoguelike
         {
             //Console.Clear();
             // For cicle to print map
-            for (int k = 0; k < col * 6 + 1; k++)
+            for (int k = 0; k < col * 4 + 1; k++)
                 Console.Write("-");
 
             // New line
@@ -171,12 +171,12 @@ namespace LRRoguelike
             {
                 for (int j = 0; j < col; j++)
                 {
-                    Console.Write("|     ");
+                    Console.Write("|   ");
                 }
 
                 Console.WriteLine('|');
 
-                for (int k = 0; k < col * 6 + 1; k++)
+                for (int k = 0; k < col * 4 + 1; k++)
                 {
                     Console.Write("-");
                 }
@@ -197,7 +197,7 @@ namespace LRRoguelike
             if (!map.Used)
             {
                 // Map
-                int[] normalizedPosM = NormalizeComponentPosition(map.Xpos, map.Ypos);
+                int[] normalizedPosM = NormalizePosition(map.Xpos, map.Ypos);
                 Console.SetCursorPosition(normalizedPosM[0], normalizedPosM[1]);
                 Console.WriteLine(map.PrintMapItem());
             }
@@ -208,15 +208,15 @@ namespace LRRoguelike
             Console.WriteLine(player.PrintPlayer());
 
             // Exit
-            int[] normalizedPosE = NormalizeComponentPosition(exit.Xpos, exit.Ypos);
+            int[] normalizedPosE = NormalizePosition(exit.Xpos, exit.Ypos);
             Console.SetCursorPosition(normalizedPosE[0], normalizedPosE[1]);
             Console.WriteLine(exit.PrintExit());
         }
 
         /// <summary>
-        /// Accepts and draws trap in map
+        /// Accepts and draws trap in map.
         /// </summary>
-        /// <param name="mapComp"></param>
+        /// <param name="trap"> Trap object instance. </param>
         public void FillMap(Trap trap)
         {
             int[] normalizedPosT = NormalizePosition(trap.Xpos, trap.Ypos);
@@ -244,15 +244,6 @@ namespace LRRoguelike
         /// <returns> Integer array that contains a normalized. </returns>
         private static int[] NormalizePosition(int x, int y) =>
             new int[2] { x * 4 - 2, y * 2 - 1 };
-
-        /// <summary>
-        /// Normalize object's position to be printed on console
-        /// </summary>
-        /// <param name="x"> Object's Xpos value. </param>
-        /// <param name="y"> Object's Ypos value. </param>
-        /// <returns> Integer array that contains a normalized. </returns>
-        private static int[] NormalizeComponentPosition(int x, int y) =>
-            new int[2] {( x * 4 + 1)- 2, y * 2 - 1 };
 
         /// <summary>
         /// Output credits, goes back to Start Menu
@@ -529,6 +520,26 @@ namespace LRRoguelike
             Console.Write
                 ($" You just used a map, the level will now uncover... ");
             Thread.Sleep(4000);
+        }
+
+        /// <summary>
+        /// Method to display an error message in case user inputs are invalid
+        /// and explains how to use program correctly.
+        /// </summary>
+        public void InputErrorMessage()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+
+            Console.WriteLine("\nInvalid console arguments..." +
+                              "\nFor correct usage, input: " +
+                              "\" dotnet run -- " +
+                              "-r <Desired number of rows> " +
+                              "-c <Desired number of collums>\".\n" +
+                              "Map size must be bigger than 1.");
+
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+            Environment.Exit(0);
         }
     }
 }

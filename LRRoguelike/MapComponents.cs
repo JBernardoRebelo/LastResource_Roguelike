@@ -5,7 +5,7 @@ namespace LRRoguelike
     /// <summary>
     /// Class that serves as base for all map components
     /// </summary>
-    public class MapComponents : IComparable<MapComponents>
+    public class MapComponents
     {
         /// <summary>
         /// Component's X position in map
@@ -68,23 +68,6 @@ namespace LRRoguelike
         {
             Ypos = row;
             Xpos = col;
-        }
-
-        /// <summary>
-        /// Method to put the traps last in index order.
-        /// </summary>
-        /// <param name="other"> Trap to be compared to. </param>
-        /// <returns> -1 if other is a Trap, 0 if it's not. </returns>
-        public int CompareTo(MapComponents other)
-        {
-            if (other is Trap)
-            {
-                return -1;
-            }
-            else
-            {
-                return 0;
-            }
         }
     }
 }

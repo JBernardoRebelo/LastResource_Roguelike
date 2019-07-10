@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace LRRoguelike
 {
@@ -25,7 +24,6 @@ namespace LRRoguelike
             SpawnPart(row, col);
             Used = false;
         }
-
 
         /// <summary>
         /// Prints Map's token in position according to discovered or not

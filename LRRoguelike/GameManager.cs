@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace LRRoguelike
 {
@@ -71,27 +70,6 @@ namespace LRRoguelike
             // Add exit and map to list of components
             mpComp.Add(exit);
             mpComp.Add(map);
-
-            Console.WriteLine("Number of rows: " + rows);
-            Console.WriteLine("Number of collums: " + col);
-            Console.WriteLine("Player's hp: " + player.HP);
-            Console.WriteLine("Player's spawn, Y: " + player.Ypos + "X: " + player.Xpos);
-            Console.WriteLine("Exit's position, Y: " + exit.Ypos + "X: " + exit.Xpos);
-            Console.WriteLine("Map's position, Y: " + map.Ypos + "x: " + map.Xpos);
-
-            int numtraps = 0;
-
-            foreach (MapComponents trap in mpComp)
-            {
-                if (trap is Trap)
-                {
-                    numtraps++;
-                    Trap trap1 = trap as Trap;
-                    Console.Write($"I'm a trap at position: X: {trap1.Xpos} Y: {trap1.Ypos}");
-                    Console.WriteLine(trap1.Type);
-                }
-            }
-            Console.WriteLine(numtraps);
 
             // Render Main Menu
             rndr.MainMenu();
@@ -282,7 +260,8 @@ namespace LRRoguelike
                             // Print details 
                             rndr.DamageTaken(trap, damageTaken);
                         }
-                        // Print a message if player has alreaydy fallen in trap
+                        // Print a message if player has alreaydy fallen...
+                        // ... in trap
                         else
                         {
                             rndr.FallenInto();
