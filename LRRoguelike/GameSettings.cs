@@ -8,7 +8,10 @@ namespace LRRoguelike
     public class GameSettings
     {
         // Instance variables
-        Render rndr = new Render();
+        /// <summary>
+        /// Instance of class Render to use methods.
+        /// </summary>
+        private Render rndr = new Render();
 
         /// <summary>
         /// Map total rows

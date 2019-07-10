@@ -9,11 +9,30 @@ namespace LRRoguelike
     public class GameManager
     {
         // Instantiate Classes
-        Random rnd = new Random();
-        Render rndr = new Render();
-        PlayerActions pA = new PlayerActions();
-        Checker checker = new Checker();
-        List<MapComponents> mpComp;
+        /// <summary>
+        /// Instance of class Random to use methods.
+        /// </summary>
+        private Random rndm = new Random();
+
+        /// <summary>
+        /// Instance of class Render to use methods.
+        /// </summary>
+        private Render rndr = new Render();
+
+        /// <summary>
+        /// Instance of class PlayerActions to use methods.
+        /// </summary>
+        private PlayerActions pA = new PlayerActions();
+
+        /// <summary>
+        /// Instance of class Checker to use methods.
+        /// </summary>
+        private Checker checker = new Checker();
+
+        /// <summary>
+        /// Declaration of a List of MapComponents.
+        /// </summary>
+        private List<MapComponents> mpComp;
 
         /// <summary>
         /// Shows start menu, redirects to Loop
@@ -78,8 +97,9 @@ namespace LRRoguelike
             Loop(col, rows, player, exit, map, mpComp);
         }
 
+
         /// <summary>
-        /// Game loop, accepts map dimensions and map components
+        /// Actual game loop
         /// </summary>
         /// <param name="col"> GameSettings Collums value. </param>
         /// <param name="rows"> GameSettings Rows value. </param>
@@ -176,7 +196,6 @@ namespace LRRoguelike
             rndr.PlayerDeath(player);
         }
 
-
         /// <summary>
         /// Re-Spawns exit and player in new level
         /// </summary>
@@ -219,10 +238,9 @@ namespace LRRoguelike
         /// <summary>
         /// Accepts seeds a seed to generate random trap in map
         /// </summary>
-        /// <param name="col"> Random x (Collums) position between
-        /// 1 and max board collums. </param>
-        /// <param name="rows">Random y (Rows) position between
-        /// 1 and max board rows. </param>
+        /// <param name="seedX"> GameSettings Collums value. </param>
+        /// <param name="seedY"> GameSettings Rows value. </param>
+        /// <returns> New Trap instance with given position. </returns>
         private Trap TrapGen(int seedX, int seedY)
         {
             // Instantiate trap
@@ -279,7 +297,7 @@ namespace LRRoguelike
         /// <returns> Returns random number between given values. </returns>
         private int RanBtw(int min, int max)
         {
-            int ran = rnd.Next(min, max);
+            int ran = rndm.Next(min, max);
             return ran;
         }
 

@@ -9,8 +9,15 @@ namespace LRRoguelike
     public class Checker
     {
         // Instantiate needed classes
-        Render rndr = new Render();
-        PlayerActions pA = new PlayerActions();
+        /// <summary>
+        /// Instance of class Render to use methods.
+        /// </summary>
+        private Render rndr = new Render();
+
+        /// <summary>
+        /// Instance of class PlayerActions to use methods.
+        /// </summary>
+        private PlayerActions pA = new PlayerActions();
 
         /// <summary>
         /// Accepts a string and calls adequate methods.

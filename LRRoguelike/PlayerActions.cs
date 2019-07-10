@@ -8,7 +8,10 @@ namespace LRRoguelike
     public class PlayerActions
     {
         // Instantiate Render for error messages
-        Render rndr = new Render();
+        /// <summary>
+        /// Instance of class Render to use methods.
+        /// </summary>
+        private Render rndr = new Render();
 
         /// <summary>
         /// Accepts input from user and moves player
