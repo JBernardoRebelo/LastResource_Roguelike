@@ -137,8 +137,22 @@ namespace LRRoguelike
                 // Print map components
                 foreach (MapComponents mc in mpComp)
                 {
-                    // Place map Components and traps
-                    rndr.FillMap(mc);
+                    if (mc is MapComponents)
+                    {
+                        // Place map Components
+                        rndr.FillMap(mc);
+                    }
+                }
+
+                // Print traps
+                foreach (MapComponents mc in mpComp)
+                {
+                    if (mc is Trap)
+                    {
+                        Trap trap = mc as Trap;
+                        // Place trap Components
+                        rndr.FillMap(trap);
+                    }
                 }
 
                 // Place player, exit and map

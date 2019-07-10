@@ -215,28 +215,25 @@ namespace LRRoguelike
         }
 
         /// <summary>
-        /// Accepts and draws component in map
+        /// Accepts and draws trap in map
+        /// </summary>
+        /// <param name="mapComp"></param>
+        public void FillMap(Trap trap)
+        {
+            int[] normalizedPosT = NormalizePosition(trap.Xpos, trap.Ypos);
+            Console.SetCursorPosition(normalizedPosT[0], normalizedPosT[1]);
+            Console.WriteLine(trap.PrintTrap());
+        }
+
+        /// <summary>
+        /// Overload Accepts and draws component in map
         /// </summary>
         /// <param name="mapComp"></param>
         public void FillMap(MapComponents mapComp)
         {
-            // Place traps
-            if (mapComp is Trap)
-            {
-                Trap trap = mapComp as Trap;
-                {
-                    int[] normalizedPosT = NormalizePosition(trap.Xpos, trap.Ypos);
-                    Console.SetCursorPosition(normalizedPosT[0], normalizedPosT[1]);
-                    Console.WriteLine(trap.PrintTrap());
-                }
-            }
-            // Place map components
-            else
-            {
-                int[] normalizedPos = NormalizePosition(mapComp.Xpos, mapComp.Ypos);
-                Console.SetCursorPosition(normalizedPos[0], normalizedPos[1]);
-                Console.WriteLine(mapComp.PrintPart());
-            }
+            int[] normalizedPos = NormalizePosition(mapComp.Xpos, mapComp.Ypos);
+            Console.SetCursorPosition(normalizedPos[0], normalizedPos[1]);
+            Console.WriteLine(mapComp.PrintPart());
         }
 
         /// <summary>
