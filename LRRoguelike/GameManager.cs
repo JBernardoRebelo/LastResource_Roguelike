@@ -40,15 +40,35 @@ namespace LRRoguelike
             }
 
             // Create map components and add to list
-            for (int i = 1; i < col + 1 ; i++)
+            for (int i = 1; i < col + 1; i++)
             {
+                // Random num
+                int rand = RanBtw(1, rows);
+
+                // Add default Map component
                 mpComp.Add(AddComponent(i, rows));
+
+                // Add traps
+                if (rand > rows / 2)
+                {
+                    mpComp.Add(TrapGen(col, rows));
+                }
+
                 for (int j = 1; j < rows; j++)
                 {
+                    // Random num
+                    rand = RanBtw(1, j);
+
                     mpComp.Add(AddComponent(i, j));
+
+                    if (rand > col / 2)
+                    {
+                        mpComp.Add(TrapGen(col, rows));
+                    }
                 }
             }
 
+            // Add exit and map to list of components
             mpComp.Add(exit);
             mpComp.Add(map);
 
@@ -59,6 +79,20 @@ namespace LRRoguelike
             Console.WriteLine("Player's spawn, Y: " + player.Ypos + "X: " + player.Xpos);
             Console.WriteLine("Exit's position, Y: " + exit.Ypos + "X: " + exit.Xpos);
             Console.WriteLine("Map's position, Y: " + map.Ypos + "x: " + map.Xpos);
+
+            int numtraps = 0;
+
+            foreach (MapComponents trap in mpComp)
+            {
+                if (trap is Trap)
+                {
+                    numtraps++;
+                    Trap trap1 = trap as Trap;
+                    Console.Write($"I'm a trap at position: X: {trap1.Xpos} Y: {trap1.Ypos}");
+                    Console.WriteLine(trap1.Type);
+                }
+            }
+            Console.WriteLine(numtraps);
             // DEBUG
             //####################################################################################
 
@@ -101,7 +135,7 @@ namespace LRRoguelike
                 // Print map components
                 foreach (MapComponents mc in mpComp)
                 {
-                    // Place map Components
+                    // Place map Components and traps
                     rndr.FillMap(mc);
                 }
 
@@ -112,13 +146,15 @@ namespace LRRoguelike
                 rndr.PlaceMenus(rows);
                 rndr.GameloopMenu(player);
 
-                // Comment here ----- 
+                // Option loop
                 do
                 {
+                    // Store input
                     option = Console.ReadLine();
 
-                    if (option == "l" || option == "m" 
-                        || option == "q" || option == "e")
+                    // Make sure option is valid
+                    if (option == "l" || option == "m"
+                        || option == "q" || option == "e" || option == "h")
                     {
                         valInput = true;
                     }
@@ -131,6 +167,9 @@ namespace LRRoguelike
                 // Checks player's choice and does stuff
                 checker.MenuChecker(option, player, map, mpComp, rows, col);
 
+                // Traps damage player
+                TrapWorker(player);
+
                 // Check if player and exit have == position and restart level
                 if (player.Xpos == exit.Xpos && player.Ypos == exit.Ypos)
                 {
@@ -139,7 +178,7 @@ namespace LRRoguelike
                 }
 
                 // End of turn
-                // Player looses 1 hp reset valInput value
+                // Player loses 1 hp reset valInput value
                 player.HP--;
                 valInput = false;
             }
@@ -158,7 +197,7 @@ namespace LRRoguelike
         /// <param name="mapComps"> List of map components. </param>
         /// <param name="col"> GameSettings Collums value. </param>
         /// <param name="rows"> GameSettings Rows value. </param>
-        public void NewLevel
+        private void NewLevel
             (Player player, Exit exit, MapItem map,
             IEnumerable<MapComponents> mapComps, int col, int rows)
         {
@@ -169,14 +208,74 @@ namespace LRRoguelike
             map.Used = false;
 
             // Reset discover
-            foreach(MapComponents mc in mapComps)
+            foreach (MapComponents mc in mapComps)
             {
                 mc.isDisc = false;
+                if (mc is Trap)
+                {
+                    Trap trap = mc as Trap;
+                    trap.FallenInto = false;
+
+                    // Assign new position
+                    trap.Xpos = RanBtw(1, col);
+                    trap.Ypos = RanBtw(1, rows);
+                }
             }
             // Reset position
             player.SpawnPlayer(RanBtw(1, rows));
             exit.SpawnPart(RanBtw(1, rows), col);
             map.SpawnPart(RanBtw(1, rows), RanBtw(1, col));
+        }
+
+        /// <summary>
+        /// Accepts seeds a seed to generate random trap in map
+        /// </summary>
+        /// <param name="col"></param>
+        /// <param name="rows"></param>
+        private Trap TrapGen(int seedX, int seedY)
+        {
+            // Instantiate trap
+            Trap trap = new Trap
+                (RanBtw(1, seedX), RanBtw(1, seedY), RanBtw(0, 100));
+
+            return trap;
+        }
+
+        /// <summary>
+        /// Accepts a player, makes traps work
+        /// </summary>
+        /// <param name="player"></param>
+        private void TrapWorker(Player player)
+        {
+            int damageTaken;
+            // Trap worker
+            foreach (MapComponents mp in mpComp)
+            {
+                if (mp is Trap)
+                {
+                    Trap trap = mp as Trap;
+                    // Check if player was hit by traps
+                    if (checker.TrapPlayer(trap, player))
+                    {
+                        if (trap.FallenInto == false)
+                        {
+                            damageTaken = RanBtw(1, trap.MaxDamage);
+
+                            // Take hp from player
+                            player.HP -= damageTaken;
+                            trap.FallenInto = true;
+
+                            // Print details 
+                            rndr.DamageTaken(trap, damageTaken);
+                        }
+                        // Print a message if player has alreaydy fallen in trap
+                        else
+                        {
+                            rndr.FallenInto();
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>

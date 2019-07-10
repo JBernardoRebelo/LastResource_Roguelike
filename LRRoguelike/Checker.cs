@@ -71,6 +71,13 @@ namespace LRRoguelike
                     pA.PickUpItem(player, map, mapComps);
 
                     break;
+
+                case "h":
+                    // Help menu
+                    rndr.Help();
+                    player.HP++;
+                    break;
+
                 // Quit program
                 case "q":
                     rndr.LeaveGame();
@@ -79,6 +86,25 @@ namespace LRRoguelike
                 default:
                     rndr.ErrorMessage();
                     break;
+            }
+        }
+
+        /// <summary>
+        /// Accepts list of map components and a player
+        /// Check if player was hit, return true if so
+        /// </summary>
+        /// <param name="mc"></param>
+        /// <param name="player"></param>
+        public bool TrapPlayer(Trap trap, Player player)
+        {
+            // Check if that map component has same pos as player
+            if (trap.Xpos == player.Xpos && trap.Ypos == player.Ypos)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
