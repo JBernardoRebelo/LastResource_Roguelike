@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LRRoguelike
 {
+    /// <summary>
+    /// Level exit
+    /// </summary>
     public class Exit : MapComponents
     {
         /// <summary>

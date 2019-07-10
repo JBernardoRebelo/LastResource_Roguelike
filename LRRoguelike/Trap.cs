@@ -4,6 +4,9 @@ using System.Text;
 
 namespace LRRoguelike
 {
+    /// <summary>
+    /// Trap component, deals damage to Players
+    /// </summary>
     public class Trap : MapComponents
     {
         /// <summary>
@@ -25,9 +28,9 @@ namespace LRRoguelike
         /// Trap constructor, accepts map dimensions and seed for damage
         /// Assigns position and max Damage
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param> 
-        /// <param name="mD"></param>
+        /// <param name="x"> Trap's x (Collums) position. </param>
+        /// <param name="y"> Trap's y (Rows) position. </param> 
+        /// <param name="mD"> Max damage the trap can deal. </param>
         public Trap(int x, int y, int mD)
         {
             Xpos = x;
@@ -51,17 +54,9 @@ namespace LRRoguelike
         }
 
         /// <summary>
-        /// Empty constructor
-        /// </summary>
-        public Trap()
-        {
-
-        }
-
-        /// <summary>
         /// Prints Trap's token in position according to discovered or not
         /// </summary>
-        /// <returns></returns>
+        /// <returns> Designated character for representation. </returns>
         public char PrintTrap()
         {
             if (isDisc)

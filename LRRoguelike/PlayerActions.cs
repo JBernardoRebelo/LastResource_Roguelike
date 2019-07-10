@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace LRRoguelike
 {
+    /// <summary>
+    /// Class with all player actions
+    /// </summary>
     public class PlayerActions
     {
         // Instantiate Render for error messages
@@ -184,7 +185,8 @@ namespace LRRoguelike
         /// </summary>
         /// <param name="mapComps"> List of map components. </param>
         /// <param name="player"> Program user. </param>
-        public void FogOfWar(IEnumerable<MapComponents> mapComps, Player player)
+        public void FogOfWar(IEnumerable<MapComponents> mapComps, 
+            Player player)
         {
             int distanceX;
             int distanceY;
@@ -210,7 +212,8 @@ namespace LRRoguelike
         /// </summary>
         /// <param name="mapComps"> List of map components. </param>
         /// <param name="player"> Program user. </param>
-        public void LookAround(IEnumerable<MapComponents> mapComps, Player player)
+        public void LookAround(IEnumerable<MapComponents> mapComps, 
+            Player player)
         {
             int distanceX;
             int distanceY;
