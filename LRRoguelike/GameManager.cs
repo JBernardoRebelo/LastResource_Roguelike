@@ -199,7 +199,7 @@ namespace LRRoguelike
         /// <param name="mapComps"> List of map components. </param>
         /// <param name="col"> GameSettings Collums value. </param>
         /// <param name="rows"> GameSettings Rows value. </param>
-        public void NewLevel
+        private void NewLevel
             (Player player, Exit exit, MapItem map,
             IEnumerable<MapComponents> mapComps, int col, int rows)
         {
@@ -234,7 +234,7 @@ namespace LRRoguelike
         /// </summary>
         /// <param name="col"></param>
         /// <param name="rows"></param>
-        public Trap TrapGen(int seedX, int seedY)
+        private Trap TrapGen(int seedX, int seedY)
         {
             // Instantiate trap
             Trap trap = new Trap

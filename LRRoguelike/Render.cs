@@ -436,7 +436,7 @@ namespace LRRoguelike
         /// Decides character to be output in legend
         /// </summary>
         /// <param name="c"></param>
-        public void LegendSet(char c)
+        private void LegendSet(char c)
         {
             if (c == 'p')
             {
@@ -494,7 +494,7 @@ namespace LRRoguelike
         /// <summary>
         /// Output credits, goes back to Start Menu
         /// </summary>
-        public void Credits()
+        private void Credits()
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             // Shows credits
