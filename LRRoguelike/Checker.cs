@@ -94,7 +94,8 @@ namespace LRRoguelike
         /// </summary>
         /// <param name="trap"> Specific Trap object instance. </param>
         /// <param name="player"> Program user. </param>
-        /// <returns> True if position is the same, false if different. </returns>
+        /// <returns> True if position is the same, false if different.
+        /// </returns>
         public bool TrapPlayer(Trap trap, Player player)
         {
             // Check if that map component has same pos as player
