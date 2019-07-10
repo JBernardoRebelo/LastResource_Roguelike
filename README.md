@@ -25,7 +25,7 @@
 
 Para referências utilizámos a
  *[.NET API](https://docs.microsoft.com/en-us/dotnet/api/?view=netcore-2.2)* 
- para tirar dúvidas mais específicas, abaixo referidas os tópicos pesquisados.
+ para tirar dúvidas mais específicas, abaixo referidos os tópicos pesquisados.
 
 - *[List Class](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1?view=netcore-2.2)*
 - *[Is](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/is)*
