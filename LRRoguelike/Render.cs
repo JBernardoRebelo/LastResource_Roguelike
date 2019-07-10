@@ -422,8 +422,9 @@ namespace LRRoguelike
         /// <summary>
         /// Accepts a position and describes trap in it's position
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="x"> Trap's x (Collums) position. </param>
+        /// <param name="y"> Trap's y (Rows) position. </param>
+        /// <param name="trap"> Trap object instance. </param>
         public void FoundTrap(int x, int y, Trap trap)
         {
             Message();
@@ -452,8 +453,8 @@ namespace LRRoguelike
         /// Accepts a trap and a player
         /// Show damage taken by trap
         /// </summary>
-        /// <param name="trap"></param>
-        /// <param name="player"></param>
+        /// <param name="trap"> Trap component (object instance). </param>
+        /// <param name="dmg"> Trap's damage. </param>
         public void DamageTaken(Trap trap, int dmg)
         {
             Message();
@@ -531,25 +532,6 @@ namespace LRRoguelike
             Console.Write
                 ($" You just used a map, the level will now uncover... ");
             Thread.Sleep(4000);
-        }
-
-        /// <summary>
-        /// Output credits, goes back to Start Menu
-        /// </summary>
-        private void Credits()
-        {
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            // Shows credits
-            Console.WriteLine("This project was made by: \n");
-            Console.WriteLine("  -> João Rebelo;");
-            Console.WriteLine("  -> Miguel Fernández;\n");
-            Console.ResetColor();
-
-            // Goes back to start menu if user enters any key
-            Console.WriteLine("Type to go back to Start Menu...");
-            Console.Read();
-            //Console.Clear();
-            MainMenu();
         }
     }
 }

@@ -70,7 +70,11 @@ namespace LRRoguelike
             Xpos = col;
         }
 
-
+        /// <summary>
+        /// Method to put the traps last in index order.
+        /// </summary>
+        /// <param name="other"> Trap to be compared to. </param>
+        /// <returns> -1 if other is a Trap, 0 if it's not. </returns>
         public int CompareTo(MapComponents other)
         {
             if (other is Trap)
