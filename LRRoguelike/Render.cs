@@ -14,7 +14,7 @@ namespace LRRoguelike
         /// </summary>
         public void MainMenu()
         {
-            Console.Clear();
+            //Console.Clear();
 
             // Output to user
             Console.WriteLine("\nPress...");
@@ -75,10 +75,11 @@ namespace LRRoguelike
             // Options menu
             Console.WriteLine(" ___________ Options ___________");
             Console.WriteLine("|                               |");
-            Console.WriteLine("| m -> Move                     |");
-            Console.WriteLine("| l -> Look around              |");
-            Console.WriteLine("| e -> Pick up item             |");
-            Console.WriteLine("| q -> Quit game                |");
+            Console.WriteLine("| (m) -> Move                   |");
+            Console.WriteLine("| (l) -> Look around            |");
+            Console.WriteLine("| (e) -> Pick up item           |");
+            Console.WriteLine("| (h) -> Help                   |");
+            Console.WriteLine("| (q) -> Quit game              |");
             Console.WriteLine("|_______________________________|\n");
 
             Console.ForegroundColor = ConsoleColor.DarkCyan;
@@ -104,6 +105,10 @@ namespace LRRoguelike
             Console.Write("| ");
             LegendSet('m');
             Console.WriteLine("                      |");
+            // Map
+            Console.Write("| ");
+            LegendSet('t');
+            Console.WriteLine("                     |");
             Console.WriteLine("|_______________________________|\n");
 
             // Sets console color to default
@@ -130,6 +135,22 @@ namespace LRRoguelike
             Console.ResetColor();
 
             Console.Write("Your move: ");
+        }
+
+        /// <summary>
+        /// Display help menu
+        /// </summary>
+        public void Help()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("\n _____________ Help Menu _____________");
+            Console.WriteLine("| There are 3 kinds of traps:         |");
+            Console.WriteLine("| -> Whole traps: Deal up to 40 dmg   |");
+            Console.WriteLine("| -> Net traps: Deal up to 80 dmg     |");
+            Console.WriteLine("| -> Blades traps: Deal up to 100 dmg |");
+            Console.WriteLine("|_____________________________________|\n");
+            Console.ResetColor();
+            Thread.Sleep(5000);
         }
 
         /// <summary>
@@ -170,10 +191,11 @@ namespace LRRoguelike
         /// <param name="player"></param>
         /// <param name="exit"></param>
         /// <param name="map"></param>
-        public void PlaceParts(Player player, Exit exit, MapItem map)
+        public void PlaceParts(Player player, Exit exit,
+            MapItem map)
         {
             // Doesn't place map if is Used
-            if(!map.Used)
+            if (!map.Used)
             {
                 // Map
                 int[] normalizedPosM = NormalizePosition(map.Xpos, map.Ypos);
@@ -198,10 +220,23 @@ namespace LRRoguelike
         /// <param name="mapComp"></param>
         public void FillMap(MapComponents mapComp)
         {
-            // Vars
-            int[] normalizedPos = NormalizePosition(mapComp.Xpos, mapComp.Ypos);
-            Console.SetCursorPosition(normalizedPos[0], normalizedPos[1]);
-            Console.WriteLine(mapComp.PrintPart());
+            // Place traps
+            if (mapComp is Trap)
+            {
+                Trap trap = mapComp as Trap;
+                {
+                    int[] normalizedPosT = NormalizePosition(trap.Xpos, trap.Ypos);
+                    Console.SetCursorPosition(normalizedPosT[0], normalizedPosT[1]);
+                    Console.WriteLine(trap.PrintTrap());
+                }
+            }
+            // Place map components
+            else
+            {
+                int[] normalizedPos = NormalizePosition(mapComp.Xpos, mapComp.Ypos);
+                Console.SetCursorPosition(normalizedPos[0], normalizedPos[1]);
+                Console.WriteLine(mapComp.PrintPart());
+            }
         }
 
         /// <summary>
@@ -212,25 +247,6 @@ namespace LRRoguelike
         /// <returns> Integer array that contains a normalized. </returns>
         private static int[] NormalizePosition(int x, int y) =>
             new int[2] { x * 4 - 2, y * 2 - 1 };
-
-        /// <summary>
-        /// Output credits, goes back to Start Menu
-        /// </summary>
-        public void Credits()
-        {
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            // Shows credits
-            Console.WriteLine("This project was made by: \n");
-            Console.WriteLine("  -> João Rebelo;");
-            Console.WriteLine("  -> Miguel Fernández;\n");
-            Console.ResetColor();
-
-            // Goes back to start menu if user enters any key
-            Console.WriteLine("Type to go back to Start Menu...");
-            Console.Read();
-            //Console.Clear();
-            MainMenu();
-        }
 
         /// <summary>
         /// Method to get and verify user input in menus
@@ -257,17 +273,6 @@ namespace LRRoguelike
 
             // Return converted uInput
             return choice;
-        }
-
-        /// <summary>
-        /// Accepts a map component and show's it's description
-        /// </summary>
-        /// <param name="mp"></param>
-        public void ItemDescription(MapComponents mp)
-        {
-            Message();
-            Console.WriteLine("There's a" + mp + "\n");
-            Console.Read();
         }
 
         /// <summary>
@@ -329,7 +334,7 @@ namespace LRRoguelike
         /// <param name="rows"> GameSettings Rows value. </param>
         public void PlaceMenus(int rows)
         {
-            for (int i = 0; i < rows * 2.25f; i++)
+            for (int i = 0; i < rows * 1.8f; i++)
             {
                 Console.WriteLine();
             }
@@ -370,43 +375,103 @@ namespace LRRoguelike
             Console.Write
                 ($" You discovered a Map at position X:{x} Y:{y}! ");
             Console.WriteLine("Catch it to unveil the rest of the Level!");
+            Thread.Sleep(3000);
+        }
+
+        /// <summary>
+        /// Accepts a position and describes trap in it's position
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void FoundTrap(int x, int y, Trap trap)
+        {
+            Message();
+            Console.Write($" You discovered a {trap.Type} ");
+            Console.Write($"trap at position X:{trap.Xpos} Y: {trap.Ypos}! ");
+            // Output info based of type
+            if (trap.Type == TrapType.Whole)
+            {
+                Console.WriteLine
+                    ("Don't fall in to it! It will hurt a little!");
+            }
+            else if (trap.Type == TrapType.Net)
+            {
+                Console.Write("Take care, don't be grabed by it or else ");
+                Console.WriteLine("you'll lose precious HP!");
+            }
+            else if (trap.Type == TrapType.Blades)
+            {
+                Console.Write("Try to dodge those blades, ");
+                Console.WriteLine("they'll chop you up and it will hurt a lot!");
+            }
             Thread.Sleep(4000);
+        }
+
+        /// <summary>
+        /// Accepts a trap and a player
+        /// Show damage taken by trap
+        /// </summary>
+        /// <param name="trap"></param>
+        /// <param name="player"></param>
+        public void DamageTaken(Trap trap, int dmg)
+        {
+            Message();
+            Console.Write($"You have fallen into a {trap.Type} trap ");
+            Console.WriteLine($"and lost {dmg} HP");
+            Thread.Sleep(4000);
+        }
+
+        /// <summary>
+        /// Print a message if player has fallen into a trap
+        /// </summary>
+        public void FallenInto()
+        {
+            Message();
+            Console.WriteLine
+                (" Fortunately, the trap you're in no longer works!");
+            Thread.Sleep(3000);
         }
 
         /// <summary>
         /// Decides character to be output in legend
         /// </summary>
         /// <param name="c"></param>
-        public void LegendSet(char c)
+        private void LegendSet(char c)
         {
-            if(c == 'p')
+            if (c == 'p')
             {
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("P -> Player");
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
-            else if(c == 'e')
+            else if (c == 'e')
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.Write("E -> Exit");
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
-            else if(c == 'd')
+            else if (c == 'd')
             {
                 Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.Write("- -> Dicovered");
+                Console.Write("  -> Dicovered");
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
-            else if(c == 'u')
+            else if (c == 'u')
             {
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write("# -> Undiscovered");
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
-            else if(c == 'm')
+            else if (c == 'm')
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("M -> Map");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+            }
+            else if (c == 't')
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("T -> Trap");
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
             }
             else
@@ -422,8 +487,27 @@ namespace LRRoguelike
         {
             Message();
             Console.Write
-                ($" You just used map, the level will now uncover... ");
+                ($" You just used a map, the level will now uncover... ");
             Thread.Sleep(4000);
+        }
+
+        /// <summary>
+        /// Output credits, goes back to Start Menu
+        /// </summary>
+        private void Credits()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            // Shows credits
+            Console.WriteLine("This project was made by: \n");
+            Console.WriteLine("  -> João Rebelo;");
+            Console.WriteLine("  -> Miguel Fernández;\n");
+            Console.ResetColor();
+
+            // Goes back to start menu if user enters any key
+            Console.WriteLine("Type to go back to Start Menu...");
+            Console.Read();
+            //Console.Clear();
+            MainMenu();
         }
     }
 }
