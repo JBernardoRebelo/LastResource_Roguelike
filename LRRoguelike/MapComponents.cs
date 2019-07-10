@@ -2,6 +2,9 @@
 
 namespace LRRoguelike
 {
+    /// <summary>
+    /// Class that serves as base for all map components
+    /// </summary>
     public class MapComponents
     {
         /// <summary>
@@ -47,8 +50,7 @@ namespace LRRoguelike
         {
             if(isDisc)
             {
-                Console.ForegroundColor = ConsoleColor.Gray;
-                return '-';
+                return ' ';
             }           
             else
             {

@@ -13,7 +13,7 @@ namespace LRRoguelike
         /// Main function.
         /// </summary>
         /// <param name="args"> Console arguments. </param>
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             // Instantiate classes
             GameSettings gm = new GameSettings(args);
@@ -22,17 +22,7 @@ namespace LRRoguelike
             // Define output text encoding
             Console.OutputEncoding = Encoding.Unicode;
 
-            /*************************
-             *******   DEBUG   *******
-             *************************/
-            for (int i = 0; i < args.Length; i++)
-            {
-                Console.WriteLine(args[i]);
-            }
-            /*************************
-             *******  !DEBUG   *******
-             *************************/
-
+            // Start Game
             gl.StartGame(gm.Collums, gm.Rows);
         }
     }

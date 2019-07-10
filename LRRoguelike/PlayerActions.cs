@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace LRRoguelike
 {
+    /// <summary>
+    /// Class with all player actions
+    /// </summary>
     public class PlayerActions
     {
         // Instantiate Render for error messages
@@ -184,7 +185,8 @@ namespace LRRoguelike
         /// </summary>
         /// <param name="mapComps"> List of map components. </param>
         /// <param name="player"> Program user. </param>
-        public void FogOfWar(IEnumerable<MapComponents> mapComps, Player player)
+        public void FogOfWar(IEnumerable<MapComponents> mapComps, 
+            Player player)
         {
             int distanceX;
             int distanceY;
@@ -210,7 +212,8 @@ namespace LRRoguelike
         /// </summary>
         /// <param name="mapComps"> List of map components. </param>
         /// <param name="player"> Program user. </param>
-        public void LookAround(IEnumerable<MapComponents> mapComps, Player player)
+        public void LookAround(IEnumerable<MapComponents> mapComps, 
+            Player player)
         {
             int distanceX;
             int distanceY;
@@ -232,7 +235,17 @@ namespace LRRoguelike
                     else if (mc is MapItem)
                     {
                         // Show map info
-                        rndr.FoundMap(mc.Xpos, mc.Ypos);
+                        MapItem map = mc as MapItem;
+                        if(!map.Used)
+                        {
+                            rndr.FoundMap(mc.Xpos, mc.Ypos);
+                        }
+                    }
+                    else if(mc is Trap)
+                    {
+                        Trap trap = mc as Trap;
+                        // Show trap info
+                        rndr.FoundTrap(trap.Xpos, trap.Xpos, trap);
                     }
                 }
             }
@@ -251,11 +264,10 @@ namespace LRRoguelike
         public void PickUpItem
             (Player player, MapItem map, IEnumerable<MapComponents> mc)
         {
-            if (player.Xpos == map.Xpos || player.Ypos == map.Ypos)
+            if (player.Xpos == map.Xpos && player.Ypos == map.Ypos)
             {
                 if (map.Used)
                 {
-                    Console.WriteLine("I was used so this won't do shit"); // ***********************************
                 }
                 else if (!map.Used)
                 {
