@@ -4,6 +4,9 @@ using System.Text;
 
 namespace LRRoguelike
 {
+    /// <summary>
+    /// Class with all player actions
+    /// </summary>
     public class PlayerActions
     {
         // Instantiate Render for error messages

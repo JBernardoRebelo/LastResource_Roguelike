@@ -4,6 +4,9 @@ using System.Text;
 
 namespace LRRoguelike
 {
+    /// <summary>
+    /// Level exit
+    /// </summary>
     public class Exit : MapComponents
     {
         /// <summary>

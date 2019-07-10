@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 
 namespace LRRoguelike
@@ -141,7 +140,7 @@ namespace LRRoguelike
         {
             //Console.Clear();
             // For cicle to print map
-            for (int k = 0; k < col * 4 + 1; k++)
+            for (int k = 0; k < col * 6 + 1; k++)
                 Console.Write("-");
 
             // New line
@@ -151,12 +150,12 @@ namespace LRRoguelike
             {
                 for (int j = 0; j < col; j++)
                 {
-                    Console.Write("|   ");
+                    Console.Write("|     ");
                 }
 
                 Console.WriteLine('|');
 
-                for (int k = 0; k < col * 4 + 1; k++)
+                for (int k = 0; k < col * 6 + 1; k++)
                 {
                     Console.Write("-");
                 }
@@ -167,16 +166,16 @@ namespace LRRoguelike
         /// <summary>
         /// Draws objects on map, accepts all components so far
         /// </summary>
-        /// <param name="player"></param>
-        /// <param name="exit"></param>
-        /// <param name="map"></param>
+        /// <param name="player"> Program user. </param>
+        /// <param name="exit"> Level exit. </param>
+        /// <param name="map"> Map item. </param>
         public void PlaceParts(Player player, Exit exit, MapItem map)
         {
             // Doesn't place map if is Used
             if(!map.Used)
             {
                 // Map
-                int[] normalizedPosM = NormalizePosition(map.Xpos, map.Ypos);
+                int[] normalizedPosM = NormalizeComponentPosition(map.Xpos, map.Ypos);
                 Console.SetCursorPosition(normalizedPosM[0], normalizedPosM[1]);
                 Console.WriteLine(map.PrintMapItem());
             }
@@ -187,7 +186,7 @@ namespace LRRoguelike
             Console.WriteLine(player.PrintPlayer());
 
             // Exit
-            int[] normalizedPosE = NormalizePosition(exit.Xpos, exit.Ypos);
+            int[] normalizedPosE = NormalizeComponentPosition(exit.Xpos, exit.Ypos);
             Console.SetCursorPosition(normalizedPosE[0], normalizedPosE[1]);
             Console.WriteLine(exit.PrintExit());
         }
@@ -195,11 +194,12 @@ namespace LRRoguelike
         /// <summary>
         /// Accepts and draws component in map
         /// </summary>
-        /// <param name="mapComp"></param>
+        /// <param name="mapComp"> Specific map component to be printed
+        /// on board. </param>
         public void FillMap(MapComponents mapComp)
         {
             // Vars
-            int[] normalizedPos = NormalizePosition(mapComp.Xpos, mapComp.Ypos);
+            int[] normalizedPos = NormalizeComponentPosition(mapComp.Xpos, mapComp.Ypos);
             Console.SetCursorPosition(normalizedPos[0], normalizedPos[1]);
             Console.WriteLine(mapComp.PrintPart());
         }
@@ -212,6 +212,15 @@ namespace LRRoguelike
         /// <returns> Integer array that contains a normalized. </returns>
         private static int[] NormalizePosition(int x, int y) =>
             new int[2] { x * 4 - 2, y * 2 - 1 };
+
+        /// <summary>
+        /// Normalize object's position to be printed on console
+        /// </summary>
+        /// <param name="x"> Object's Xpos value. </param>
+        /// <param name="y"> Object's Ypos value. </param>
+        /// <returns> Integer array that contains a normalized. </returns>
+        private static int[] NormalizeComponentPosition(int x, int y) =>
+            new int[2] {( x * 4 + 1)- 2, y * 2 - 1 };
 
         /// <summary>
         /// Output credits, goes back to Start Menu
@@ -262,7 +271,8 @@ namespace LRRoguelike
         /// <summary>
         /// Accepts a map component and show's it's description
         /// </summary>
-        /// <param name="mp"></param>
+        /// <param name="mp"> Specific map component for info to be
+        /// printed. </param>
         public void ItemDescription(MapComponents mp)
         {
             Message();
@@ -283,6 +293,7 @@ namespace LRRoguelike
         /// <summary>
         /// Outputs message of death and shows level of death
         /// </summary>
+        /// <param name="player"> Program user. </param>
         public void PlayerDeath(Player player)
         {
             Message();
@@ -329,7 +340,7 @@ namespace LRRoguelike
         /// <param name="rows"> GameSettings Rows value. </param>
         public void PlaceMenus(int rows)
         {
-            for (int i = 0; i < rows * 2.25f; i++)
+            for (int i = 0; i < rows * 2; i++)
             {
                 Console.WriteLine();
             }
@@ -348,8 +359,8 @@ namespace LRRoguelike
         /// <summary>
         /// Accepts a position and describes exit in it's position
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="x"> Exits's x (Collums) position. </param>
+        /// <param name="y"> Exits's y (Rows) position. </param>
         public void FoundExit(int x, int y)
         {
             Message();
@@ -362,8 +373,8 @@ namespace LRRoguelike
         /// <summary>
         /// Accepts a position and describes map in it's position
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="x"> Map's x (Collums) position. </param>
+        /// <param name="y"> Map's y (Rows) position. </param>
         public void FoundMap(int x, int y)
         {
             Message();
@@ -376,7 +387,8 @@ namespace LRRoguelike
         /// <summary>
         /// Decides character to be output in legend
         /// </summary>
-        /// <param name="c"></param>
+        /// <param name="c"> Character whose color will be change to be 
+        /// distiguished from chart. </param>
         public void LegendSet(char c)
         {
             if(c == 'p')

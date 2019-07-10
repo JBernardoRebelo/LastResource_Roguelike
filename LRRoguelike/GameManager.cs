@@ -21,8 +21,6 @@ namespace LRRoguelike
         /// </summary>
         /// <param name="col"> GameSettings Collums value. </param>
         /// <param name="rows"> GameSettings Rows value. </param>
-        /// <param name="player"> Program user. </param>
-        /// /// <param name="exit"> Program user. </param>
         public void StartGame(int col, int rows)
         {
             // Instantiate objects in world with "random" positions

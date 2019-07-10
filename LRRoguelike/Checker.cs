@@ -3,19 +3,24 @@ using System.Collections.Generic;
 
 namespace LRRoguelike
 {
-    class Checker
+    /// <summary>
+    /// Class used to check actions and menu interactions
+    /// </summary>
+    public class Checker
     {
         // Instantiate needed classes
         Render rndr = new Render();
         PlayerActions pA = new PlayerActions();
 
         /// <summary>
-        /// Accepts a string and calls adequate methods
+        /// Accepts a string and calls adequate methods.
         /// </summary>
         /// <param name="option"> User input. </param>
         /// <param name="player"> Program user. </param>
         /// <param name="rows"> GameSettings Rows value. </param>
         /// <param name="col"> GameSettings Collums value. </param>
+        /// <param name="map"> Map item. </param>
+        /// <param name="mapComps"> List of map components. </param>
         public void MenuChecker
             (string option, Player player, MapItem map,
             IEnumerable<MapComponents> mapComps, int rows, int col)

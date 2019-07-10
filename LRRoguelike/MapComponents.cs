@@ -2,6 +2,9 @@
 
 namespace LRRoguelike
 {
+    /// <summary>
+    /// Class that serves as base for all map components
+    /// </summary>
     public class MapComponents
     {
         /// <summary>

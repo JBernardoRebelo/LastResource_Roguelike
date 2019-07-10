@@ -4,6 +4,9 @@ using System.Text;
 
 namespace LRRoguelike
 {
+    /// <summary>
+    /// Map class, item used to unveil board.
+    /// </summary>
     public class MapItem : MapComponents
     {
         /// <summary>
