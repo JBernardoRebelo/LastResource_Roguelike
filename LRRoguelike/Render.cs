@@ -541,5 +541,20 @@ namespace LRRoguelike
 
             Environment.Exit(0);
         }
+
+        /// <summary>
+        /// Displays message to inform player no item can be used.
+        /// </summary>
+        public void NoItemToUse()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+
+            Console.WriteLine("No item in range to be used... \n" +
+                "You still lose 1HP :c");
+
+            Console.ForegroundColor = ConsoleColor.Gray;
+
+            Thread.Sleep(3000);
+        }
     }
 }

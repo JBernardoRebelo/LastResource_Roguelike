@@ -282,6 +282,11 @@ namespace LRRoguelike
                     map.UncoverMap(mc);
                 }
             }
+
+            else
+            {
+                rndr.NoItemToUse();
+            }
         }
     }
 }
