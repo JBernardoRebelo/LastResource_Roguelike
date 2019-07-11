@@ -20,9 +20,9 @@ Miguel Fernández - Classe: `GameSettings`; `Render`; `GameManager`. Documentaç
 ### Arquitetura da Solução
 
 ### Diagrama UML
-![](UML_Projecto_2Epoca_LP1_final.jpg)
+![](UML_Projecto_2Epoca_LP1_fim.jpg)
 ### Fluxograma
-![](Fluxograma_Projecto_2Epoca_LP1_fim.jpg)
+![](Fluxograma_Projecto_2Epoca_LP1_final.jpg)
 ## Conclusões
 
 ## Referências
